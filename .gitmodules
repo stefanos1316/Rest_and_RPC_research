@@ -1,0 +1,3 @@
+[submodule "ds3"]
+	path = ds3
+	url = https://github.com/dvdstore/ds3.git
