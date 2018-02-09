@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#This script purpose serves to modify the existing php script that supports php 5.3 functions to php 7 
+
+#Commnad-line arguments
+#Provide all the file to apply changes on them
+
+if [ "$#" -lt 1 ]; then
+	echo "Illegal number of parameters"
+	echo "Use ./changingToMySQLi_functions.sh -h or -help to get more info"
+	exit
+fi 
+
+if [ "$1" == "-h" ] || [ "$1" == "-help" ]; then 
+	echo "Add a file or a list of files (separated with space) in order to apply changes on them"
+	echo "Example, $ ./changingToMySQLi_functions.sh dslogin.php dsnewcustomer.php"
+	exit
+fi
+
+for files in $*;
+do
+
+#Change from mysql to mysqli
+sed -i 's/mysql/mysqli/g' $files
+
+#Change pconnect to connect
+sed -i 's/mysqli_pconnect()/mysqli_connect("localhost", "web", "web")/g' $files
+
+#Add the necesary parameter to mysqli_query
+sed -i 's/mysqli_query(/mysqli_query($link_id,\ /g' $files
+
+echo "Change applied on file $files"
+
+done
+
+echo "All changes applied!"
+exit
