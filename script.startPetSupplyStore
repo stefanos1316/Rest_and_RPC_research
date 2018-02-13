@@ -62,3 +62,4 @@ docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=
 echo "Starting WebUI..."
 docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=8080" -p 8080:8080 -d descartesresearch/petsupplystore-webui
 echo "All services are started!!!"
+echo "You can visit the site via this link http://localhost:8080/tools.descartes.petsupplystore.webui/"
