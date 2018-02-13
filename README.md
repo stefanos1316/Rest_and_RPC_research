@@ -40,3 +40,4 @@ Note: You have to uncomment the life extension=mysqli.so from my /etc/php.ini.
 	by using wine32 (wine32 ./ds3webdriver.exe --config_file=/pathto/DriverConfig.txt) 
 
 NOTE: In case of error you can also check the /var/loh/nginx/error.log for more information.
+	For additional help you can contact me at sgeorgiouATaueb.gr
