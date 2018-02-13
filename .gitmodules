@@ -1,3 +1,6 @@
 [submodule "ds3"]
 	path = ds3
 	url = https://github.com/dvdstore/ds3.git
+[submodule "Pet-Supply-Store"]
+	path = Pet-Supply-Store
+	url = https://github.com/DescartesResearch/Pet-Supply-Store.git

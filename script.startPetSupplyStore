@@ -1,0 +1,64 @@
+#!/bin/bash 
+
+if [ "$#" -eq 0 ]; then
+	echo ""
+	echo "Illegal number of command line arguments!"
+	echo "Use --help for more information."
+	echo ""
+	exit
+fi
+
+if [ "$1" == "-h" ] || [ "$1" == "-help" ] || [ "$1" == "--help" ] || [ "$1" == "--h" ]; then
+	echo ""
+	echo "Script for Starting Docker Images"
+	echo "================================="
+	echo ""
+	echo "--IP <address> 		Provide the hosts IP address."		 
+	echo "--debug			Enable debug mode (printing messages)"
+	echo " "
+	exit
+fi
+
+
+
+# Retrieve all command line arguments
+
+# Get all arguments
+args=("$@") 
+
+# Get number of elements 
+ELEMENTS=${#args[@]} 
+
+# Initiallize parameters
+IPAddress="0"
+debugging="0"
+
+# echo each element in array  
+# for lQsds
+for (( i=0;i<$ELEMENTS;++i)); do  
+
+	case "${args[${i}]}" in 
+	("--IP") IPAddress=${args[i+1]} ;;
+	("--debug") debugging="1" ;;
+	esac
+done
+
+
+
+echo "Starting Docker images"
+echo "======================"
+echo "Starting Registry..."
+docker run -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=10000" -p 10000:8080 -d descartesresearch/petsupplystore-registry
+echo "Starting DB..."
+docker run -p 3306:3306 -d descartesresearch/petsupplystore-db
+echo "Starting Persistence..."
+docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=1111" -e "DB_HOST=$IPAddress" -e "DB_PORT=3306" -p 1111:8080 -d descartesresearch/petsupplystore-persistence
+echo "Starting Store..."
+docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=2222" -p 2222:8080 -d descartesresearch/petsupplystore-store
+echo "Starting Recommender..."
+docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=3333" -p 3333:8080 -d descartesresearch/petsupplystore-recommender
+echo "Starting Image Provider..."
+docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=4444" -p 4444:8080 -d descartesresearch/petsupplystore-image
+echo "Starting WebUI..."
+docker run -e "REGISTRY_HOST=$IPAddress" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$IPAddress" -e "SERVICE_PORT=8080" -p 8080:8080 -d descartesresearch/petsupplystore-webui
+echo "All services are started!!!"

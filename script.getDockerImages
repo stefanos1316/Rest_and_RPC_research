@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "Retrieving all images for Pet-Supply-Store"
+echo "=========================================="
+echo ""
+echo "Retrieving Registry..."
+sudo docker pull descartesresearch/petsupplystore-registry
+echo "Retrieving WebUI..."
+sudo docker pull descartesresearch/petsupplystore-webui
+echo "Retrieving Store..."
+sudo docker pull descartesresearch/petsupplystore-store
+echo "Retrieving Persistence"
+sudo docker pull descartesresearch/petsupplystore-persistence
+echo "Retrieving Recommender..."
+sudo docker pull descartesresearch/petsupplystore-recommender
+echo "Retrieving Image..."
+sudo docker pull descartesresearch/petsupplystore-image
+echo "Retrieving DB..."
+sudo docker pull descartesresearch/petsupplystore-db
+echo "All docker images retrieved!!!"
