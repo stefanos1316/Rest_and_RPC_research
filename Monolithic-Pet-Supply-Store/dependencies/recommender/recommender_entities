@@ -1,0 +1,49 @@
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.findOrder(List<Order>, long) returns class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.findOrder(List<Order>, long) calls method tools.descartes.petsupplystore.entities.Order.getId()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.recommendProducts(List<OrderItem>) calls method tools.descartes.petsupplystore.entities.OrderItem.getProductId()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.recommendProducts(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.train(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.Order.getUserId()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.train(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.train(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.OrderItem.getOrderId()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.train(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.OrderItem.getProductId()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommender.train(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.getRecommendMulti() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.getRecommendSingle() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.getTrainOrderItems() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.getTrainOrders() references class tools.descartes.petsupplystore.entities.Order
+field tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.recommendMulti references class tools.descartes.petsupplystore.entities.OrderItem
+field tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.recommendSingle references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setRecommendMulti(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setRecommendSingle(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setTrainOrderItems(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setTrainOrders(List<Order>) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() calls method tools.descartes.petsupplystore.entities.Order.()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() calls method tools.descartes.petsupplystore.entities.Order.setUserId(long)
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() calls method tools.descartes.petsupplystore.entities.Order.setId(long)
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() calls method tools.descartes.petsupplystore.entities.OrderItem.setProductId(long)
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() calls method tools.descartes.petsupplystore.entities.OrderItem.setOrderId(long)
+method tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.setup() references class tools.descartes.petsupplystore.entities.OrderItem
+field tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.trainOrderItems references class tools.descartes.petsupplystore.entities.OrderItem
+field tools.descartes.petsupplystore.recommender.algorithm.AbstractRecommenderTest.trainOrders references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.IRecommender.recommendProducts(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.IRecommender.train(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.IRecommender.train(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.RecommenderSelector.recommendProducts(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.algorithm.RecommenderSelector.train(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.algorithm.RecommenderSelector.train(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.RecommenderEndpointTest.testRecommendEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.recommender.RecommenderEndpointTest.testRecommendEndpoint() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.rest.RecommendEndpoint.recommend(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.rest.RecommendSingleEndpoint.recommend(OrderItem) has param class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterForMaxtimeStamp(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.Order.getTime()
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterForMaxtimeStamp(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.Order.getId()
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterForMaxtimeStamp(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterForMaxtimeStamp(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.OrderItem.getOrderId()
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterForMaxtimeStamp(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterLists(List<OrderItem>, List<Order>) calls method tools.descartes.petsupplystore.entities.Order.getTime()
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterLists(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.filterLists(List<OrderItem>, List<Order>) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.retrieveDataAndRetrain() references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.retrieveDataAndRetrain() references class tools.descartes.petsupplystore.entities.OrderItem

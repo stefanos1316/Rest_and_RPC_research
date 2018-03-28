@@ -1,0 +1,23 @@
+class tools.descartes.petsupplystore.image.setup.ImageProviderStartup.1 implements interface tools.descartes.petsupplystore.registryclient.StartupCallback
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.1.callback() calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getClient()
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.1.callback() calls method tools.descartes.petsupplystore.registryclient.RegistryClient.register(String)
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextDestroyed(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getClient()
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextDestroyed(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.unregister(String)
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getClient()
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.runAfterServiceIsAvailable(Service, StartupCallback, Service)
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextInitialized(ServletContextEvent) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextInitialized(ServletContextEvent) accesses field tools.descartes.petsupplystore.registryclient.Service.IMAGE
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextInitialized(ServletContextEvent) references enum tools.descartes.petsupplystore.registryclient.Service
+method tools.descartes.petsupplystore.image.setup.ImageProviderStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.preInitializeServiceLoadBalancers(Service...)
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchCategories() accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchCategories() references class tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTimeoutException
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchCategories() calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.<T, R>loadBalanceRESTOperation(Service, String, Class<T>, Function<RESTClient<T>, R>)
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) references class tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTimeoutException
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.<T, R>loadBalanceRESTOperation(Service, String, Class<T>, Function<RESTClient<T>, R>)
+method tools.descartes.petsupplystore.image.setup.SetupController.isFirstImageProvider() calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getClient()
+method tools.descartes.petsupplystore.image.setup.SetupController.isFirstImageProvider() calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getServersForService(Service)
+method tools.descartes.petsupplystore.image.setup.SetupController.isFirstImageProvider() accesses field tools.descartes.petsupplystore.registryclient.Service.IMAGE
+method tools.descartes.petsupplystore.image.setup.SetupController.waitForPersistence() accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.image.setup.SetupController.waitForPersistence() references class tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTimeoutException
+method tools.descartes.petsupplystore.image.setup.SetupController.waitForPersistence() calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.<T, R>loadBalanceRESTOperation(Service, String, Class<T>, Function<RESTClient<T>, R>)

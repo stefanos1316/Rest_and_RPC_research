@@ -1,0 +1,123 @@
+method tools.descartes.petsupplystore.image.ImageDB.<K>findImageID(K, ImageSize, HashMap<K, Map<Long, ImageSize>>) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.<K>map(K, long, ImageSize, HashMap<K, Map<Long, ImageSize>>) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.<K>unmap(long, HashMap<K, Map<Long, ImageSize>>) references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.getImageID(ImageDBKey, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.getImageID(long, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.getImageID(String, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.getImageSize(long) returns class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.hasImageID(ImageDBKey, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.hasImageID(long, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.hasImageID(String, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+field tools.descartes.petsupplystore.image.ImageDB.products references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.setImageMapping(ImageDBKey, long, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.setImageMapping(long, long, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageDB.setImageMapping(String, long, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+field tools.descartes.petsupplystore.image.ImageDB.sizes references class tools.descartes.petsupplystore.entities.ImageSize
+field tools.descartes.petsupplystore.image.ImageDB.webui references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageProvider.getImageFor(ImageDBKey, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageProvider.getImageFor(ImageDBKey, ImageSize) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.STD_IMAGE_SIZE
+method tools.descartes.petsupplystore.image.ImageProvider.getProductImages(Map<Long, ImageSize>) references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageProvider.getWebUIImages(Map<String, ImageSize>) references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageProvider.scaleAndRegisterImg(BufferedImage, ImageDBKey, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageScaler.scale(BufferedImage, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.ImageScaler.scale(BufferedImage, ImageSize) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.ImageScaler.scale(BufferedImage, ImageSize) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+class tools.descartes.petsupplystore.image.setup.CreatorFactory contains class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.CreatorFactory.(int, ImageDB, ImageSize, Path, Map<Category, List<Long>>, Map<Category, BufferedImage>, AtomicLong) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.setup.CreatorFactory.(int, ImageDB, ImageSize, Path, Map<Category, List<Long>>, Map<Category, BufferedImage>, AtomicLong) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.CreatorFactory.(int, ImageDB, ImageSize, Path, Map<Category, List<Long>>, Map<Category, BufferedImage>, AtomicLong) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.STD_IMAGE_SIZE
+field tools.descartes.petsupplystore.image.setup.CreatorFactory.categories references class tools.descartes.petsupplystore.entities.Category
+field tools.descartes.petsupplystore.image.setup.CreatorFactory.categoryImages references class tools.descartes.petsupplystore.entities.Category
+field tools.descartes.petsupplystore.image.setup.CreatorFactory.imgSize is of type class tools.descartes.petsupplystore.entities.ImageSize
+class tools.descartes.petsupplystore.image.setup.CreatorRunner contains class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.CreatorRunner.(ImageDB, ImageSize, long, int, BufferedImage, Path, AtomicLong) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.CreatorRunner.(ImageDB, ImageSize, long, int, BufferedImage, Path, AtomicLong) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.STD_IMAGE_SIZE
+field tools.descartes.petsupplystore.image.setup.CreatorRunner.size is of type class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.createImage(int, BufferedImage, ImageSize, Random) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.createImage(int, BufferedImage, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.createImage(int, BufferedImage, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.drawCategoryImage(Graphics2D, ImageSize, BufferedImage, Random) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.drawCategoryImage(Graphics2D, ImageSize, BufferedImage, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.drawCategoryImage(Graphics2D, ImageSize, BufferedImage, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeLine(Graphics2D, ImageSize, Random) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeLine(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeLine(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeOval(Graphics2D, ImageSize, Random) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeOval(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeOval(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeRectangle(Graphics2D, ImageSize, Random) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeRectangle(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeRectangle(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeText(Graphics2D, ImageSize, Random) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeText(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.setup.ImageCreator.makeText(Graphics2D, ImageSize, Random) calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+class tools.descartes.petsupplystore.image.setup.SetupController.1 references class tools.descartes.petsupplystore.entities.Product
+class tools.descartes.petsupplystore.image.setup.SetupController.2 references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.setup.SetupController.convertToIDs(List<Product>) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.image.setup.SetupController.detectExistingImages(ImageDB) calls method tools.descartes.petsupplystore.entities.ImageSize.(int, int)
+method tools.descartes.petsupplystore.image.setup.SetupController.detectExistingImages(ImageDB) references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.setup.SetupController.detectExistingImages(ImageDB) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.FULL
+method tools.descartes.petsupplystore.image.setup.SetupController.detectExistingImages(ImageDB) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchCategories() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) has param class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) calls method tools.descartes.petsupplystore.entities.Category.getName()
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) calls method tools.descartes.petsupplystore.entities.Category.getId()
+method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.image.setup.SetupController.generateImages() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.setup.SetupController.generateImages(Map<Category, List<Long>>, Map<Category, BufferedImage>) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.setup.SetupController.generateImages(Map<Category, List<Long>>, Map<Category, BufferedImage>) calls method tools.descartes.petsupplystore.entities.ImageSize.toString()
+method tools.descartes.petsupplystore.image.setup.SetupController.generateImages(Map<Category, List<Long>>, Map<Category, BufferedImage>) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.STD_IMAGE_SIZE
+method tools.descartes.petsupplystore.image.setup.SetupController.matchCategoriesToImage(List<Category>) calls method tools.descartes.petsupplystore.entities.Category.getName()
+method tools.descartes.petsupplystore.image.setup.SetupController.matchCategoriesToImage(List<Category>) calls method tools.descartes.petsupplystore.entities.Category.getId()
+method tools.descartes.petsupplystore.image.setup.SetupController.matchCategoriesToImage(List<Category>) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.image.storage.DriveStorage.loadFromDisk(Path, long) references class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.storage.rules.StoreLargeImages.test(StoreImage) calls method tools.descartes.petsupplystore.entities.ImageSize.equals(Object)
+method tools.descartes.petsupplystore.image.storage.rules.StoreLargeImages.test(StoreImage) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.FULL
+method tools.descartes.petsupplystore.image.storage.rules.StoreLargeImages.test(StoreImage) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.storage.rules.TestStoreLargeImages.initialize() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.FULL
+method tools.descartes.petsupplystore.image.storage.rules.TestStoreLargeImages.initialize() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.storage.rules.TestStoreLargeImages.initialize() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.MAIN_IMAGE
+method tools.descartes.petsupplystore.image.storage.rules.TestStoreLargeImages.initialize() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.PREVIEW
+method tools.descartes.petsupplystore.image.storage.rules.TestStoreLargeImages.initialize() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+class tools.descartes.petsupplystore.image.StoreImage contains class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.StoreImage.(long, BufferedImage, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.StoreImage.(long, byte[], ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.StoreImage.getSize() returns class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.StoreImage.setImageSize(ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+field tools.descartes.petsupplystore.image.StoreImage.size is of type class tools.descartes.petsupplystore.entities.ImageSize
+class tools.descartes.petsupplystore.image.TestImageDB contains class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.TestImageDB.() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestImageDB.() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.FULL
+method tools.descartes.petsupplystore.image.TestImageDB.() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+field tools.descartes.petsupplystore.image.TestImageDB.size is of type class tools.descartes.petsupplystore.entities.ImageSize
+field tools.descartes.petsupplystore.image.TestImageDB.sizeLarge is of type class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.image.TestImageScaler.testScale() calls method tools.descartes.petsupplystore.entities.ImageSize.getWidth()
+method tools.descartes.petsupplystore.image.TestImageScaler.testScale() calls method tools.descartes.petsupplystore.entities.ImageSize.getHeight()
+method tools.descartes.petsupplystore.image.TestImageScaler.testScale() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.FULL
+method tools.descartes.petsupplystore.image.TestImageScaler.testScale() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestImageScaler.testScale() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testByteArrayConstructorNull() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testByteArrayConstructorNull() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testConstructor() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testConstructor() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testEquals() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testEquals() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetBase64() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetBase64() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetByteArray() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetByteArray() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetByteSize() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetByteSize() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetId() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetId() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetImage() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetImage() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetSize() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testGetSize() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testHashCode() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testHashCode() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testImageConstructorNull() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testImageConstructorNull() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.image.TestStoreImage.testToString() accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.image.TestStoreImage.testToString() calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+

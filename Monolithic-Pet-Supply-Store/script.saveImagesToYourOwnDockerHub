@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Changing pom.xml's repository tags <repository>***<repository>"
+
+sed -i 's/<repository>\$1/<repository>stefanos1316\/g' services/*/pom.xml
+sed -i 's/<repository>\$1/<repository>stefanos1316\/g' utilities/*/pom.xml
+
+echo "Done"
+
+exit

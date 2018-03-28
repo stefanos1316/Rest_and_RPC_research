@@ -1,0 +1,68 @@
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, int, int)
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.(String, String, String, Class<T>)
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getService()
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getApplicationURI()
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getEndpointURI()
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() references class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, int, int)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForCreation(RESTClient<T>, T)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForUpdate(RESTClient<T>, long, T)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>deleteEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.NotFoundException
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.(String, String, String, Class<T>)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForCreation(RESTClient<T>, T)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, int, int)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForUpdate(RESTClient<T>, long, T)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, String, long, int, int)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>deleteEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.NotFoundException
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.(String, String, String, Class<T>)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForCreation(RESTClient<T>, T)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, int, int)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForUpdate(RESTClient<T>, long, T)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, String, long, int, int)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>deleteEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.NotFoundException
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.(String, String, String, Class<T>)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getEndpointTarget()
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.repository.CacheManager.clearRemoteCacheREST(RESTClient<String>, Class<?>) has param class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.repository.CacheManager.clearRemoteCacheREST(RESTClient<String>, Class<?>) calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getService()
+method tools.descartes.petsupplystore.persistence.repository.CacheManager.clearRemoteCacheREST(RESTClient<String>, Class<?>) calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getApplicationURI()
+method tools.descartes.petsupplystore.persistence.repository.CacheManager.clearRemoteCacheREST(RESTClient<String>, Class<?>) calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getEndpointURI()
+method tools.descartes.petsupplystore.persistence.repository.CacheManager.resetRemoteEMF(RESTClient<String>) has param class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.repository.CacheManager.resetRemoteEMF(RESTClient<String>) calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getEndpointTarget()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.setMaintenanceModeExternal(RESTClient<String>, Boolean) has param class tools.descartes.petsupplystore.rest.RESTClient<T>
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.setMaintenanceModeExternal(RESTClient<String>, Boolean) calls method tools.descartes.petsupplystore.rest.RESTClient<T>.getEndpointTarget()
+class tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint extends class tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.() calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.()
+class tools.descartes.petsupplystore.persistence.rest.OrderEndpoint extends class tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.() calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.()
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.listAllForUser(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.listAll(Integer, Integer)
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.listAllForUser(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.parseIntQueryParam(Integer)
+class tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint extends class tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.() calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.()
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForOrder(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.listAll(Integer, Integer)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForOrder(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.parseIntQueryParam(Integer)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForProduct(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.listAll(Integer, Integer)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForProduct(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.parseIntQueryParam(Integer)
+class tools.descartes.petsupplystore.persistence.rest.ProductEndpoint extends class tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.() calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.()
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.listAllForCategory(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.listAll(Integer, Integer)
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.listAllForCategory(Long, Integer, Integer) calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.parseIntQueryParam(Integer)
+class tools.descartes.petsupplystore.persistence.rest.UserEndpoint extends class tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.() calls method tools.descartes.petsupplystore.rest.AbstractCRUDEndpoint<T>.()
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntities(RESTClient<T>, int, int)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForCreation(RESTClient<T>, T)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>sendEntityForUpdate(RESTClient<T>, long, T)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>getEntityWithProperty(RESTClient<T>, String, String)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.NonBalancedCRUDOperations.<T>deleteEntity(RESTClient<T>, long)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.NotFoundException
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.rest.RESTClient<T>.(String, String, String, Class<T>)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.rest.RESTClient<T>

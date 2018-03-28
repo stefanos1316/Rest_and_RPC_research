@@ -1,0 +1,59 @@
+method tools.descartes.petsupplystore.store.rest.AbstractStoreRestTest.setup() accesses field tools.descartes.petsupplystore.registryclient.Service.IMAGE
+method tools.descartes.petsupplystore.store.rest.AbstractStoreRestTest.setup() accesses field tools.descartes.petsupplystore.registryclient.Service.STORE
+method tools.descartes.petsupplystore.store.rest.AbstractStoreRestTest.setup() accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.AbstractStoreRestTest.setup() accesses field tools.descartes.petsupplystore.registryclient.Service.RECOMMENDER
+method tools.descartes.petsupplystore.store.rest.AbstractStoreRestTest.setup() calls method tools.descartes.petsupplystore.registryclient.Service.getServiceName()
+method tools.descartes.petsupplystore.store.rest.CartTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.addProductToCart(SessionBlob, long)
+method tools.descartes.petsupplystore.store.rest.CartTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.updateQuantity(SessionBlob, long, int)
+method tools.descartes.petsupplystore.store.rest.CartTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.removeProductFromCart(SessionBlob, long)
+method tools.descartes.petsupplystore.store.rest.CartTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.placeOrder(SessionBlob, String, String, String, String, String, long, String)
+method tools.descartes.petsupplystore.store.rest.CartTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.login(SessionBlob, String, String)
+method tools.descartes.petsupplystore.store.rest.CategoryInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getCategory(long)
+method tools.descartes.petsupplystore.store.rest.CategoryInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getCategories()
+method tools.descartes.petsupplystore.store.rest.EmptyStoreStartup.contextInitialized(ServletContextEvent) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.EmptyStoreStartup.contextInitialized(ServletContextEvent) accesses field tools.descartes.petsupplystore.registryclient.Service.RECOMMENDER
+method tools.descartes.petsupplystore.store.rest.EmptyStoreStartup.contextInitialized(ServletContextEvent) references enum tools.descartes.petsupplystore.registryclient.Service
+method tools.descartes.petsupplystore.store.rest.EmptyStoreStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.preInitializeServiceLoadBalancers(Service...)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.isLoggedIn(SessionBlob)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.login(SessionBlob, String, String)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.logout(SessionBlob)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.addProductToCart(SessionBlob, long)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.removeProductFromCart(SessionBlob, long)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.updateQuantity(SessionBlob, long, int)
+method tools.descartes.petsupplystore.store.rest.LoginLogoutTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.placeOrder(SessionBlob, String, String, String, String, String, long, String)
+method tools.descartes.petsupplystore.store.rest.ProductInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getProduct(long)
+method tools.descartes.petsupplystore.store.rest.ProductInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getProducts(long, int, int)
+method tools.descartes.petsupplystore.store.rest.ProductInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getNumberOfProducts(long)
+method tools.descartes.petsupplystore.store.rest.StoreCartREST.addProductToCart(SessionBlob, Long) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreCartREST.addProductToCart(SessionBlob, Long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntity(Service, String, Class<T>, long)
+method tools.descartes.petsupplystore.store.rest.StoreCategoriesREST.getCategories() accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreCategoriesREST.getCategories() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntities(Service, String, Class<T>, int, int)
+method tools.descartes.petsupplystore.store.rest.StoreCategoriesREST.getCategory(long) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreCategoriesREST.getCategory(long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntity(Service, String, Class<T>, long)
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getAdvertisement(List<OrderItem>, Long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedRecommenderOperations.getRecommendations(List<OrderItem>)
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getAdvertisement(List<OrderItem>, Long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getProduct(long)
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getNumberOfProducts(Long) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getNumberOfProducts(Long) calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.<T, R>loadBalanceRESTOperation(Service, String, Class<T>, Function<RESTClient<T>, R>)
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getProduct(Long) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getProduct(Long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntity(Service, String, Class<T>, long)
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getProducts(Long, int, int) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreProductREST.getProducts(Long, int, int) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntities(Service, String, Class<T>, String, long, int, int)
+method tools.descartes.petsupplystore.store.rest.StoreUserActionsREST.login(SessionBlob, String, String) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreUserActionsREST.login(SessionBlob, String, String) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntityWithProperties(Service, String, Class<T>, String, String)
+method tools.descartes.petsupplystore.store.rest.StoreUserActionsREST.placeOrder(SessionBlob, long, String, String, String, String, String, String) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreUserActionsREST.placeOrder(SessionBlob, long, String, String, String, String, String, String) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>sendEntityForCreation(Service, String, Class<T>, T)
+method tools.descartes.petsupplystore.store.rest.StoreUserREST.getOrdersForUser(Long) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreUserREST.getOrdersForUser(Long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntities(Service, String, Class<T>, String, long, int, int)
+method tools.descartes.petsupplystore.store.rest.StoreUserREST.getUser(Long) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.rest.StoreUserREST.getUser(Long) calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedCRUDOperations.<T>getEntity(Service, String, Class<T>, long)
+method tools.descartes.petsupplystore.store.rest.UserInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getUser(long)
+method tools.descartes.petsupplystore.store.rest.UserInformationTest.runTest() calls method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getOrdersForUser(long)
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextDestroyed(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getClient()
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextDestroyed(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.unregister(String)
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.getClient()
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.RegistryClient.register(String)
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextInitialized(ServletContextEvent) accesses field tools.descartes.petsupplystore.registryclient.Service.PERSISTENCE
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextInitialized(ServletContextEvent) accesses field tools.descartes.petsupplystore.registryclient.Service.RECOMMENDER
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextInitialized(ServletContextEvent) references enum tools.descartes.petsupplystore.registryclient.Service
+method tools.descartes.petsupplystore.store.startup.StoreStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.registryclient.loadbalancers.ServiceLoadBalancer.preInitializeServiceLoadBalancers(Service...)
+

@@ -1,0 +1,97 @@
+method tools.descartes.petsupplystore.webui.servlet.AboutUsServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.PORTRAIT
+method tools.descartes.petsupplystore.webui.servlet.AboutUsServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.LOGO
+method tools.descartes.petsupplystore.webui.servlet.AboutUsServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.AboutUsServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.AbstractUIServlet.destroySessionBlob(SessionBlob, HttpServletResponse) has param class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.AbstractUIServlet.getSessionBlob(HttpServletRequest) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.AbstractUIServlet.getSessionBlob(HttpServletRequest) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.()
+method tools.descartes.petsupplystore.webui.servlet.AbstractUIServlet.saveSessionBlob(SessionBlob, HttpServletResponse) has param class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.AbstractUiTest.mockCategories(int) calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.webui.servlet.AbstractUiTest.mockCategories(int) calls method tools.descartes.petsupplystore.entities.Category.setId(long)
+method tools.descartes.petsupplystore.webui.servlet.AbstractUiTest.mockCategories(int) calls method tools.descartes.petsupplystore.entities.Category.setName(String)
+method tools.descartes.petsupplystore.webui.servlet.AbstractUiTest.mockCategories(int) calls method tools.descartes.petsupplystore.entities.Category.setDescription(String)
+method tools.descartes.petsupplystore.webui.servlet.AbstractUiTest.mockCategories(int) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.confirmOrder(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.OrderItem.getQuantity()
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.confirmOrder(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.OrderItem.getUnitPriceInCents()
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.confirmOrder(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.confirmOrder(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.getOrderItems()
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.confirmOrder(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.getOrderItems()
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.updateOrder(HttpServletRequest, List<OrderItem>, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.OrderItem.getProductId()
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.updateOrder(HttpServletRequest, List<OrderItem>, HttpServletResponse) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.webui.servlet.CartActionServlet.updateOrder(HttpServletRequest, List<OrderItem>, HttpServletResponse) references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.CartActionTest.testCartAction() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.webui.servlet.CartActionTest.testCartAction() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.webui.servlet.CartActionTest.testCartAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.()
+method tools.descartes.petsupplystore.webui.servlet.CartActionTest.testCartAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.setSID(String)
+method tools.descartes.petsupplystore.webui.servlet.CartActionTest.testCartAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.setOrderItems(List<OrderItem>)
+method tools.descartes.petsupplystore.webui.servlet.CartActionTest.testCartAction() references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.OrderItem.getProductId()
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.getOrderItems()
+method tools.descartes.petsupplystore.webui.servlet.CartServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.()
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.setSID(String)
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.setOrderItems(List<OrderItem>)
+method tools.descartes.petsupplystore.webui.servlet.CartServletTest.testCartAction() references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.CategoryServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.Category.getName()
+method tools.descartes.petsupplystore.webui.servlet.CategoryServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.webui.servlet.CategoryServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.CategoryServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.CategoryServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.CategoryTest.testCategories() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.()
+method tools.descartes.petsupplystore.webui.servlet.CategoryTest.testCategories() references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.DataBaseServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.DataBaseServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.ErrorServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.ErrorServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ERROR
+method tools.descartes.petsupplystore.webui.servlet.ErrorServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.HeaderTest.testHeaderLogging() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.()
+method tools.descartes.petsupplystore.webui.servlet.HeaderTest.testHeaderLogging() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.setSID(String)
+method tools.descartes.petsupplystore.webui.servlet.HeaderTest.testHeaderLogging() references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.IndexServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.IndexServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.LoginActionServlet.doPostInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.getSID()
+method tools.descartes.petsupplystore.webui.servlet.LoginActionServlet.doPostInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.LoginActionTest.testLoginAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.()
+method tools.descartes.petsupplystore.webui.servlet.LoginActionTest.testLoginAction() calls method tools.descartes.petsupplystore.entities.message.SessionBlob.setSID(String)
+method tools.descartes.petsupplystore.webui.servlet.LoginActionTest.testLoginAction() references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.LoginServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.LoginServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.OrderServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.getOrderItems()
+method tools.descartes.petsupplystore.webui.servlet.OrderServlet.doPostInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.OrderServlet.doPostInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.PaginationTest.testPagination() calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.webui.servlet.PaginationTest.testPagination() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.webui.servlet.PaginationTest.testPagination() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.mockProducts(int, int, List<Product>) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.testProductsperPage() calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.testProductsperPage() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.testProductsperPage() calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.testProductsperPage() calls method tools.descartes.petsupplystore.entities.Product.setName(String)
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.testProductsperPage() calls method tools.descartes.petsupplystore.entities.Product.setId(long)
+method tools.descartes.petsupplystore.webui.servlet.ProductperPageTest.testProductsperPage() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.ProductServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.RECOMMENDATION
+method tools.descartes.petsupplystore.webui.servlet.ProductServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.ProductServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.ProductServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.webui.servlet.ProductServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.ProductServlet.doGetInternal(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.webui.servlet.ProductServletTest.testCartAction() calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.webui.servlet.ProductServletTest.testCartAction() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.webui.servlet.ProfileServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.ProfileServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.webui.servlet.ProfileServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.message.SessionBlob.getUID()
+method tools.descartes.petsupplystore.webui.servlet.StatusServlet.doGetInternal(HttpServletRequest, HttpServletResponse) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.ICON
+method tools.descartes.petsupplystore.webui.servlet.StatusServlet.doGetInternal(HttpServletRequest, HttpServletResponse) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+

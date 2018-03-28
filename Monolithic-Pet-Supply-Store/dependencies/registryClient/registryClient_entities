@@ -1,0 +1,53 @@
+method tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.getId()
+method tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.registryclient.loadbalancers.LoadBalancerTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImage(Product, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImage(Product, ImageSize) has param class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImage(Product, ImageSize) calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImage(Product) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.FULL
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImage(Product) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImage(Product) has param class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImages(List<Product>, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImages(List<Product>, ImageSize) calls method tools.descartes.petsupplystore.entities.ImageSize.toString()
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImages(List<Product>, ImageSize) calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductImages(List<Product>, ImageSize) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductPreviewImages(List<Product>) accesses field tools.descartes.petsupplystore.entities.ImageSizePreset.PREVIEW
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductPreviewImages(List<Product>) calls method tools.descartes.petsupplystore.entities.ImageSizePreset.getSize()
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getProductPreviewImages(List<Product>) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getWebImage(String, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getWebImages(List<String>, ImageSize) has param class tools.descartes.petsupplystore.entities.ImageSize
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedImageOperations.getWebImages(List<String>, ImageSize) calls method tools.descartes.petsupplystore.entities.ImageSize.toString()
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedRecommenderOperations.getRecommendations(List<OrderItem>) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedRecommenderOperations.getRecommendations(List<OrderItem>) references class tools.descartes.petsupplystore.entities.OrderItem
+class tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.1 references class tools.descartes.petsupplystore.entities.Category
+class tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.2 references class tools.descartes.petsupplystore.entities.Product
+class tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.3 references class tools.descartes.petsupplystore.entities.Product
+class tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.4 references class tools.descartes.petsupplystore.entities.Product
+class tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.5 references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.addProductToCart(SessionBlob, long) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.addProductToCart(SessionBlob, long) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getAdvertisements(SessionBlob, long) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getAdvertisements(SessionBlob, long) has param class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getAdvertisements(SessionBlob) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getAdvertisements(SessionBlob) has param class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getCategories() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getCategory(long) returns class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getOrdersForUser(long) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getOrdersForUser(long) references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getProduct(long) returns class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getProducts(long, int, int) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.getUser(long) returns class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.isLoggedIn(SessionBlob) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.isLoggedIn(SessionBlob) has param class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.login(SessionBlob, String, String) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.login(SessionBlob, String, String) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.logout(SessionBlob) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.logout(SessionBlob) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.placeOrder(SessionBlob, String, String, String, String, String, long, String) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.placeOrder(SessionBlob, String, String, String, String, String, long, String) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.removeProductFromCart(SessionBlob, long) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.removeProductFromCart(SessionBlob, long) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.updateQuantity(SessionBlob, long, int) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.registryclient.rest.LoadBalancedStoreOperations.updateQuantity(SessionBlob, long, int) returns class tools.descartes.petsupplystore.entities.message.SessionBlob
+

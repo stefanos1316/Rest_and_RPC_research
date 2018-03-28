@@ -1,0 +1,7 @@
+method tools.descartes.petsupplystore.registryclient.HeartbeatTest.dismantle() calls method tools.descartes.petsupplystore.registry.rest.Registry.getRegistryInstance()
+method tools.descartes.petsupplystore.registryclient.HeartbeatTest.dismantle() calls method tools.descartes.petsupplystore.registry.rest.Registry.getHeartbeatMap()
+method tools.descartes.petsupplystore.registryclient.HeartbeatTest.dismantle() calls method tools.descartes.petsupplystore.registry.rest.Registry.getMap()
+method tools.descartes.petsupplystore.registryclient.HeartbeatTest.setup() references class tools.descartes.petsupplystore.registry.rest.Registry
+method tools.descartes.petsupplystore.registryclient.HeartbeatTest.setup() references class tools.descartes.petsupplystore.registry.rest.RegistryREST
+method tools.descartes.petsupplystore.registryclient.HeartbeatTest.setup() references class tools.descartes.petsupplystore.registry.rest.RegistryStartup
+

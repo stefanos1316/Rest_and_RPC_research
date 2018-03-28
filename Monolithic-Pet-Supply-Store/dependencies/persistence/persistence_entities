@@ -1,0 +1,240 @@
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.persistence.CacheTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.setName(String)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.setDescription(String)
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.getName()
+method tools.descartes.petsupplystore.persistence.CategoryEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Category
+class tools.descartes.petsupplystore.persistence.domain.CategoryRepository references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.domain.CategoryRepository.createEntity(Category) has param class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.domain.CategoryRepository.createEntity(Category) calls method tools.descartes.petsupplystore.entities.Category.getName()
+method tools.descartes.petsupplystore.persistence.domain.CategoryRepository.createEntity(Category) calls method tools.descartes.petsupplystore.entities.Category.getDescription()
+method tools.descartes.petsupplystore.persistence.domain.CategoryRepository.updateEntity(long, Category) has param class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.domain.CategoryRepository.updateEntity(long, Category) calls method tools.descartes.petsupplystore.entities.Category.getName()
+method tools.descartes.petsupplystore.persistence.domain.CategoryRepository.updateEntity(long, Category) calls method tools.descartes.petsupplystore.entities.Category.getDescription()
+class tools.descartes.petsupplystore.persistence.domain.OrderItemRepository references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.createEntity(OrderItem) has param class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.createEntity(OrderItem) calls method tools.descartes.petsupplystore.entities.OrderItem.getQuantity()
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.createEntity(OrderItem) calls method tools.descartes.petsupplystore.entities.OrderItem.getUnitPriceInCents()
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.createEntity(OrderItem) calls method tools.descartes.petsupplystore.entities.OrderItem.getProductId()
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.createEntity(OrderItem) calls method tools.descartes.petsupplystore.entities.OrderItem.getOrderId()
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.updateEntity(long, OrderItem) has param class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.updateEntity(long, OrderItem) calls method tools.descartes.petsupplystore.entities.OrderItem.getQuantity()
+method tools.descartes.petsupplystore.persistence.domain.OrderItemRepository.updateEntity(long, OrderItem) calls method tools.descartes.petsupplystore.entities.OrderItem.getUnitPriceInCents()
+class tools.descartes.petsupplystore.persistence.domain.OrderRepository references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) has param class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getTime()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getTotalPriceInCents()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getAddressName()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getAddress1()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getAddress2()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getCreditCardCompany()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getCreditCardNumber()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getCreditCardExpiryDate()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.createEntity(Order) calls method tools.descartes.petsupplystore.entities.Order.getUserId()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) has param class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getTime()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getTotalPriceInCents()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getAddressName()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getAddress1()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getAddress2()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getCreditCardCompany()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getCreditCardNumber()
+method tools.descartes.petsupplystore.persistence.domain.OrderRepository.updateEntity(long, Order) calls method tools.descartes.petsupplystore.entities.Order.getCreditCardExpiryDate()
+class tools.descartes.petsupplystore.persistence.domain.PersistenceCategory extends class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.domain.PersistenceCategory.() calls method tools.descartes.petsupplystore.entities.Category.()
+class tools.descartes.petsupplystore.persistence.domain.PersistenceOrder extends class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.domain.PersistenceOrder.() calls method tools.descartes.petsupplystore.entities.Order.()
+class tools.descartes.petsupplystore.persistence.domain.PersistenceOrderItem extends class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.domain.PersistenceOrderItem.() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+class tools.descartes.petsupplystore.persistence.domain.PersistenceProduct extends class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.domain.PersistenceProduct.() calls method tools.descartes.petsupplystore.entities.Product.()
+class tools.descartes.petsupplystore.persistence.domain.PersistenceUser extends class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.domain.PersistenceUser.() calls method tools.descartes.petsupplystore.entities.User.()
+class tools.descartes.petsupplystore.persistence.domain.ProductRepository references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.createEntity(Product) has param class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.createEntity(Product) calls method tools.descartes.petsupplystore.entities.Product.getName()
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.createEntity(Product) calls method tools.descartes.petsupplystore.entities.Product.getDescription()
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.createEntity(Product) calls method tools.descartes.petsupplystore.entities.Product.getListPriceInCents()
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.createEntity(Product) calls method tools.descartes.petsupplystore.entities.Product.getCategoryId()
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.updateEntity(long, Product) has param class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.updateEntity(long, Product) calls method tools.descartes.petsupplystore.entities.Product.getName()
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.updateEntity(long, Product) calls method tools.descartes.petsupplystore.entities.Product.getDescription()
+method tools.descartes.petsupplystore.persistence.domain.ProductRepository.updateEntity(long, Product) calls method tools.descartes.petsupplystore.entities.Product.getListPriceInCents()
+class tools.descartes.petsupplystore.persistence.domain.UserRepository references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.createEntity(User) has param class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.createEntity(User) calls method tools.descartes.petsupplystore.entities.User.getUserName()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.createEntity(User) calls method tools.descartes.petsupplystore.entities.User.getPassword()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.createEntity(User) calls method tools.descartes.petsupplystore.entities.User.getRealName()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.createEntity(User) calls method tools.descartes.petsupplystore.entities.User.getEmail()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.updateEntity(long, User) has param class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.updateEntity(long, User) calls method tools.descartes.petsupplystore.entities.User.getUserName()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.updateEntity(long, User) calls method tools.descartes.petsupplystore.entities.User.getPassword()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.updateEntity(long, User) calls method tools.descartes.petsupplystore.entities.User.getRealName()
+method tools.descartes.petsupplystore.persistence.domain.UserRepository.updateEntity(long, User) calls method tools.descartes.petsupplystore.entities.User.getEmail()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.setName(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.setDescription(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Order.()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Order.setUserId(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Order.setAddressName(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Order.setTotalPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Order.getTotalPriceInCents()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.setOrderId(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.setProductId(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.setQuantity(int)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.setUnitPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.getUnitPriceInCents()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.OrderItem.getQuantity()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setCategoryId(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setName(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setDescription(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setListPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.()
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setRealName(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setUserName(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setEmail(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setPassword(String)
+method tools.descartes.petsupplystore.persistence.OrderItemEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.setName(String)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Category.setDescription(String)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setCategoryId(long)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setName(String)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setDescription(String)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.setListPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.Product.getName()
+method tools.descartes.petsupplystore.persistence.ProductEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateCategories(int) calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateCategories(int) calls method tools.descartes.petsupplystore.entities.Category.setDescription(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateCategories(int) calls method tools.descartes.petsupplystore.entities.Category.setName(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateCategories(int) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) has param class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.Category.getId()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) has param class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.Order.getId()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) returns class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.OrderItem.setOrderId(long)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.OrderItem.setQuantity(int)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.OrderItem.setProductId(long)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.OrderItem.setUnitPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.Product.getId()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) calls method tools.descartes.petsupplystore.entities.Product.getListPriceInCents()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrderItem(Order, Category, int) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setAddressName(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setAddress1(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setAddress2(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setCreditCardCompany(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setCreditCardExpiryDate(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setTime(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setUserId(long)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.Order.setCreditCardNumber(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.OrderItem.getQuantity()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) calls method tools.descartes.petsupplystore.entities.OrderItem.getUnitPriceInCents()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateOrders(int, int) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateProducts(int) calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateProducts(int) calls method tools.descartes.petsupplystore.entities.Product.setName(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateProducts(int) calls method tools.descartes.petsupplystore.entities.Product.setDescription(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateProducts(int) calls method tools.descartes.petsupplystore.entities.Product.setListPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateProducts(int) calls method tools.descartes.petsupplystore.entities.Product.setCategoryId(long)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateProducts(int) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateUsers(int) calls method tools.descartes.petsupplystore.entities.User.()
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateUsers(int) calls method tools.descartes.petsupplystore.entities.User.setUserName(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateUsers(int) calls method tools.descartes.petsupplystore.entities.User.setEmail(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateUsers(int) calls method tools.descartes.petsupplystore.entities.User.setRealName(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateUsers(int) calls method tools.descartes.petsupplystore.entities.User.setPassword(String)
+method tools.descartes.petsupplystore.persistence.repository.DataGenerator.generateUsers(int) references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Category.()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Category.setName(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Category.setDescription(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Order.()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Order.setTotalPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Order.setUserId(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Order.getTotalPriceInCents()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.OrderItem.()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.OrderItem.setOrderId(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.OrderItem.setProductId(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.OrderItem.setQuantity(int)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.OrderItem.setUnitPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Product.()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Product.setCategoryId(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Product.setName(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Product.setDescription(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.Product.setListPriceInCents(long)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.User.()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.User.setRealName(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.User.setUserName(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.User.setEmail(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.User.setPassword(String)
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() calls method tools.descartes.petsupplystore.entities.User.getRealName()
+method tools.descartes.petsupplystore.persistence.RepositoryTest.testRepos() references class tools.descartes.petsupplystore.entities.User
+class tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.createEntity(Category) has param class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.findEntityById(long) returns class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.findEntityById(long) calls method tools.descartes.petsupplystore.entities.Category.(Category)
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.listAllEntities(int, int) calls method tools.descartes.petsupplystore.entities.Category.(Category)
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.listAllEntities(int, int) references class tools.descartes.petsupplystore.entities.Category
+method tools.descartes.petsupplystore.persistence.rest.CategoryEndpoint.updateEntity(long, Category) has param class tools.descartes.petsupplystore.entities.Category
+class tools.descartes.petsupplystore.persistence.rest.OrderEndpoint references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.createEntity(Order) has param class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.findEntityById(long) returns class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.findEntityById(long) calls method tools.descartes.petsupplystore.entities.Order.(Order)
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.listAllEntities(int, int) calls method tools.descartes.petsupplystore.entities.Order.(Order)
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.listAllEntities(int, int) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.listAllForUser(Long, Integer, Integer) calls method tools.descartes.petsupplystore.entities.Order.(Order)
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.listAllForUser(Long, Integer, Integer) references class tools.descartes.petsupplystore.entities.Order
+method tools.descartes.petsupplystore.persistence.rest.OrderEndpoint.updateEntity(long, Order) has param class tools.descartes.petsupplystore.entities.Order
+class tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.createEntity(OrderItem) has param class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.findEntityById(long) returns class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.findEntityById(long) calls method tools.descartes.petsupplystore.entities.OrderItem.(OrderItem)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllEntities(int, int) calls method tools.descartes.petsupplystore.entities.OrderItem.(OrderItem)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllEntities(int, int) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForOrder(Long, Integer, Integer) calls method tools.descartes.petsupplystore.entities.OrderItem.(OrderItem)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForOrder(Long, Integer, Integer) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForProduct(Long, Integer, Integer) calls method tools.descartes.petsupplystore.entities.OrderItem.(OrderItem)
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.listAllForProduct(Long, Integer, Integer) references class tools.descartes.petsupplystore.entities.OrderItem
+method tools.descartes.petsupplystore.persistence.rest.OrderItemEndpoint.updateEntity(long, OrderItem) has param class tools.descartes.petsupplystore.entities.OrderItem
+class tools.descartes.petsupplystore.persistence.rest.ProductEndpoint references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.createEntity(Product) has param class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.findEntityById(long) returns class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.findEntityById(long) calls method tools.descartes.petsupplystore.entities.Product.(Product)
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.listAllEntities(int, int) calls method tools.descartes.petsupplystore.entities.Product.(Product)
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.listAllEntities(int, int) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.listAllForCategory(Long, Integer, Integer) calls method tools.descartes.petsupplystore.entities.Product.(Product)
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.listAllForCategory(Long, Integer, Integer) references class tools.descartes.petsupplystore.entities.Product
+method tools.descartes.petsupplystore.persistence.rest.ProductEndpoint.updateEntity(long, Product) has param class tools.descartes.petsupplystore.entities.Product
+class tools.descartes.petsupplystore.persistence.rest.UserEndpoint references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.createEntity(User) has param class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.findById(String) calls method tools.descartes.petsupplystore.entities.User.(User)
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.findById(String) references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.findEntityById(long) returns class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.findEntityById(long) calls method tools.descartes.petsupplystore.entities.User.(User)
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.listAllEntities(int, int) calls method tools.descartes.petsupplystore.entities.User.(User)
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.listAllEntities(int, int) references class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.rest.UserEndpoint.updateEntity(long, User) has param class tools.descartes.petsupplystore.entities.User
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.()
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setEmail(String)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setRealName(String)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setUserName(String)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.setPassword(String)
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.getRealName()
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() calls method tools.descartes.petsupplystore.entities.User.getId()
+method tools.descartes.petsupplystore.persistence.UserEndpointTest.testEndpoint() references class tools.descartes.petsupplystore.entities.User

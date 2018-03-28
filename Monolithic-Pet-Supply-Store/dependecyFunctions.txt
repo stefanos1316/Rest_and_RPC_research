@@ -1,0 +1,4 @@
+Recommender -> entities (total number 49)
+Recommender -> rest (total number 2)
+Recommender -> registryClient(total number 30)
+
