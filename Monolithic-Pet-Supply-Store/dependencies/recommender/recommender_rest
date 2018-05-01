@@ -1,3 +1,0 @@
-method tools.descartes.petsupplystore.recommender.servlet.RecommenderStartup.contextInitialized(ServletContextEvent) calls method tools.descartes.petsupplystore.rest.RESTClient<T>.setGlobalReadTimeout(int)
-method tools.descartes.petsupplystore.recommender.servlet.TrainingSynchronizer.waitForPersistence() references class tools.descartes.petsupplystore.rest.NotFoundException
-

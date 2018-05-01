@@ -1,2 +1,0 @@
-method tools.descartes.petsupplystore.webui.servlet.AbstractUIServlet.doGet(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.rest.NotFoundException
-method tools.descartes.petsupplystore.webui.servlet.AbstractUIServlet.doPost(HttpServletRequest, HttpServletResponse) references class tools.descartes.petsupplystore.rest.NotFoundException

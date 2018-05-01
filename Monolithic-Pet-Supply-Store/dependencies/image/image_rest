@@ -1,4 +1,0 @@
-method tools.descartes.petsupplystore.image.setup.SetupController.fetchCategories() references class tools.descartes.petsupplystore.rest.NotFoundException
-method tools.descartes.petsupplystore.image.setup.SetupController.fetchProductsForCategory(Category, HashMap<Category, List<Long>>) references class tools.descartes.petsupplystore.rest.NotFoundException
-method tools.descartes.petsupplystore.image.setup.SetupController.waitForPersistence() references class tools.descartes.petsupplystore.rest.NotFoundException
-
