@@ -27,9 +27,25 @@ function checkRemoteHostSSH {
 	fi
 }
 
+# Function for help me
+function helpMe {
+
+	echo
+	echo "-p | --directoryPath		Is the path where all the test subjects are located."
+	echo "-n | --remoteHostName		The name of the host that will act as a server instance."
+	echo "-a | --remoteHostAddress		The IP address of the nost that acts as a server."
+	echo "-h | --help			Print the help me message and exit."
+	echo "-s | --server			Take measurements from the server instance."
+	echo "-c | --client			Take measurements from the client instance."
+	echo
+
+	exit
+}
+
 ############################################################################################################################################
 
 # Script for runnig the experiment to collect results for Rest and RPC
+
 
 # Command line arguments
 DIRECTORY_PATH=""
@@ -38,7 +54,7 @@ REMOTE_HOST_ADDRESS=""
 SERVER=false
 CLIENT=false
 
-OPTIONS=`getopt -o p:n:a:sc --long directoryPath:,remoteHostName:,remoteHostAddress:,server,client -n 'execute.sh' -- "$@"`
+OPTIONS=`getopt -o p:n:a:sch --long help,directoryPath:,remoteHostName:,remoteHostAddress:,server,client -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
 while true; do
 	case "$1" in 
@@ -57,8 +73,9 @@ while true; do
 				*\.*\.*\.*) REMOTE_HOST_ADDRESS=$2 ; shift 2 ;;
 				*) >&2 echo "[Error] IP address is required!" ; shift 2 ;;
 			esac ;;
-		-s|--server) SERVER=true ; shift ;;
-		-c|--client) CLIENT=true ; shift ;;
+		-s|--server) ${SERVER}=true; shift ;;
+		-c|--client) ${CLIENT}=true; shift ;;
+		-h|--help) helpMe ; shift ;;
 		--) shift ; break ;;
 		*) >&2 echo "Wrong command line argument, please try again." ; exit 1 ;;
 	esac
@@ -104,8 +121,7 @@ do
 			case "$k" in 
 				*.go) 
 					echo "Executing go's $j 's code"
-					if [ ${CLIENT} = true ]; then
-
+					if [  ${SERVER} = true ]; then
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
 						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST} touch GitHub/Rest_RPC_EM/energy_results/$containesTasks/c.txt
