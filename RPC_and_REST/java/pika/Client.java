@@ -14,9 +14,12 @@ public class Client {
 
     channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     String message = "Hello World!";
+for (int i = 0; i < 4500; ++i) {
+    message = message + i;
     channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
+    message = "Hello World " + i;
     System.out.println(" [x] Sent '" + message + "'");
-
+}
     channel.close();
     connection.close();
   }

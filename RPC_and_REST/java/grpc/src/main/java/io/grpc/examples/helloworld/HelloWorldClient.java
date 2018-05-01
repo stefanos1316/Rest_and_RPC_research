@@ -53,7 +53,7 @@ public class HelloWorldClient {
 
   /** Say hello to server. */
   public void greet(String name) {
-    logger.info("Will try to greet " + name + " ...");
+  // logger.info("Will try to greet " + name + " ...");
     HelloRequest request = HelloRequest.newBuilder().setName(name).build();
     HelloReply response;
     try {
@@ -77,7 +77,9 @@ public class HelloWorldClient {
       if (args.length > 0) {
         user = args[0]; /* Use the arg as the name to greet if provided */
       }
-      client.greet(user);
+	for (int i = 0; i < 4500; ++i)
+      		client.greet(user+i);
+	System.exit(1);
     } finally {
       client.shutdown();
     }

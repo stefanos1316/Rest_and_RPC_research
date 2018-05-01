@@ -31,10 +31,14 @@ function main() {
   } else {
     user = 'world';
   }
+  
+for (i = 0; i < 4500; i++) { 
+  user = 'world' + i;
   request.setName(user);
   client.sayHello(request, function(err, response) {
     console.log('Greeting:', response.getMessage());
   });
+}
 }
 
 main();
