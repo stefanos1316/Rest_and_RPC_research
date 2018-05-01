@@ -103,14 +103,15 @@ EnergyPerformanceLogDirName="experiment_data_"$EnergyPerformanceLogDataDate
 #Before creating directories check if the remote host is acticvated and SSH is running
 checkRemoteHostSSH ${REMOTE_HOST_NAME} ${REMOTE_HOST_ADDRESS}
 
-# Create REMOTEHOST is a single variable
-REMOTE_HOST==${REMOTE_HOST_NAME}@${REMOTE_HOST_ADDRESS}
+# Create REMOTEHOST is a single variable for server and em
+REMOTE_HOST_ME=${REMOTE_HOST_NAME_ME}@${REMOTE_HOST_ADDRESS_ME}
+REMOTE_HOST_SERVER=${REMOTE_HOST_NAME_SERVER}@${REMOTE_HOST_ADDRESS_SERVER}
 
 # If the script is still running it means ssh connection is fine.
 mkdir -p ../reports/$EnergyPerformanceLogDirName
 mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_results
 
-SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName
+SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_ME} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName
 SSH_AUTH_SOCK=0 ssh $remoteHost mkdir -p GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results
 
 if [ $? -eq 0 ];
@@ -139,30 +140,31 @@ do
 					if [  ${SERVER} = true ]; then
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
-						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST} touch GitHub/Rest_RPC_EM/energy_results/$containesTasks/c.txt
+						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_ME} touch GitHub/Rest_RPC_EM/energy_results/$containesTasks/c.txt
 						touch  ../reports/
 
 						# Run the wattsup in the background
-						SSH_AUTH_SOCK=0 ssh $remoteHost "sh -c 'sudo ./GitHub/Rosetta-Code-Research/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results/$containesTasks/c.txt' &" &
+						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_ME} "sh -c 'sudo ./GitHub/Rosetta-Code-Research/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results/$containesTasks/c.txt' &" &
 						
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
 				
-						# Start the server instance
-						time /usr/local/go/bin/go run server.go
-						getServerPID=$!
-
+						# Start the server instance $j is the type of RPC or Rest
+						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_RPC_Server/go/$j/server.go'"
 						
 						# Start the client
+						exec=$(time /usr/local/go/bin/go run client.go)
+						eval $exec &
+						getClientID=$!
 						
 
 						# While our tasks is still running sleep a second and start again
-						while  ps -p ${getServerPID} > /dev/null ;
+						while  ps -p ${getClientPID} > /dev/null ;
 						do
 							sleep 1
 						done
 					
-						# Once the client stopped running 
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
 					fi
 				 ;;
 
