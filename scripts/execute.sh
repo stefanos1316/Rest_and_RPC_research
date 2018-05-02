@@ -7,7 +7,6 @@
 
 # Check via if the give host is running
 function checkRemoteHostSSH {
-
 	#Check if nmap exist on the host, otherwise recommend to install it
 	if nmap --version | grep "command not found"; then
 		echo "Nmap not found in local host."
@@ -58,7 +57,7 @@ REMOTE_HOST_ADDRESS_SERVER=""
 SERVER=false
 CLIENT=false
 
-OPTIONS=`getopt -o p:n:a:schbd --long help,directoryPath:,remoteHostNameEM:,remoteHostNameServer:,remoteHostAddressEM:,remoteHostAddressServer,server,client -n 'execute.sh' -- "$@"`
+OPTIONS=`getopt -o p:n:a:schb:d: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameServer:,remoteHostAddressEM:,remoteHostAddressServer:,server,client -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
 while true; do
 	case "$1" in 
@@ -95,24 +94,23 @@ while true; do
 	esac
 done
 
-exit
 # Create parameters for the directory names
 EnergyPerformanceLogDataDate=$(date -u | sed -e 's/ /_/g')
 EnergyPerformanceLogDirName="experiment_data_"$EnergyPerformanceLogDataDate
 
 #Before creating directories check if the remote host is acticvated and SSH is running
-checkRemoteHostSSH ${REMOTE_HOST_NAME} ${REMOTE_HOST_ADDRESS}
+checkRemoteHostSSH ${REMOTE_HOST_NAME_EM} ${REMOTE_HOST_ADDRESS_EM}
+checkRemoteHostSSH ${REMOTE_HOST_NAME_SERVER} ${REMOTE_HOST_ADDRESS_SERVER}
 
 # Create REMOTEHOST is a single variable for server and em
-REMOTE_HOST_ME=${REMOTE_HOST_NAME_ME}@${REMOTE_HOST_ADDRESS_ME}
+REMOTE_HOST_EM=${REMOTE_HOST_NAME_EM}@${REMOTE_HOST_ADDRESS_EM}
 REMOTE_HOST_SERVER=${REMOTE_HOST_NAME_SERVER}@${REMOTE_HOST_ADDRESS_SERVER}
 
 # If the script is still running it means ssh connection is fine.
-mkdir -p ../reports/$EnergyPerformanceLogDirName
 mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_results
 
-SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_ME} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName
-SSH_AUTH_SOCK=0 ssh $remoteHost mkdir -p GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results
+ssh ${REMOTE_HOST_ME} mkdir -p ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
+ssh ${REMOTE_HOST_SERVER} mkdir -p ~/GitHub/Rest_RPC_Server/reports/$EnergyPerformanceLogDirName/performance_results
 
 if [ $? -eq 0 ];
 then
