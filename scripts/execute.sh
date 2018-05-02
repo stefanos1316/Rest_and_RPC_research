@@ -138,17 +138,17 @@ do
 					if [  ${SERVER} = true ]; then
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
-						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_ME} touch GitHub/Rest_RPC_EM/energy_results/$containesTasks/c.txt
+						ssh ${REMOTE_HOST_ME} touch GitHub/Rest_RPC_EM/energy_results/$containesTasks/c.txt
 						touch  ../reports/
 
 						# Run the wattsup in the background
-						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_ME} "sh -c 'sudo ./GitHub/Rosetta-Code-Research/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results/$containesTasks/c.txt' &" &
+						ssh ${REMOTE_HOST_ME} "sh -c 'sudo ./GitHub/Rosetta-Code-Research/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results/$containesTasks/c.txt' &" &
 						
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
 				
 						# Start the server instance $j is the type of RPC or Rest
-						SSH_AUTH_SOCK=0 ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_RPC_Server/go/$j/server.go'"
+						ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_RPC_Server/go/$j/server.go'"
 						
 						# Start the client
 						exec=$(time /usr/local/go/bin/go run client.go)
@@ -166,7 +166,13 @@ do
 					fi
 				 ;;
 
-				*.js) echo "$k is a javascript script" ;;
+				*.js) 
+					echo "$k is a javascript script" 
+					# If the current RPC is jax_ws_rpc then
+					if [ "$j" == "jax_ws_rpc" ]; then
+						echo "Found $j"
+					fi
+				;;
 				*.py) echo "$k is a python script" ;;
 				*.*) echo "This should be here..." ;;
 			esac
