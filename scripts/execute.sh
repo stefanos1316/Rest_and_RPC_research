@@ -109,7 +109,7 @@ REMOTE_HOST_SERVER=${REMOTE_HOST_NAME_SERVER}@${REMOTE_HOST_ADDRESS_SERVER}
 # If the script is still running it means ssh connection is fine.
 mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_results
 
-ssh ${REMOTE_HOST_ME} mkdir -p ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
+ssh ${REMOTE_HOST_EM} mkdir -p ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
 ssh ${REMOTE_HOST_SERVER} mkdir -p ~/GitHub/Rest_RPC_Server/reports/$EnergyPerformanceLogDirName/performance_results
 
 if [ $? -eq 0 ];
@@ -130,23 +130,34 @@ for i in `ls ${DIRECTORY_PATH}`
 do
 	for j in `ls ${DIRECTORY_PATH}/${i}` 
 	do
+		ssh ${REMOTE_HOST_EM} mkdir -p ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j
+		ssh ${REMOTE_HOST_SERVER} mkdir -p ~/GitHub/Rest_RPC_Server/reports/$EnergyPerformanceLogDirName/performance_results/$j
+		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results/$j
+
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
 		do
+			# At this point we already reached the source code of a specific implemetation
 			case "$k" in 
 				*.go) 
 					echo "Executing go's $j 's code"
+
+					# Now we are going to retrieve measurements from Server Instance
 					if [  ${SERVER} = true ]; then
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
-						ssh ${REMOTE_HOST_ME} touch GitHub/Rest_RPC_EM/energy_results/$containesTasks/c.txt
-						touch  ../reports/
+						ssh ${REMOTE_HOST_EM} touch ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt
+						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$j/go.txt
 
 						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_ME} "sh -c 'sudo ./GitHub/Rosetta-Code-Research/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rosetta-Code-Research/Reports/$EnergyPerformanceLogDirName/Energy_Results/$containesTasks/c.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt' &" &
 						
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
 				
+						# Test until this part
+						sleep 5 
+						exit
+
 						# Start the server instance $j is the type of RPC or Rest
 						ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_RPC_Server/go/$j/server.go'"
 						
@@ -163,15 +174,13 @@ do
 						done
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						ssh ${REMOTE_HOST_SERVER} sudo kill -9  		
 					fi
 				 ;;
 
 				*.js) 
 					echo "$k is a javascript script" 
-					# If the current RPC is jax_ws_rpc then
-					if [ "$j" == "jax_ws_rpc" ]; then
-						echo "Found $j"
-					fi
 				;;
 				*.py) echo "$k is a python script" ;;
 				*.*) echo "This should be here..." ;;
