@@ -109,8 +109,8 @@ REMOTE_HOST_SERVER=${REMOTE_HOST_NAME_SERVER}@${REMOTE_HOST_ADDRESS_SERVER}
 # If the script is still running it means ssh connection is fine.
 mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_results
 
-ssh ${REMOTE_HOST_EM} mkdir -p ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
-ssh ${REMOTE_HOST_SERVER} mkdir -p ~/GitHub/Rest_RPC_Server/reports/$EnergyPerformanceLogDirName/performance_results
+ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
+ssh ${REMOTE_HOST_SERVER} mkdir -p GitHub/Rest_and_RPC_research/reports/$EnergyPerformanceLogDirName/performance_results
 
 if [ $? -eq 0 ];
 then
@@ -124,14 +124,13 @@ fi
 # Create Performance locally since the execution is done here.
 mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results
 
-
 # Now we will run the experiment and collect out data.
 for i in `ls ${DIRECTORY_PATH}`
 do
 	for j in `ls ${DIRECTORY_PATH}/${i}` 
 	do
-		ssh ${REMOTE_HOST_EM} mkdir -p ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j
-		ssh ${REMOTE_HOST_SERVER} mkdir -p ~/GitHub/Rest_RPC_Server/reports/$EnergyPerformanceLogDirName/performance_results/$j
+		ssh ${REMOTE_HOST_EM} mkdir GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j
+		ssh ${REMOTE_HOST_SERVER} mkdir GitHub/Rest_and RPC_research/reports/$EnergyPerformanceLogDirName/performance_results/$j
 		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results/$j
 
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
@@ -145,21 +144,18 @@ do
 					if [  ${SERVER} = true ]; then
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
-						ssh ${REMOTE_HOST_EM} touch ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt
 						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$j/go.txt
 
 						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ~/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt' &" &
 						
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
 				
-						# Test until this part
-						sleep 5 
-						exit
 
 						# Start the server instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_RPC_Server/go/$j/server.go'"
+						ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_and_RPC_Research/go/$j/server.go'"
 						
 						# Start the client
 						exec=$(time /usr/local/go/bin/go run client.go)
@@ -167,6 +163,11 @@ do
 						getClientID=$!
 						
 
+						# Test until this part
+						sleep 10 
+						exit
+
+						
 						# While our tasks is still running sleep a second and start again
 						while  ps -p ${getClientPID} > /dev/null ;
 						do
