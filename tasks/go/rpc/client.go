@@ -12,13 +12,14 @@ func main() {
 		log.Fatalf("Error in dialing. %s", err)
 	}
 	args := &rpcexample.Args{
-		A: 2,
-		B: 3,
+		A: "Stefanos",
 	}
 	var result rpcexample.Result
-	err = client.Call("Arith.Multiply", args, &result)
-	if err != nil {
-		log.Fatalf("error in Arith", err)
+	for i := 0; i < 20000; i++ { 	
+		err = client.Call("Arith.Multiply", args, &result)
+		if err != nil {
+			log.Fatalf("error in Arith", err)
+		}
 	}
-	log.Printf("%d*%d=%d\n", args.A, args.B, result)
+	log.Printf("%s  %d\n", args.A, result)
 }

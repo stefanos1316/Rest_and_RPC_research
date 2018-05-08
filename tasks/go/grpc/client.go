@@ -47,11 +47,15 @@ func main() {
 	if len(os.Args) > 1 {
 		name = os.Args[1]
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
-	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+	for i := 0; i < 20000; i++ {
+		r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
+		_ = r
+		if err != nil {
+			log.Fatalf("could not greet: %v", err)
+		}
+	
+	//log.Printf("Greeting: %s", r.Message)
 	}
-	log.Printf("Greeting: %s", r.Message)
 }

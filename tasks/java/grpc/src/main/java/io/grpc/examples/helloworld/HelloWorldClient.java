@@ -62,7 +62,7 @@ public class HelloWorldClient {
       logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
       return;
     }
-    logger.info("Greeting: " + response.getMessage());
+    //logger.info("Greeting: " + response.getMessage());
   }
 
   /**
@@ -77,7 +77,7 @@ public class HelloWorldClient {
       if (args.length > 0) {
         user = args[0]; /* Use the arg as the name to greet if provided */
       }
-	for (int i = 0; i < 4500; ++i)
+	for (int i = 0; i < 20000; ++i)
       		client.greet(user+i);
 	System.exit(1);
     } finally {
