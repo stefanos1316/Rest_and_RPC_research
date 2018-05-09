@@ -1,4 +1,4 @@
-# Compiling and Executing code
+# Compiling and Executing Tests
 ## Pika 
 
 For all the RPC pika examples remember to start the server using the following command:
