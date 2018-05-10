@@ -11,7 +11,7 @@ public class HelloWorldClient {
 
 		try {
 
-			URL url = new URL("http://195.251.251.25:9876/jax_ws_rpc?wsdl");
+			URL url = new URL("http://195.251.251.27:9876/jax_ws_rpc?wsdl");
 			QName qname = new QName("http://thejavageek.com/",
 					"HelloWorldServerImplService");
 

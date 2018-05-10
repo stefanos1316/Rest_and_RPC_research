@@ -2,5 +2,5 @@
 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/java/grpc/src/test/java/io/grpc/examples/routeguide/RouteGuideServerTest.java
 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/java/grpc/src/test/java/io/grpc/examples/helloworld/HelloWorldServerTest.java
 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/java/grpc/src/test/java/io/grpc/examples/header/HeaderClientInterceptorTest.java
-/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/java/grpc/src/test/java/io/grpc/examples/header/HeaderServerInterceptorTest.java
 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/java/grpc/src/test/java/io/grpc/examples/routeguide/RouteGuideClientTest.java
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/java/grpc/src/test/java/io/grpc/examples/header/HeaderServerInterceptorTest.java
