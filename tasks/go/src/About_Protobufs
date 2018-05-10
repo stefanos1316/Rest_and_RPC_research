@@ -1,0 +1,5 @@
+Information regarding protobufs
+===============================
+
+gRPC uses protobuf by default, and it's faster because it's binary and it's type-safe.
+
