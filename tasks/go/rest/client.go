@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-    	url := "http://localhost:3000"
+    	url := "http://195.251.251.27:3000"
     	req, err := http.NewRequest(http.MethodGet, url, nil)
 		if err != nil {
 			log.Fatal(err)

@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	client, err := rpc.DialHTTP("tcp", ":12345")
+	client, err := rpc.DialHTTP("tcp", "195.251.251.27:12345")
 	if err != nil {
 		log.Fatalf("Error in dialing. %s", err)
 	}

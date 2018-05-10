@@ -1,6 +1,6 @@
 import requests
-url = 'http://127.0.0.1:5000/'
+url = 'http://195.251.251.27:5000/'
 
-for i in range(4500):
+for i in range(20000):
 	response = requests.get(url)
 print response.content
