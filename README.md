@@ -26,7 +26,7 @@ For Java's exmaple you can use the Maven to build and run the example
 
 For Java's Jax WS you may compile using javac pathToJavaFiles/*.java and run as follows:
 	
-		$ java -cp ./src com.thejavageek.HelloWorldPublisher
+		$ java -cp ./src com.thejavageek.HelloWorldServerPublisher
 		$ java -cp ./src com.thejavageek.HelloWorldClient 
 
 

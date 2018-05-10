@@ -11,7 +11,7 @@ public class HelloWorldClient {
 
 		try {
 
-			URL url = new URL("http://localhost:9876/jax_ws_rpc?wsdl");
+			URL url = new URL("http://195.251.251.25:9876/jax_ws_rpc?wsdl");
 			QName qname = new QName("http://thejavageek.com/",
 					"HelloWorldServerImplService");
 
@@ -19,7 +19,7 @@ public class HelloWorldClient {
 			
 			HelloWorldServer server = service.getPort(HelloWorldServer.class);
 			
-			for (int i = 0; i < 4500; ++i) {
+			for (int i = 0; i < 1000; ++i) {
 				String name = "World " + i;
 				//System.out.println(server.sayHello(name));
 				server.sayHello(name);
