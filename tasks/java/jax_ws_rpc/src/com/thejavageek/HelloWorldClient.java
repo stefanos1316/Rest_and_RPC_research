@@ -19,7 +19,7 @@ public class HelloWorldClient {
 			
 			HelloWorldServer server = service.getPort(HelloWorldServer.class);
 			
-			for (int i = 0; i < 1000; ++i) {
+			for (int i = 0; i < 20000; ++i) {
 				String name = "World " + i;
 				//System.out.println(server.sayHello(name));
 				server.sayHello(name);

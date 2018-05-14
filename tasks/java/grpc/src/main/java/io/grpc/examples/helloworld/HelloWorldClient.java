@@ -70,7 +70,7 @@ public class HelloWorldClient {
    * greeting.
    */
   public static void main(String[] args) throws Exception {
-    HelloWorldClient client = new HelloWorldClient("195.251.251.25", 50051);
+    HelloWorldClient client = new HelloWorldClient("195.251.251.27", 50051);
     try {
       /* Access a service running on the local machine on port 50051 */
       String user = "world";
