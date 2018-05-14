@@ -127,12 +127,25 @@ mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results
 # Now we will run the experiment and collect out data.
 for i in `ls ${DIRECTORY_PATH}`
 do
+	# This $i has a programming language directory name and $j jas the name of the protocol
 	for j in `ls ${DIRECTORY_PATH}/${i}` 
 	do
 		ssh ${REMOTE_HOST_EM} mkdir GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j
 		ssh ${REMOTE_HOST_SERVER} mkdir GitHub/Rest_and RPC_research/reports/$EnergyPerformanceLogDirName/performance_results/$j
 		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results/$j
 
+		# Consider adding the case here to make the execution and not in a directory below.	
+		echo "Directory is $j"
+		case $j in 
+			go) if [grpc,rest,rpc] and make all calls from here ;;
+			java) if [grpc,rest,jax_ws_rpc] ;;
+			javascript) if [grpc,rest,rpc] ;;
+			python) if [grpc,rest,rpc] ;;
+		esac
+
+
+
+		exit
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
 		do
 			# At this point we already reached the source code of a specific implemetation
@@ -154,11 +167,11 @@ do
 						sleep 2
 				
 
-						# Start the server instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_SERVER} "sh -c './GitHub/Rest_and_RPC_Research/go/$j/server.go'"
+						# Start the client instance $j is the type of RPC or Rest
+						ssh ${REMOTE_HOST_SERVER} "sh -c 'go run /GitHub/Rest_and_RPC_Research/go/$j/client.go'"
 						
-						# Start the client
-						exec=$(time /usr/local/go/bin/go run client.go)
+						# Start the server
+						exec=$(time go run server.go)
 						eval $exec &
 						getClientID=$!
 						
@@ -184,7 +197,12 @@ do
 					echo "$k is a javascript script" 
 				;;
 				*.py) echo "$k is a python script" ;;
-				*.*) echo "This should be here..." ;;
+				*.java) 
+					echo "Executing java $k"
+			 
+					
+		
+				;;
 			esac
 		done
 	done
