@@ -11,11 +11,9 @@ public class JerseyClientGet {
 
 			Client client = Client.create();
 
-			WebResource webResource = client
-					.resource("http://localhost:8080/RESTfulExample/rest/hello/mkyong");
-
-			ClientResponse response = webResource.accept("application/json")
-					.get(ClientResponse.class);
+			for (int i = 0; i < 20000; ++i) {
+				WebResource webResource = client.resource("http://195.251.251.27:8080/RESTfulServer/rest/hello/mkyong");
+				ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 
 			if (response.getStatus() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : "
@@ -23,9 +21,8 @@ public class JerseyClientGet {
 			}
 
 			String output = response.getEntity(String.class);
-
-			System.out.println("Output from Server .... \n");
-			System.out.println(output);
+			}
+			System.out.println("Done .... \n");
 
 		} catch (Exception e) {
 

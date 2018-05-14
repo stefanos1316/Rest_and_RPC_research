@@ -34,7 +34,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>RESTfulExample</finalName>
+		<finalName>RESTfulServer</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
