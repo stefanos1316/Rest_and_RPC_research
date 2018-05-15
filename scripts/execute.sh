@@ -191,9 +191,56 @@ do
 					fi
 				;;
 				java) 
-					echo "Executing java $k"
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
-						echo $j
+						echo "Executing $j from $i"
+				
+						# At this point we are in the main directory where all the java files are locate such as src, target, and pom.xmls.
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/java.txt
+						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt
+
+						# Run the wattsup in the background
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/java.txt' &" &
+	
+						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
+						sleep 2					
+						
+						# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
+						case "$j" in			
+							grpc)
+								if [ "$k" = "src" ]; then
+									(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									getServerPID=$!
+
+									# Now start the remote client
+
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+								
+									# Check if remote client is still running
+									while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
+									do
+										sleep 1
+									done
+
+									# Stop server instance
+									kill -9 ${getServerPID}
+									echo "Done with $k"
+									sleep 5
+								fi
+							;;
+							rest) 
+								#if [ "$k" = "REST_server" ]; then
+								#	(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+								#fi
+							;;
+							jax_ws_rpc) 
+								
+							;;
+						esac
+
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "Killing wattsup pro"		
+							
 					fi
 					exit
 				;;
