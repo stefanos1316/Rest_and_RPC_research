@@ -177,18 +177,16 @@ do
 				 ;;
 
 				javascript) 
-					exit
-					echo "$k is a javascript script" 
-					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
-						echo $j 
-					fi
+				#	echo "$k is a javascript script" 
+				#	if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
+				#		echo $j 
+				#	fi
 				;;
 				python) 
-					exit
-					echo "$k is a python script" 
-					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
-						echo $j 
-					fi
+				#	echo "$k is a python script" 
+				#	if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
+				#		echo $j 
+				#	fi
 				;;
 				java) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
@@ -211,8 +209,7 @@ do
 									(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 									getServerPID=$!
 
-									# Now start the remote client
-
+									# Now start the remote client by entering the path where it is located
 									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
 								
 									# Check if remote client is still running
@@ -228,12 +225,55 @@ do
 								fi
 							;;
 							rest) 
-								#if [ "$k" = "REST_server" ]; then
-								#	(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
-								#fi
+								if [ "$k" = "REST_server" ]; then
+																	
+									response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
+									if [ "${response}" == "Jersey say : Testing" ]; then
+										echo "Apache tomcat working and RESTfulServer deployed"
+									else
+										&>2 echo "Error, apache tomcat may not run or RESTfulServer may not be deployed"
+										exit
+									fi
+
+									# Starting remote client, 
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '/bin/sh -c cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+				
+									 # Check if remote client is still running
+                                                                        while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
+                                                                        do
+                                                                                sleep 1
+                                                                        done
+
+                                                                        # Stop server instance
+                                                                        kill -9 ${getServerPID}
+                                                                        echo "Done with $k"
+                                                                        sleep 5
+									
+								fi
 							;;
 							jax_ws_rpc) 
-								
+								if [ "$k" = "src" ]; then
+
+
+									# Start server java -cp ./src com.thejavageek.HelloWorldServerPublisher
+									(time java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									getServerPID=$!
+									
+									# Start client java -cp ./src com.thejavageek.HelloWorldClient 
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+										
+									 # Check if remote client is still running
+                                                                        while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
+                                                                        do
+                                                                                sleep 1
+                                                                        done
+
+                                                                        # Stop server instance
+                                                                        kill -9 ${getServerPID}
+                                                                        echo "Done with $k"
+                                                                        sleep 5
+
+								fi	
 							;;
 						esac
 
@@ -242,7 +282,6 @@ do
 						echo "Killing wattsup pro"		
 							
 					fi
-					exit
 				;;
 			esac
 		done
