@@ -8,6 +8,9 @@
 # Check via if the give host is running
 function checkRemoteHostSSH {
 	#Check if nmap exist on the host, otherwise recommend to install it
+	
+	echo "Checking instance $1@$2"
+
 	if nmap --version | grep "command not found"; then
 		echo "Nmap not found in local host."
 		echo "Please install nmap before procceding any further."
@@ -15,7 +18,7 @@ function checkRemoteHostSSH {
 		exit
 	fi
 
-	if nmap -p22 $2 -oG - | grep -q 22/open; then 
+	if nmap -p22 $2 -Pn -oG - | grep -q 22/open; then 
     		echo "Remote Host's $2 SSH is active"
 		echo "Procceding normally..."
 		echo " "
@@ -33,11 +36,9 @@ function helpMe {
 	echo "-p | --directoryPath		Is the path where all the test subjects are located."
 	echo "-n | --remoteHostNameEM		The name of the host that will act as an energy monitoring instance."
 	echo "-a | --remoteHostAddressEM	The IP address of the host that acts as an energy monitoring."
-	echo "-b | --remoteHostNameAServer	The name of the host that will act as a server instance."
-	echo "-d | --remoteHostAddressServer	The IP address of the host that acts as a server."
+	echo "-b | --remoteHostNameClient	The name of the host that will act as a client instance."
+	echo "-d | --remoteHostAddressClient	The IP address of the host that acts as a client."
 	echo "-h | --help			Print the help me message and exit."
-	echo "-s | --server			Take measurements from the server instance."
-	echo "-c | --client			Take measurements from the client instance."
 	echo
 
 	exit
@@ -47,17 +48,14 @@ function helpMe {
 
 # Script for runnig the experiment to collect results for Rest and RPC
 
-
 # Command line arguments
 DIRECTORY_PATH=""
 REMOTE_HOST_NAME_EM=""
 REMOTE_HOST_ADDRESS_EM=""
-REMOTE_HOST_NAME_SERVER=""
-REMOTE_HOST_ADDRESS_SERVER=""
-SERVER=false
-CLIENT=false
+REMOTE_HOST_NAME_CLIENT=""
+REMOTE_HOST_ADDRESS_CLIENT=""
 
-OPTIONS=`getopt -o p:n:a:schb:d: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameServer:,remoteHostAddressEM:,remoteHostAddressServer:,server,client -n 'execute.sh' -- "$@"`
+OPTIONS=`getopt -o p:n:a:hb:d: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient: -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
 while true; do
 	case "$1" in 
@@ -76,18 +74,16 @@ while true; do
 				*\.*\.*\.*) REMOTE_HOST_ADDRESS_EM=$2 ; shift 2 ;;
 				*) >&2 echo "[Error] IP address is required!" ; shift 2 ;;
 			esac ;;
-		-b|--remoteHostNameServer) 
+		-b|--remoteHostNameClient) 
 			case $2 in 
-				*[a-zA-Z0-9]*) REMOTE_HOST_NAME_SERVER=$2 ; shift 2 ;;
+				*[a-zA-Z0-9]*) REMOTE_HOST_NAME_CLIENT=$2 ; shift 2 ;;
 				*) >&2 echo "[Error] Host name is required!" ; shift 2 ;;
 			esac ;;
-		-d|--remoteHostAddressServer) 
+		-d|--remoteHostAddressClient) 
 			case $2 in 
-				*\.*\.*\.*) REMOTE_HOST_ADDRESS_SERVER=$2 ; shift 2 ;;
+				*\.*\.*\.*) REMOTE_HOST_ADDRESS_CLIENT=$2 ; shift 2 ;;
 				*) >&2 echo "[Error] IP address is required!" ; shift 2 ;;
 			esac ;;
-		-s|--server) SERVER=true; shift ;;
-		-c|--client) CLIENT=true; shift ;;
 		-h|--help) helpMe ; shift ;;
 		--) shift ; break ;;
 		*) >&2 echo "Wrong command line argument, please try again." ; exit 1 ;;
@@ -100,17 +96,17 @@ EnergyPerformanceLogDirName="experiment_data_"$EnergyPerformanceLogDataDate
 
 #Before creating directories check if the remote host is acticvated and SSH is running
 checkRemoteHostSSH ${REMOTE_HOST_NAME_EM} ${REMOTE_HOST_ADDRESS_EM}
-checkRemoteHostSSH ${REMOTE_HOST_NAME_SERVER} ${REMOTE_HOST_ADDRESS_SERVER}
+checkRemoteHostSSH ${REMOTE_HOST_NAME_CLIENT} ${REMOTE_HOST_ADDRESS_CLIENT}
 
 # Create REMOTEHOST is a single variable for server and em
 REMOTE_HOST_EM=${REMOTE_HOST_NAME_EM}@${REMOTE_HOST_ADDRESS_EM}
-REMOTE_HOST_SERVER=${REMOTE_HOST_NAME_SERVER}@${REMOTE_HOST_ADDRESS_SERVER}
+REMOTE_HOST_CLIENT=${REMOTE_HOST_NAME_CLIENT}@${REMOTE_HOST_ADDRESS_CLIENT}
 
 # If the script is still running it means ssh connection is fine.
 mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_results
 
 ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
-ssh ${REMOTE_HOST_SERVER} mkdir -p GitHub/Rest_and_RPC_research/reports/$EnergyPerformanceLogDirName/performance_results
+ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results
 
 if [ $? -eq 0 ];
 then
@@ -130,78 +126,123 @@ do
 	# This $i has a programming language directory name and $j jas the name of the protocol
 	for j in `ls ${DIRECTORY_PATH}/${i}` 
 	do
-		ssh ${REMOTE_HOST_EM} mkdir GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j
-		ssh ${REMOTE_HOST_SERVER} mkdir GitHub/Rest_and RPC_research/reports/$EnergyPerformanceLogDirName/performance_results/$j
-		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results/$j
+		if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" -o "$j" = "jax_ws_rpc" ]; then
+			ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j
+			ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j
+		fi
+		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results/$i/$j
 
-		# Consider adding the case here to make the execution and not in a directory below.	
-		echo "Directory is $j"
-		case $j in 
-			go) if [grpc,rest,rpc] and make all calls from here ;;
-			java) if [grpc,rest,jax_ws_rpc] ;;
-			javascript) if [grpc,rest,rpc] ;;
-			python) if [grpc,rest,rpc] ;;
-		esac
-
-
-
-		exit
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
 		do
 			# At this point we already reached the source code of a specific implemetation
-			case "$k" in 
-				*.go) 
-					echo "Executing go's $j 's code"
-
-					# Now we are going to retrieve measurements from Server Instance
-					if [  ${SERVER} = true ]; then
+			case "$i" in 
+				go)
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
+					if [ "$k" = "server.go" ]; then	
+						echo "Executing $j from $i"
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt
-						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$j/go.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/go.txt
+						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt
 
 						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$j/go.txt' &" &
-						
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/go.txt' &" &
+	
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
 				
-
-						# Start the client instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_SERVER} "sh -c 'go run /GitHub/Rest_and_RPC_Research/go/$j/client.go'"
-						
 						# Start the server
-						exec=$(time go run server.go)
-						eval $exec &
-						getClientID=$!
+						(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
+						getServerPID=$!
 						
-
-						# Test until this part
-						sleep 10 
-						exit
-
-						
-						# While our tasks is still running sleep a second and start again
-						while  ps -p ${getClientPID} > /dev/null ;
+						# Start the client instance $j is the type of RPC or Rest
+						ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/go.txt'" &
+			
+						# Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.go > /dev/null ;
 						do
 							sleep 1
 						done
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						ssh ${REMOTE_HOST_SERVER} sudo kill -9  		
+						echo "Killing wattsup pro"
+						
+						# Stop server instance
+						kill -9 ${getServerPID}
+						echo "Done with $k"
+						sleep 5
+					fi
 					fi
 				 ;;
 
-				*.js) 
+				javascript) 
+					exit
 					echo "$k is a javascript script" 
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
+						echo $j 
+					fi
 				;;
-				*.py) echo "$k is a python script" ;;
-				*.java) 
-					echo "Executing java $k"
-			 
-					
-		
+				python) 
+					exit
+					echo "$k is a python script" 
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
+						echo $j 
+					fi
+				;;
+				java) 
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
+						echo "Executing $j from $i"
+				
+						# At this point we are in the main directory where all the java files are locate such as src, target, and pom.xmls.
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/java.txt
+						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt
+
+						# Run the wattsup in the background
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/java.txt' &" &
+	
+						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
+						sleep 2					
+						
+						# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
+						case "$j" in			
+							grpc)
+								if [ "$k" = "src" ]; then
+									(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									getServerPID=$!
+
+									# Now start the remote client
+
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+								
+									# Check if remote client is still running
+									while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
+									do
+										sleep 1
+									done
+
+									# Stop server instance
+									kill -9 ${getServerPID}
+									echo "Done with $k"
+									sleep 5
+								fi
+							;;
+							rest) 
+								#if [ "$k" = "REST_server" ]; then
+								#	(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+								#fi
+							;;
+							jax_ws_rpc) 
+								
+							;;
+						esac
+
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "Killing wattsup pro"		
+							
+					fi
+					exit
 				;;
 			esac
 		done
