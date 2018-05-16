@@ -206,7 +206,7 @@ do
 						case "$j" in			
 							grpc)
 								if [ "$k" = "src" ]; then
-									(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 									getServerPID=$!
 
 									# Now start the remote client by entering the path where it is located
@@ -236,7 +236,7 @@ do
 									fi
 
 									# Starting remote client, 
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '/bin/sh -c cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+									ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt && cd ~/'" &
 				
 									 # Check if remote client is still running
                                                                         while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
@@ -251,16 +251,16 @@ do
 									
 								fi
 							;;
-							jax_ws_rpc) 
+							jax_ws_rpc_offline) 
 								if [ "$k" = "src" ]; then
 
 
 									# Start server java -cp ./src com.thejavageek.HelloWorldServerPublisher
-									(time java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									#(time java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 									getServerPID=$!
 									
 									# Start client java -cp ./src com.thejavageek.HelloWorldClient 
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+									#ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
 										
 									 # Check if remote client is still running
                                                                         while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;

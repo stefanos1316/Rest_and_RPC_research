@@ -1,7 +1,0 @@
-+ go run ../tasks//go/grpc/server.go
-2018/05/15 18:39:03 failed to listen: listen tcp :50051: bind: address already in use
-exit status 1
-
-real	0m0.619s
-user	0m0.777s
-sys	0m0.108s

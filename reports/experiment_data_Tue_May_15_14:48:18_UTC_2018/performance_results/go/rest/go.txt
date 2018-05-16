@@ -1,5 +1,0 @@
-+ go run ../tasks//go/rest/server.go
-
-real	0m0.234s
-user	0m0.246s
-sys	0m0.048s

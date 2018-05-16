@@ -1,6 +1,0 @@
-+ java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher
-Error: Could not find or load main class com.thejavageek.HelloWorldServerPublisher
-
-real	0m0.058s
-user	0m0.043s
-sys	0m0.006s
