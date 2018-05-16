@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 ############################################################################################################################################
 #					ALL FUNCTIONS HERE		
 ############################################################################################################################################
@@ -177,16 +176,80 @@ do
 				 ;;
 
 				javascript) 
-				#	echo "$k is a javascript script" 
-				#	if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
-				#		echo $j 
-				#	fi
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
+						if [ "$k" = "server.js"  ]; then
+							echo "Executing $j from $i"
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/javascript.txt
+                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt
+
+                                                	# Run the wattsup in the background
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/javascript.txt' &" &
+
+                                                	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
+                                                	sleep 2
+
+                                                	# Start the server
+							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
+							getServerPID=$!									
+
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/javascript.txt'" &
+			
+							# Check if remote client is still running
+							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.js > /dev/null ;
+							do
+								sleep 1
+							done
+					
+							# Once the client stopped running kill Server and WattsUp?Pro instances.
+							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+							echo "Killing wattsup pro"
+						
+							# Stop server instance
+							kill -9 ${getServerPID}
+							echo "Done with $k"
+							sleep 5
+						fi	
+					fi
 				;;
 				python) 
-				#	echo "$k is a python script" 
-				#	if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
-				#		echo $j 
-				#	fi
+
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
+						if [ "$k" = "server.py"  ]; then
+							echo "Executing $j from $i"
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/python.txt
+                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt
+
+                                                	# Run the wattsup in the background
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/python.txt' &" &
+
+                                                	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
+                                                	sleep 2
+
+                                                	# Start the server
+							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
+							getServerPID=$!									
+							sleep 2
+
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/python.txt'" &
+			
+							# Check if remote client is still running
+							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.py > /dev/null ;
+							do
+								sleep 1
+							done
+					
+							# Once the client stopped running kill Server and WattsUp?Pro instances.
+							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+							echo "Killing wattsup pro"
+						
+							# Stop server instance
+							kill -9 ${getServerPID}
+							echo "Done with $k"
+							sleep 5
+						fi	
+					fi
 				;;
 				java) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
@@ -226,7 +289,8 @@ do
 							;;
 							rest) 
 								if [ "$k" = "REST_server" ]; then
-																	
+									bash ../apache-tomcat-9.0.8/bin/catalina.sh start
+									sleep 2
 									response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
 									if [ "${response}" == "Jersey say : Testing" ]; then
 										echo "Apache tomcat working and RESTfulServer deployed"
@@ -251,16 +315,15 @@ do
 									
 								fi
 							;;
-							jax_ws_rpc_offline) 
+							jax_ws_rpc) 
 								if [ "$k" = "src" ]; then
 
-
 									# Start server java -cp ./src com.thejavageek.HelloWorldServerPublisher
-									#(time java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									(time java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 									getServerPID=$!
 									
 									# Start client java -cp ./src com.thejavageek.HelloWorldClient 
-									#ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
 										
 									 # Check if remote client is still running
                                                                         while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;

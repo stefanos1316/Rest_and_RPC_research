@@ -1,0 +1,2 @@
++ go run ../tasks//go/grpc/server.go
+signal: killed

@@ -1,0 +1,7 @@
++ go run ../tasks//go/rpc/server.go
+2018/05/16 15:57:14 Couldn't start listening on port 1234. Error listen tcp :12345: bind: address already in use
+exit status 1
+
+real	0m0.276s
+user	0m0.282s
+sys	0m0.059s

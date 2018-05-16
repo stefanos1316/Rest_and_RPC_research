@@ -1,0 +1,5 @@
+{
+    "name"   : "jsonrpc",
+    "version": "0.1.1",
+    "main"   : "./jsonrpc"
+}

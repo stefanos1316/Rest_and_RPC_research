@@ -1,0 +1,23 @@
++ go run ../tasks//go/rest/server.go
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 5ms
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 10ms
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 20ms
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 40ms
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 80ms
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 160ms
+2018/05/16 11:56:57 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 320ms
+2018/05/16 11:56:58 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 640ms
+2018/05/16 11:57:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 5ms
+2018/05/16 11:57:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 10ms
+2018/05/16 11:57:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 20ms
+2018/05/16 11:57:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 5ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 5ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 10ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 20ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 40ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 80ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 160ms
+2018/05/16 12:03:00 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 320ms
+2018/05/16 12:03:01 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 640ms
+2018/05/16 12:03:03 http: Accept error: accept tcp [::]:3000: accept4: too many open files; retrying in 5ms
+signal: killed
