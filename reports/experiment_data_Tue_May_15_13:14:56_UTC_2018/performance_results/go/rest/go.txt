@@ -1,1 +1,0 @@
-+ go run ../tasks//go/rest/server.go
