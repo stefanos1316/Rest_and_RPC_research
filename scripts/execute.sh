@@ -227,7 +227,7 @@ do
                                                 	sleep 2
 
                                                 	# Start the server
-							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
+							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt &		
 							getServerPID=$!									
 							sleep 2
 

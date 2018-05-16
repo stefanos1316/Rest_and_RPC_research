@@ -1,1 +1,0 @@
-+ java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher

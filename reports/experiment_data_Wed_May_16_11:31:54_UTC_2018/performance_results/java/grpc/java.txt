@@ -1,6 +1,0 @@
-+ mvn -f ../tasks//java/grpc/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer
-POM file ../tasks//java/grpc/ specified with the -f/--file command line argument does not exist
-
-real	0m16.664s
-user	0m4.721s
-sys	0m0.185s
