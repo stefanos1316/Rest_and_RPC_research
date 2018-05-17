@@ -319,12 +319,12 @@ do
 								if [ "$k" = "src" ]; then
 
 									# Start server java -cp ./src com.thejavageek.HelloWorldServerPublisher
-									(time java -cp ../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+									(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 									getServerPID=$!
 									
 									# Start client java -cp ./src com.thejavageek.HelloWorldClient 
 									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
-										
+									sleep 5
 									 # Check if remote client is still running
                                                                         while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
                                                                         do

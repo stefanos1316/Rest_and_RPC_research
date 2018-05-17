@@ -1016,3 +1016,210 @@ Caused by: java.net.BindException: Address already in use
 16-May-2018 16:41:08.619 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-195.251.251.27-8080"]
 16-May-2018 16:41:08.627 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
 16-May-2018 16:41:08.642 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 766 ms
+16-May-2018 17:46:48.233 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/9.0.8
+16-May-2018 17:46:48.366 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 27 2018 19:32:00 UTC
+16-May-2018 17:46:48.366 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         9.0.8.0
+16-May-2018 17:46:48.366 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+16-May-2018 17:46:48.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.16.6-202.fc27.x86_64
+16-May-2018 17:46:48.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+16-May-2018 17:46:48.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-4.b10.fc27.x86_64/jre
+16-May-2018 17:46:48.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_171-b10
+16-May-2018 17:46:48.367 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+16-May-2018 17:46:48.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 17:46:48.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 17:46:48.368 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/conf/logging.properties
+16-May-2018 17:46:48.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-May-2018 17:46:48.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+16-May-2018 17:46:48.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+16-May-2018 17:46:48.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+16-May-2018 17:46:48.369 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+16-May-2018 17:46:48.370 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 17:46:48.370 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 17:46:48.370 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/temp
+16-May-2018 17:46:48.370 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+16-May-2018 17:46:48.595 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 17:46:48.602 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 17:46:48.606 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 17:46:48.607 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 17:46:48.608 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 831 ms
+16-May-2018 17:46:48.625 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+16-May-2018 17:46:48.625 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/9.0.8
+16-May-2018 17:46:48.684 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war]
+16-May-2018 17:46:49.127 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+16-May-2018 17:46:49.170 INFO [main] com.sun.jersey.api.core.PackagesResourceConfig.init Scanning for root resource and provider classes in the packages:
+  com.mkyong.rest
+16-May-2018 17:46:49.181 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.logClasses Root resource classes found:
+  class com.mkyong.rest.HelloWorldService
+16-May-2018 17:46:49.181 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.init No provider classes found.
+16-May-2018 17:46:49.218 INFO [main] com.sun.jersey.server.impl.application.WebApplicationImpl._initiate Initiating Jersey application, version 'Jersey: 1.8 06/24/2011 12:17 PM'
+16-May-2018 17:46:49.508 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war] has finished in [823] ms
+16-May-2018 17:46:49.508 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs]
+16-May-2018 17:46:49.515 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs] has finished in [7] ms
+16-May-2018 17:46:49.516 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples]
+16-May-2018 17:46:49.661 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples] has finished in [145] ms
+16-May-2018 17:46:49.661 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT]
+16-May-2018 17:46:49.682 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT] has finished in [21] ms
+16-May-2018 17:46:49.693 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager]
+16-May-2018 17:46:49.719 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager] has finished in [26] ms
+16-May-2018 17:46:49.719 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager]
+16-May-2018 17:46:49.729 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager] has finished in [9] ms
+16-May-2018 17:46:49.730 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 17:46:49.739 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 17:46:49.751 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1143 ms
+16-May-2018 18:37:19.697 INFO [Thread-5] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:37:20.394 INFO [Thread-5] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:37:20.447 INFO [Thread-5] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+16-May-2018 18:37:20.618 INFO [Thread-5] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:37:20.619 INFO [Thread-5] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:37:20.619 INFO [Thread-5] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:37:20.620 INFO [Thread-5] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:43:09.652 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/9.0.8
+16-May-2018 18:43:09.780 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 27 2018 19:32:00 UTC
+16-May-2018 18:43:09.780 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         9.0.8.0
+16-May-2018 18:43:09.780 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+16-May-2018 18:43:09.780 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.16.6-202.fc27.x86_64
+16-May-2018 18:43:09.780 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+16-May-2018 18:43:09.781 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-4.b10.fc27.x86_64/jre
+16-May-2018 18:43:09.781 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_171-b10
+16-May-2018 18:43:09.781 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+16-May-2018 18:43:09.781 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:43:09.781 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:43:09.782 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/conf/logging.properties
+16-May-2018 18:43:09.782 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-May-2018 18:43:09.782 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+16-May-2018 18:43:09.783 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+16-May-2018 18:43:09.783 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+16-May-2018 18:43:09.783 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+16-May-2018 18:43:09.783 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:43:09.783 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:43:09.784 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/temp
+16-May-2018 18:43:09.784 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+16-May-2018 18:43:10.012 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:43:10.018 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 18:43:10.022 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:43:10.022 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 18:43:10.022 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 748 ms
+16-May-2018 18:43:10.043 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+16-May-2018 18:43:10.043 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/9.0.8
+16-May-2018 18:43:10.099 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war]
+16-May-2018 18:43:10.490 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+16-May-2018 18:43:10.527 INFO [main] com.sun.jersey.api.core.PackagesResourceConfig.init Scanning for root resource and provider classes in the packages:
+  com.mkyong.rest
+16-May-2018 18:43:10.538 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.logClasses Root resource classes found:
+  class com.mkyong.rest.HelloWorldService
+16-May-2018 18:43:10.538 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.init No provider classes found.
+16-May-2018 18:43:10.577 INFO [main] com.sun.jersey.server.impl.application.WebApplicationImpl._initiate Initiating Jersey application, version 'Jersey: 1.8 06/24/2011 12:17 PM'
+16-May-2018 18:43:10.868 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war] has finished in [769] ms
+16-May-2018 18:43:10.869 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs]
+16-May-2018 18:43:10.876 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs] has finished in [7] ms
+16-May-2018 18:43:10.876 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples]
+16-May-2018 18:43:11.059 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples] has finished in [183] ms
+16-May-2018 18:43:11.060 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT]
+16-May-2018 18:43:11.085 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT] has finished in [25] ms
+16-May-2018 18:43:11.096 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager]
+16-May-2018 18:43:11.171 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager] has finished in [75] ms
+16-May-2018 18:43:11.172 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager]
+16-May-2018 18:43:11.181 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager] has finished in [9] ms
+16-May-2018 18:43:11.182 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:43:11.190 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:43:11.198 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1175 ms
+16-May-2018 18:55:45.481 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/9.0.8
+16-May-2018 18:55:45.555 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 27 2018 19:32:00 UTC
+16-May-2018 18:55:45.555 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         9.0.8.0
+16-May-2018 18:55:45.555 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+16-May-2018 18:55:45.555 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.16.6-202.fc27.x86_64
+16-May-2018 18:55:45.556 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+16-May-2018 18:55:45.556 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-4.b10.fc27.x86_64/jre
+16-May-2018 18:55:45.556 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_171-b10
+16-May-2018 18:55:45.556 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+16-May-2018 18:55:45.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:55:45.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:55:45.557 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/conf/logging.properties
+16-May-2018 18:55:45.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-May-2018 18:55:45.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+16-May-2018 18:55:45.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+16-May-2018 18:55:45.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+16-May-2018 18:55:45.558 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+16-May-2018 18:55:45.559 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:55:45.559 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 18:55:45.559 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/temp
+16-May-2018 18:55:45.559 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+16-May-2018 18:55:45.829 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:55:45.836 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 18:55:45.840 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:55:45.840 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 18:55:45.841 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 730 ms
+16-May-2018 18:55:45.868 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+16-May-2018 18:55:45.868 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/9.0.8
+16-May-2018 18:55:45.925 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war]
+16-May-2018 18:55:46.400 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+16-May-2018 18:55:46.451 INFO [main] com.sun.jersey.api.core.PackagesResourceConfig.init Scanning for root resource and provider classes in the packages:
+  com.mkyong.rest
+16-May-2018 18:55:46.462 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.logClasses Root resource classes found:
+  class com.mkyong.rest.HelloWorldService
+16-May-2018 18:55:46.462 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.init No provider classes found.
+16-May-2018 18:55:46.501 INFO [main] com.sun.jersey.server.impl.application.WebApplicationImpl._initiate Initiating Jersey application, version 'Jersey: 1.8 06/24/2011 12:17 PM'
+16-May-2018 18:55:46.801 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war] has finished in [876] ms
+16-May-2018 18:55:46.802 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs]
+16-May-2018 18:55:46.809 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs] has finished in [7] ms
+16-May-2018 18:55:46.809 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples]
+16-May-2018 18:55:46.979 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples] has finished in [170] ms
+16-May-2018 18:55:46.979 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT]
+16-May-2018 18:55:46.988 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT] has finished in [9] ms
+16-May-2018 18:55:47.004 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager]
+16-May-2018 18:55:47.032 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager] has finished in [29] ms
+16-May-2018 18:55:47.032 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager]
+16-May-2018 18:55:47.044 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager] has finished in [12] ms
+16-May-2018 18:55:47.045 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 18:55:47.049 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 18:55:47.058 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1217 ms
+16-May-2018 19:15:51.053 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/9.0.8
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 27 2018 19:32:00 UTC
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         9.0.8.0
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.16.6-202.fc27.x86_64
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-4.b10.fc27.x86_64/jre
+16-May-2018 19:15:51.147 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_171-b10
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/conf/logging.properties
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+16-May-2018 19:15:51.148 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 19:15:51.149 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8
+16-May-2018 19:15:51.149 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/temp
+16-May-2018 19:15:51.149 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+16-May-2018 19:15:51.373 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 19:15:51.381 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 19:15:51.384 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 19:15:51.385 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+16-May-2018 19:15:51.385 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 689 ms
+16-May-2018 19:15:51.402 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+16-May-2018 19:15:51.402 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/9.0.8
+16-May-2018 19:15:51.473 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war]
+16-May-2018 19:15:51.852 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+16-May-2018 19:15:51.904 INFO [main] com.sun.jersey.api.core.PackagesResourceConfig.init Scanning for root resource and provider classes in the packages:
+  com.mkyong.rest
+16-May-2018 19:15:51.916 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.logClasses Root resource classes found:
+  class com.mkyong.rest.HelloWorldService
+16-May-2018 19:15:51.916 INFO [main] com.sun.jersey.api.core.ScanningResourceConfig.init No provider classes found.
+16-May-2018 19:15:51.953 INFO [main] com.sun.jersey.server.impl.application.WebApplicationImpl._initiate Initiating Jersey application, version 'Jersey: 1.8 06/24/2011 12:17 PM'
+16-May-2018 19:15:52.203 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/RESTfulServer.war] has finished in [729] ms
+16-May-2018 19:15:52.203 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs]
+16-May-2018 19:15:52.210 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/docs] has finished in [7] ms
+16-May-2018 19:15:52.210 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples]
+16-May-2018 19:15:52.431 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/examples] has finished in [221] ms
+16-May-2018 19:15:52.431 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT]
+16-May-2018 19:15:52.455 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/ROOT] has finished in [23] ms
+16-May-2018 19:15:52.463 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager]
+16-May-2018 19:15:52.493 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/manager] has finished in [30] ms
+16-May-2018 19:15:52.493 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager]
+16-May-2018 19:15:52.506 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/webapps/host-manager] has finished in [12] ms
+16-May-2018 19:15:52.507 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-195.251.251.27-8080"]
+16-May-2018 19:15:52.516 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+16-May-2018 19:15:52.532 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1146 ms
