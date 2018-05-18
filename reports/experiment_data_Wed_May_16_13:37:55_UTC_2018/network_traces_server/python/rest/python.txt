@@ -1,3 +1,0 @@
-+ strace -f -e trace=network -c python ../tasks//python/rest/server.py
-strace: Process 9981 attached
- * Running on http://195.251.251.27:5000/ (Press CTRL+C to quit)

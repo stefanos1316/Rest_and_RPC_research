@@ -295,7 +295,7 @@ do
 										# Start the client instance $j is the type of RPC or Rest
 									
 										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.python) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/python.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/python.txt'" &
 										;;
 									syscalls)
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
@@ -304,7 +304,7 @@ do
 									
 										# Start the client instance $j is the type of RPC or Rest
 										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c pythonGitHub/Rest_and_RPC_research/tasks/$i/$j/client.python) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
 										;;
 								esac
 							else

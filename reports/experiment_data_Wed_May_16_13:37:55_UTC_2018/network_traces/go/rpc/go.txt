@@ -1,0 +1,11 @@
+2018/05/18 17:40:22 Stefanos  %!d(rpcexample.Result=Hello World!)
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+  0.00    0.000000           0         1           socket
+  0.00    0.000000           0         1         1 connect
+  0.00    0.000000           0         1           getsockname
+  0.00    0.000000           0         1           getpeername
+  0.00    0.000000           0         2           setsockopt
+  0.00    0.000000           0         1           getsockopt
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000000                     7         1 total

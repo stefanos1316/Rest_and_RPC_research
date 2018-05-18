@@ -1,6 +1,0 @@
-+ strace -f -e trace=network -c node ../tasks//javascript/rpc/server.js
-strace: Process 9877 attached
-strace: Process 9878 attached
-strace: Process 9876 attached
-strace: Process 9879 attached
-strace: Process 9880 attached

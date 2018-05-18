@@ -1,0 +1,60 @@
++ strace -f -e trace=network -c mvn -f ../tasks//java/grpc/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer
+strace: Process 15371 attached
+strace: Process 15372 attached
+strace: Process 15373 attached
+strace: Process 15374 attached
+strace: Process 15375 attached
+strace: Process 15376 attached
+strace: Process 15377 attached
+strace: Process 15378 attached
+strace: Process 15379 attached
+strace: Process 15380 attached
+strace: Process 15381 attached
+strace: Process 15383 attached
+strace: Process 15384 attached
+strace: Process 15385 attached
+strace: Process 15386 attached
+strace: Process 15387 attached
+strace: Process 15388 attached
+strace: Process 15389 attached
+strace: Process 15390 attached
+POM file ../tasks//java/grpc/ specified with the -f/--file command line argument does not exist
+strace: Process 15391 attached
+strace: Process 15392 attached
+strace: Process 15393 attached
+strace: Process 15394 attached
+strace: Process 15395 attached
+strace: Process 15396 attached
+strace: Process 15397 attached
+strace: Process 15398 attached
+strace: Process 15399 attached
+strace: Process 15400 attached
+strace: Process 15401 attached
+strace: Process 15402 attached
+strace: Process 15403 attached
+strace: Process 15404 attached
+strace: Process 15405 attached
+strace: Process 15406 attached
+strace: Process 15407 attached
+strace: Process 15408 attached
+strace: Process 15409 attached
+strace: Process 15410 attached
+strace: Process 15411 attached
+strace: Process 15422 attached
+strace: Process 15424 attached
+strace: Process 15425 attached
+strace: Process 15479 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 57.14    0.000072           4        17           socket
+ 19.05    0.000024          24         1           sendmmsg
+ 16.67    0.000021           2        10         8 connect
+  4.76    0.000006           1         6           sendto
+  1.59    0.000002           2         1         1 getsockname
+  0.79    0.000001           0         2           setsockopt
+  0.00    0.000000           0         2           recvfrom
+  0.00    0.000000           0         1           shutdown
+  0.00    0.000000           0         1         1 bind
+  0.00    0.000000           0         2           socketpair
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000126                    43        10 total

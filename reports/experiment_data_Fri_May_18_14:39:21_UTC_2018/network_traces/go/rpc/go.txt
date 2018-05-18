@@ -1,0 +1,59 @@
++ strace -f -e trace=network -c go run ../tasks//go/rpc/server.go
+strace: Process 15130 attached
+strace: Process 15131 attached
+strace: Process 15132 attached
+strace: Process 15133 attached
+strace: Process 15134 attached
+strace: Process 15135 attached
+strace: Process 15136 attached
+strace: Process 15137 attached
+strace: Process 15138 attached
+strace: Process 15140 attached
+strace: Process 15141 attached
+strace: Process 15142 attached
+strace: Process 15143 attached
+strace: Process 15144 attached
+strace: Process 15145 attached
+strace: Process 15146 attached
+strace: Process 15147 attached
+strace: Process 15153 attached
+strace: Process 15154 attached
+strace: Process 15155 attached
+strace: Process 15156 attached
+strace: Process 15157 attached
+strace: Process 15158 attached
+strace: Process 15159 attached
+strace: Process 15160 attached
+strace: Process 15161 attached
+strace: Process 15162 attached
+strace: Process 15163 attached
+strace: Process 15164 attached
+strace: Process 15165 attached
+strace: Process 15166 attached
+strace: Process 15167 attached
+strace: Process 15168 attached
+strace: Process 15169 attached
+strace: Process 15170 attached
+strace: Process 15171 attached
+strace: Process 15172 attached
+strace: Process 15173 attached
+strace: Process 15174 attached
+strace: Process 15175 attached
+strace: Process 15176 attached
+strace: Process 15177 attached
+strace: Process 15179 attached
+strace: Process 15180 attached
+strace: Process 15181 attached
+strace: Process 15182 attached
+strace: Process 15183 attached
+strace: Process 15184 attached
+2018/05/18 17:40:09 Couldn't start listening on port 1234. Error listen tcp :12345: bind: address already in use
+exit status 1
+strace: Process 15185 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 67.07    0.000055          13         4           socket
+ 17.07    0.000014           2         5           setsockopt
+ 15.85    0.000013           4         3         1 bind
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000082                    12         1 total
