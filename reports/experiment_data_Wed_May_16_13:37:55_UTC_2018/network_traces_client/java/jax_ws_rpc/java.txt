@@ -1,0 +1,62 @@
+strace: Process 15424 attached
+strace: Process 15425 attached
+strace: Process 15426 attached
+strace: Process 15427 attached
+strace: Process 15428 attached
+strace: Process 15429 attached
+strace: Process 15430 attached
+strace: Process 15431 attached
+strace: Process 15432 attached
+strace: Process 15433 attached
+strace: Process 15434 attached
+strace: Process 15435 attached
+strace: Process 15436 attached
+strace: Process 15437 attached
+strace: Process 15438 attached
+strace: Process 15439 attached
+strace: Process 15440 attached
+strace: Process 15441 attached
+strace: Process 15442 attached
+strace: Process 15443 attached
+strace: Process 15444 attached
+strace: Process 15445 attached
+strace: Process 15446 attached
+strace: Process 15447 attached
+strace: Process 15448 attached
+strace: Process 15449 attached
+strace: Process 15450 attached
+strace: Process 15451 attached
+strace: Process 15452 attached
+strace: Process 15453 attached
+strace: Process 15454 attached
+strace: Process 15455 attached
+strace: Process 15456 attached
+strace: Process 15457 attached
+strace: Process 15458 attached
+strace: Process 15459 attached
+strace: Process 15460 attached
+strace: Process 15461 attached
+strace: Process 15462 attached
+strace: Process 15463 attached
+strace: Process 15464 attached
+strace: Process 15465 attached
+strace: Process 15466 attached
+strace: Process 15467 attached
+strace: Process 15468 attached
+strace: Process 15469 attached
+strace: Process 15470 attached
+strace: Process 15471 attached
+strace: Process 15472 attached
+strace: Process 15473 attached
+strace: Process 15474 attached
+strace: Process 15475 attached
+strace: Process 15476 attached
+strace: Process 15477 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 69.68    0.000193          21         9         8 connect
+ 24.19    0.000067           7         9           socket
+  6.14    0.000017           2         6           sendto
+  0.00    0.000000           0         3         3 getsockname
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000277                    27        11 total

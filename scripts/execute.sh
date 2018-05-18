@@ -159,27 +159,28 @@ do
 	
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
-						getServerPID
+						getServerPID=0
 						# Start the server
 						if [ "${TRACES_FLAG}" = "true" ]; then 
 							case ${TRACES_TYPE} in 
 								network) 
-									mkdir -p ../reports/${EnergyPerformanceLogDirName}/straces_results/$i/$j
-									(strace -f -e trace=network go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/go.txt &
+									mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
+									(strace -f -e trace=network -c go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/go.txt &
 									getServerPID=$!
 									# Start the client instance $j is the type of RPC or Rest
 									
-									ssh ${REMOTE_HOST_CLIENT} "sh -c mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j"
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/go.txt'" &
-
+									ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/go.txt'" &
+								;;
 								syscalls)
-									mkdir -p ../reports/${EnergyPerformanceLogDirName}/straces_results/$i/$j
+									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
 									(strace -c go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
 									getServerPID=$!
 									
 									# Start the client instance $j is the type of RPC or Rest
-									ssh ${REMOTE_HOST_CLIENT} "sh -c mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j"
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/go.txt'" &
+									ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/go.txt'" &
+								;;
 							esac
 						else
 							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
@@ -220,16 +221,38 @@ do
 
                                                 	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                 	sleep 2
-							getServerPID
-
+							getServerPID=0
 
                                                 	# Start the server
-							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
-							getServerPID=$!									
+							if [ "${TRACES_FLAG}" = "true" ]; then
+								case ${TRACES_TYPE} in 
+									network) 
+										mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
+										(strace -f -e trace=network -c node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/javascript.txt &
+										getServerPID=$!
+										# Start the client instance $j is the type of RPC or Rest
+									
+										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/javascript.txt'" &
+										;;
+									syscalls)
+										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
+										(strace -c node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/javascript.txt &
+										getServerPID=$!
+									
+										# Start the client instance $j is the type of RPC or Rest
+										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/javascript.txt'" &
+										;;
+								esac
+							else
+								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
+								getServerPID=$!									
 
-							# Start the client instance $j is the type of RPC or Rest
-							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/javascript.txt'" &
-			
+								# Start the client instance $j is the type of RPC or Rest
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/javascript.txt'" &
+							fi
+
 							# Check if remote client is still running
 							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.js > /dev/null ;
 							do
@@ -260,15 +283,39 @@ do
 
                                                 	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                 	sleep 2
+							getServerPID=0
 
                                                 	# Start the server
-							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt &		
-							getServerPID=$!									
-							sleep 2
+							if [ "${TRACES_FLAG}" = "true" ]; then
+								case ${TRACES_TYPE} in 
+									network) 
+										mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
+										(strace -f -e trace=network -c python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/python.txt &
+										getServerPID=$!
+										# Start the client instance $j is the type of RPC or Rest
+									
+										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.python) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/python.txt'" &
+										;;
+									syscalls)
+										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
+										(strace -c python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/python.txt &
+										getServerPID=$!
+									
+										# Start the client instance $j is the type of RPC or Rest
+										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
+										;;
+								esac
+							else
+								(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt &		
+								getServerPID=$!									
+								sleep 2
 
-							# Start the client instance $j is the type of RPC or Rest
-							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/python.txt'" &
-			
+								# Start the client instance $j is the type of RPC or Rest
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/python.txt'" &
+							fi
+
 							# Check if remote client is still running
 							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.py > /dev/null ;
 							do
@@ -299,30 +346,62 @@ do
 	
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2					
-						
+						getServerPID=0
+
 						# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
 						case "$j" in			
 							grpc)
 								if [ "$k" = "src" ]; then
-									(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
-									getServerPID=$!
+									if [ "${TRACES_FLAG}" = "true" ]; then
+										case ${TRACES_TYPE} in 
+											network) 
+												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
+												(strace -f -e trace=network -c mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
+												getServerPID=$!
+												# Start the client instance $j is the type of RPC or Rest
+									
+												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/java.txt'" &
+												;;
+											syscalls)
+												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
+												(strace -c mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer ) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+												getServerPID=$!
+									
+												# Start the client instance $j is the type of RPC or Rest
+												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
+												;;
+										esac
+									else
+										(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+										getServerPID=$!
 
-									# Now start the remote client by entering the path where it is located
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
-								
+										# Now start the remote client by entering the path where it is located
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+									fi
+
 									# Check if remote client is still running
 									while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
 									do
 										sleep 1
 									done
 
-									# Stop server instance
-									kill -9 ${getServerPID}
-									echo "Done with $k"
-									sleep 5
+									
+									# Check if remote client is still running
+                                                                        while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
+                                                                        do
+                                                                                sleep 1
+                                                                        done
+
+                                                                        # Stop server instance
+                                                                       	kill -9 ${getServerPID}
+                                                                        echo "Done with $k"
+                                                                        sleep 5
+									
 								fi
 							;;
-							rest) 
+							rest)
 								if [ "$k" = "REST_server" ]; then
 									bash ../apache-tomcat-9.0.8/bin/catalina.sh start
 									sleep 2
@@ -334,43 +413,85 @@ do
 										exit
 									fi
 
-									# Starting remote client, 
-									ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt && cd ~/'" &
-				
+									if [ "${TRACE_FLAG}" ]; then
+										case ${TRACE_TYPE} in
+											network) 
+												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+
+												ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (strace -f -e trace=network -c bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt && cd ~/'" &
+												;;
+											syscalls) 
+												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (strace -c bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt && cd ~/'" &
+												;;
+										esac
+									else
+										# Starting remote client,
+										ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt && cd ~/'" &
+									fi
+
 									 # Check if remote client is still running
                                                                         while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
                                                                         do
                                                                                 sleep 1
                                                                         done
 
+									bash ../apache-tomcat-9.0.8/bin/catalina.sh stop
+
                                                                         # Stop server instance
-                                                                        kill -9 ${getServerPID}
+                                                                      	# kill -9 ${getServerPID}
                                                                         echo "Done with $k"
                                                                         sleep 5
-									
+
 								fi
 							;;
 							jax_ws_rpc) 
 								if [ "$k" = "src" ]; then
 
+									getServerPID=0
 									# Start server java -cp ./src com.thejavageek.HelloWorldServerPublisher
-									(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
-									getServerPID=$!
+									if [ "${TRACES_FLAG}" = "true" ]; then
+										case ${TRACES_TYPE} in 
+											network) 
+												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
+												(strace -f -e trace=network -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
+												getServerPID=$!
+												# Start the client instance $j is the type of RPC or Rest
 									
-									# Start client java -cp ./src com.thejavageek.HelloWorldClient 
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
-									sleep 5
-									 # Check if remote client is still running
-                                                                        while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
-                                                                        do
-                                                                                sleep 1
-                                                                        done
+												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/java.txt'" &
+												;;
+											syscalls)
+												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
+												(strace -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+												getServerPID=$!
+									
+												# Start the client instance $j is the type of RPC or Rest
+												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
+												;;
+										esac
+									else
+										(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+										getServerPID=$!
+									
+										# Start client java -cp ./src com.thejavageek.HelloWorldClient 
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+										sleep 5
+									 
+										# Check if remote client is still running
+                                                                        	while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null ;
+                                                                        	do
+                                                                                	sleep 1
+                                                                        	done
+									fi
 
                                                                         # Stop server instance
                                                                         kill -9 ${getServerPID}
                                                                         echo "Done with $k"
                                                                         sleep 5
-
 								fi	
 							;;
 						esac
@@ -378,7 +499,6 @@ do
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
 						echo "Killing wattsup pro"		
-							
 					fi
 				;;
 			esac

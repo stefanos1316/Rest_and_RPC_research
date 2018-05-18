@@ -1,0 +1,63 @@
+strace: Process 12948 attached
+strace: Process 12949 attached
+strace: Process 12950 attached
+strace: Process 12951 attached
+strace: Process 12952 attached
+strace: Process 12953 attached
+strace: Process 12954 attached
+strace: Process 12955 attached
+strace: Process 12956 attached
+strace: Process 12959 attached
+strace: Process 12961 attached
+strace: Process 12962 attached
+strace: Process 12964 attached
+strace: Process 12972 attached
+strace: Process 12971 attached
+strace: Process 12973 attached
+strace: Process 12976 attached
+strace: Process 12977 attached
+strace: Process 12978 attached
+strace: Process 12979 attached
+strace: Process 12980 attached
+strace: Process 12981 attached
+strace: Process 12982 attached
+strace: Process 12983 attached
+strace: Process 12984 attached
+strace: Process 12985 attached
+strace: Process 12986 attached
+strace: Process 12987 attached
+strace: Process 12988 attached
+strace: Process 12989 attached
+strace: Process 12990 attached
+strace: Process 12991 attached
+strace: Process 12992 attached
+strace: Process 12993 attached
+strace: Process 12994 attached
+strace: Process 12995 attached
+strace: Process 12996 attached
+strace: Process 12997 attached
+strace: Process 12998 attached
+strace: Process 12999 attached
+strace: Process 13000 attached
+strace: Process 13001 attached
+strace: Process 13002 attached
+strace: Process 13003 attached
+strace: Process 13004 attached
+strace: Process 13005 attached
+strace: Process 13006 attached
+strace: Process 13007 attached
+strace: Process 13380 attached
+strace: Process 13381 attached
+strace: Process 13382 attached
+strace: Process 13383 attached
+2018/05/18 16:41:23 Stefanos  %!d(rpcexample.Result=Hello World!)
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 83.78    0.000372         372         1           socket
+ 13.06    0.000058          58         1         1 connect
+  1.35    0.000006           3         2           setsockopt
+  0.90    0.000004           4         1           getsockopt
+  0.45    0.000002           2         1           getsockname
+  0.45    0.000002           2         1           getpeername
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000444                     7         1 total

@@ -1,0 +1,12 @@
+strace: Process 19057 attached
+strace: Process 19058 attached
+strace: Process 19059 attached
+strace: Process 19060 attached
+strace: Process 19061 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 80.37    0.097795           4     20000     15914 socket
+ 16.19    0.019695           4      4086      4086 connect
+  3.44    0.004185           1      4086           getsockopt
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.121675                 28172     20000 total
