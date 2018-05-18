@@ -32,12 +32,13 @@ function checkRemoteHostSSH {
 function helpMe {
 
 	echo
-	echo "-p | --directoryPath		Is the path where all the test subjects are located."
-	echo "-n | --remoteHostNameEM		The name of the host that will act as an energy monitoring instance."
-	echo "-a | --remoteHostAddressEM	The IP address of the host that acts as an energy monitoring."
-	echo "-b | --remoteHostNameClient	The name of the host that will act as a client instance."
-	echo "-d | --remoteHostAddressClient	The IP address of the host that acts as a client."
-	echo "-h | --help			Print the help me message and exit."
+	echo "-p | --directoryPath [argument]			Is the path where all the test subjects are located."
+	echo "-n | --remoteHostNameEM [device name]		The name of the host that will act as an energy monitoring instance."
+	echo "-a | --remoteHostAddressEM [device IP]		The IP address of the host that acts as an energy monitoring."
+	echo "-b | --remoteHostNameClient [devcice name]	The name of the host that will act as a client instance."
+	echo "-d | --remoteHostAddressClient [device IP]	The IP address of the host that acts as a client."
+	echo "-t | --straces [argument]				Option to get traces such as syscalls or network calls"
+	echo "-h | --help					Print the help me message and exit."
 	echo
 
 	exit
@@ -53,8 +54,10 @@ REMOTE_HOST_NAME_EM=""
 REMOTE_HOST_ADDRESS_EM=""
 REMOTE_HOST_NAME_CLIENT=""
 REMOTE_HOST_ADDRESS_CLIENT=""
+TRACES_TYPE=""
+TRACES_FLAG=false
 
-OPTIONS=`getopt -o p:n:a:hb:d: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient: -n 'execute.sh' -- "$@"`
+OPTIONS=`getopt -o p:n:a:hb:d:t: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient:,straces: -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
 while true; do
 	case "$1" in 
@@ -82,6 +85,13 @@ while true; do
 			case $2 in 
 				*\.*\.*\.*) REMOTE_HOST_ADDRESS_CLIENT=$2 ; shift 2 ;;
 				*) >&2 echo "[Error] IP address is required!" ; shift 2 ;;
+			esac ;;
+		-t|--straces)
+			TRACES_FLAG=true
+			case $2 in 
+				network) TRACES_TYPE=$2 ; shift 2 ;;
+				syscalls) TRACES_TYPE=$2 ; shift 2 ;;
+				*) >&2 echo "[Error] Option not available, consider adding network or syscalls" ; shift 2 ;;
 			esac ;;
 		-h|--help) helpMe ; shift ;;
 		--) shift ; break ;;
@@ -149,13 +159,36 @@ do
 	
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
-				
+						getServerPID
 						# Start the server
-						(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
-						getServerPID=$!
+						if [ "${TRACES_FLAG}" = "true" ]; then 
+							case ${TRACES_TYPE} in 
+								network) 
+									mkdir -p ../reports/${EnergyPerformanceLogDirName}/straces_results/$i/$j
+									(strace -f -e trace=network go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/go.txt &
+									getServerPID=$!
+									# Start the client instance $j is the type of RPC or Rest
+									
+									ssh ${REMOTE_HOST_CLIENT} "sh -c mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j"
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/go.txt'" &
+
+								syscalls)
+									mkdir -p ../reports/${EnergyPerformanceLogDirName}/straces_results/$i/$j
+									(strace -c go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
+									getServerPID=$!
+									
+									# Start the client instance $j is the type of RPC or Rest
+									ssh ${REMOTE_HOST_CLIENT} "sh -c mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j"
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/go.txt'" &
+							esac
+						else
+							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
+							getServerPID=$!
+
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/go.txt'" &
+						fi
 						
-						# Start the client instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/go.txt'" &
 			
 						# Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.go > /dev/null ;
@@ -187,6 +220,8 @@ do
 
                                                 	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                 	sleep 2
+							getServerPID
+
 
                                                 	# Start the server
 							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
