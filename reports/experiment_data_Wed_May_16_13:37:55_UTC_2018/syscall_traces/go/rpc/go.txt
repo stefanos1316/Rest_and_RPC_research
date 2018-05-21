@@ -1,0 +1,42 @@
+2018/05/21 11:16:14 Stefanos  %!d(rpcexample.Result=Hello World!)
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 80.97    0.040172        8034         5           wait4
+  7.51    0.003728          13       278         6 futex
+  3.65    0.001810           3       536           lstat
+  1.30    0.000644           2       225           openat
+  1.02    0.000504           1       459       442 epoll_ctl
+  0.91    0.000452           1       231           read
+  0.80    0.000395          79         5           waitid
+  0.64    0.000318         318         1           readlinkat
+  0.62    0.000309           1       240           close
+  0.56    0.000277          39         7           mkdirat
+  0.54    0.000266          29         9           clone
+  0.48    0.000238          19        12           getdents64
+  0.45    0.000222           3        62        33 stat
+  0.12    0.000058           1        42           fcntl
+  0.10    0.000050           1        32           mmap
+  0.07    0.000036           7         5           rt_sigreturn
+  0.07    0.000033          11         3           pselect6
+  0.06    0.000032           1        29           rt_sigprocmask
+  0.06    0.000028           3         9           mprotect
+  0.05    0.000027           2        10           pipe2
+  0.02    0.000008           1         6           getpid
+  0.01    0.000003           3         1           write
+  0.01    0.000003           3         1           epoll_create1
+  0.00    0.000002           2         1           epoll_wait
+  0.00    0.000000           0         3           fstat
+  0.00    0.000000           0         2           munmap
+  0.00    0.000000           0         3           brk
+  0.00    0.000000           0       120           rt_sigaction
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         2           sigaltstack
+  0.00    0.000000           0         1           arch_prctl
+  0.00    0.000000           0         1           gettid
+  0.00    0.000000           0         1           sched_getaffinity
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+  0.00    0.000000           0         1           prlimit64
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.049615                  2347       482 total
