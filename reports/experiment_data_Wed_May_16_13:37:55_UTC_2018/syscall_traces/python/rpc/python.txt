@@ -1,1 +1,40 @@
-strace: Can't stat 'pythonGitHub/Rest_and_RPC_research/tasks/python/rpc/client.python': No such file or directory
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 38.85    0.578530           7     73230           recvfrom
+ 21.09    0.314133          15     20000           connect
+ 16.08    0.239430          11     20000           socket
+ 13.52    0.201384           9     20153           close
+ 10.31    0.153552           7     20000           sendto
+  0.06    0.000919           1       638       485 openat
+  0.02    0.000335           1       210       183 stat
+  0.02    0.000304           1       226           read
+  0.01    0.000198           0       209           fstat
+  0.01    0.000121           1        68           rt_sigaction
+  0.01    0.000101           1        81           mmap
+  0.00    0.000055           0        60           mprotect
+  0.00    0.000050           1        48           brk
+  0.00    0.000021           0        28           lseek
+  0.00    0.000017           1        11           lstat
+  0.00    0.000010           2         5         5 ioctl
+  0.00    0.000005           0         6         2 readlink
+  0.00    0.000004           1         4           munmap
+  0.00    0.000004           4         1           sysinfo
+  0.00    0.000004           0        12           futex
+  0.00    0.000002           2         1           write
+  0.00    0.000002           2         1           getpid
+  0.00    0.000002           2         1           getcwd
+  0.00    0.000000           0         1           rt_sigprocmask
+  0.00    0.000000           0         2         2 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         2           fcntl
+  0.00    0.000000           0         4           getdents
+  0.00    0.000000           0         1           getuid
+  0.00    0.000000           0         1           getgid
+  0.00    0.000000           0         1           geteuid
+  0.00    0.000000           0         1           getegid
+  0.00    0.000000           0         1           arch_prctl
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+  0.00    0.000000           0         1           prlimit64
+------ ----------- ----------- --------- --------- ----------------
+100.00    1.489183                155011       677 total

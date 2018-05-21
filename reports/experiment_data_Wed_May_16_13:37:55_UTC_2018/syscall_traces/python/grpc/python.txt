@@ -1,1 +1,48 @@
-strace: Can't stat 'pythonGitHub/Rest_and_RPC_research/tasks/python/grpc/client.python': No such file or directory
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 38.25    0.212717           1    144972           clock_gettime
+ 32.86    0.182739           4     40000           sendmsg
+ 16.23    0.090277           2     41409     20704 recvmsg
+ 11.02    0.061260           2     24899           epoll_wait
+  0.42    0.002328           1      1936      1548 openat
+  0.32    0.001765           9       193           write
+  0.15    0.000859           1       704       511 stat
+  0.15    0.000845         845         1           wait4
+  0.14    0.000789           1       784           read
+  0.10    0.000567           0       761           fstat
+  0.07    0.000405           4        82           getdents
+  0.06    0.000354           0       398           close
+  0.05    0.000259           1       150         3 lstat
+  0.04    0.000207           1       143           mmap
+  0.04    0.000205           0       275        64 lseek
+  0.02    0.000132           1        85           mprotect
+  0.02    0.000117           1        68           rt_sigaction
+  0.02    0.000103           2        40         1 futex
+  0.01    0.000045           0        86           brk
+  0.00    0.000026           1        17           munmap
+  0.00    0.000017           5         3           clone
+  0.00    0.000013           1        11        11 ioctl
+  0.00    0.000007           3         2         2 access
+  0.00    0.000006           6         1           shutdown
+  0.00    0.000006           0        20           fcntl
+  0.00    0.000005           0         6         2 readlink
+  0.00    0.000003           3         1           getcwd
+  0.00    0.000003           3         1           sysinfo
+  0.00    0.000002           0         4           pipe
+  0.00    0.000002           2         1           getpid
+  0.00    0.000001           1         1           geteuid
+  0.00    0.000001           1         1           getegid
+  0.00    0.000001           1         1           epoll_ctl
+  0.00    0.000000           0         1           rt_sigprocmask
+  0.00    0.000000           0         1           mremap
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         2           uname
+  0.00    0.000000           0         1           getuid
+  0.00    0.000000           0         1           getgid
+  0.00    0.000000           0         1           arch_prctl
+  0.00    0.000000           0         1           epoll_create
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+  0.00    0.000000           0         2           prlimit64
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.556066                257069     22846 total
