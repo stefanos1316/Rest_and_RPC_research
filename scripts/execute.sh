@@ -370,7 +370,7 @@ do
 									
 												# Start the client instance $j is the type of RPC or Rest
 												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
 												;;
 										esac
 									else
@@ -413,8 +413,8 @@ do
 										exit
 									fi
 
-									if [ "${TRACE_FLAG}" ]; then
-										case ${TRACE_TYPE} in
+									if [ "${TRACES_FLAG}" = "true" ]; then
+										case ${TRACES_TYPE} in
 											network) 
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
 												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
