@@ -441,7 +441,7 @@ do
 									bash ../apache-tomcat-9.0.8/bin/catalina.sh stop
 
                                                                         # Stop server instance
-                                                                      	# kill -9 ${getServerPID}
+                                                                        #kill -9 ${getServerPID}
                                                                         echo "Done with $k"
                                                                         sleep 5
 
@@ -506,5 +506,12 @@ do
 	done
 done
 
+# Now transer all the collected data to the server in the related directories
+# From client
+scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/ ../reports/${EnergyPerformanceLogDirName}/performance_results_client
+# From RPi
+scp -r ${REMOTE_HOST_EM}:/home/pi/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results ../reports/${EnergyPerformanceLogDirName}/energy_results_client
+
+echo "Transfer done"
 
 exit 1

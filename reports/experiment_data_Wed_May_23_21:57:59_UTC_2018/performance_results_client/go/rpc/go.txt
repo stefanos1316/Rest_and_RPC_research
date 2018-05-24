@@ -1,0 +1,5 @@
+2018/05/24 00:59:01 Stefanos  %!d(rpcexample.Result=Hello World!)
+
+real	0m12.029s
+user	0m1.306s
+sys	0m1.654s
