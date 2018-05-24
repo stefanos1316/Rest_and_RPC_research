@@ -17,7 +17,7 @@ fi
 DIRECTORY_PATH=""
 
 
-OPTIONS=`getopt -o -p: --long --absoluteDataPath -n 'plotResults.sh' -- "$@"`
+OPTIONS=`getopt -o -p: --long --relatedPath -n 'plotResults.sh' -- "$@"`
 eval set -- "$OPTIONS"
 while true; do
 	case "$1" in 
@@ -30,6 +30,12 @@ while true; do
 		*) >&2 echo "Wrong command line argument, please try again." ; exit 1 ;;
 	esac
 done
+
+
+PATH_TO_REPORT=${DIRECTORY_PATH}
+for z in `ls ${PATH_TO_REPORT}`; do 
+
+	DIRECTORY_PATH=$(echo "${PATH_TO_REPORT}/$z")
 
 # Create directory where all the adjusted results will be stored
 if [ ! -d ${DIRECTORY_PATH}/graph_data ]; then
@@ -91,6 +97,8 @@ for i in `ls ${DIRECTORY_PATH}`; do
 			esac
 		done
 	done
+done
+
 done
 
 echo Done, exiting...
