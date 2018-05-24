@@ -73,6 +73,8 @@ TOTAL_REST_PY=0
 			TOTAL_RPC_PY=$(echo ${TOTAL_RPC_PY} + ${VALUE_RPC_PY} | bc)
 	
 		done
+			echo "Energy Consumption..."
+
 			AVERAGE=$(echo ${TOTAL_GRPC_GO} / ${INSTANCES} | bc)
 			echo "Average EC of Go for gRPC for 50 records is ${AVERAGE}"
 			AVERAGE=$(echo ${TOTAL_RPC_GO} / ${INSTANCES} | bc)
@@ -101,5 +103,43 @@ TOTAL_REST_PY=0
 			AVERAGE=$(echo ${TOTAL_RPC_PY} / ${INSTANCES} | bc)
 			echo "Average EC of PY for RPC for 50 records is ${AVERAGE}"
 
+
+
+LANGUAGES="go java, javascript python"
+PROTOCOLS="rest :rpc grpc jax_ws_rpc"
+
+LANGUAGES_ARRAY=($LANGUAGES)
+PROTOCOLS_ARRAY=($PROTOCOLS)
+
+AVERAGE=0
+TOTAL=0
+
+echo 
+echo "Performance measurements..."
+
+for i in "${PROTOCOLS_ARRAY[@]}"; do 
+	for j in "${LANGUAGES_ARRAY[@]}"; do 
+		for k in `ls $1`; do 
+			VALUE=0
+			PATH_DATA=$(echo "$1/$k/graph_data/performance_client.txt")
+	
+			if [ "$i" = "jax_ws_rpc" -a "$j" != "java" ]; then
+				break
+			else
+				VALUE=$(cat ${PATH_DATA} | grep "$i" | grep "$j" | awk -F ":" '{print $4}')
+				
+				if [ -z "${VALUE}" ]; then
+					break
+				fi
+			fi
+
+
+			TOTAL=$(echo ${TOTAL} + ${VALUE} | bc)
+		done
+		
+		AVERAGE=$(echo ${TOTAL} / ${INSTANCES})
+		echo "Average Time of $j for $i is ${AVERAGE}"
+	done
+done
 
 exit
