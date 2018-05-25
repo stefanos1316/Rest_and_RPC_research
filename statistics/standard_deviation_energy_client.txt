@@ -1,23 +1,23 @@
 Go
 ==
-REST -> 0
-RPC -> 0.3
-gRPC -> 0.38
+REST -> 37.51
+RPC -> 64.52
+gRPC -> 74.74
 
 Java
 ====
-REST -> 0.23
-RPC -> 0.14 
-gRPC -> 0.63
+REST -> 29.11
+RPC -> 53.45
+gRPC -> 24.01
 
 JavaScript
 ==========
-REST -> 1.67
-RPC -> 0.45
-gRPC -> 0.32
+REST -> 51.62
+RPC -> 32.16
+gRPC -> 18.19
 
 Python
 ======
-REST -> 2.67
-RPC -> 5.22
-gRPC -> 0.92
+REST -> 83.83
+RPC -> 165.63
+gRPC -> 60.99
