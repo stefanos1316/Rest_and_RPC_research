@@ -75,32 +75,32 @@ TOTAL_REST_PY=0
 		done
 			echo "Energy Consumption..."
 
-			AVERAGE=$(echo ${TOTAL_GRPC_GO} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_GRPC_GO} / ${INSTANCES} | bc -l)
 			echo "Average EC of Go for gRPC for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_RPC_GO} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_RPC_GO} / ${INSTANCES} | bc -l)
 			echo "Average EC of Go for RPC for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_REST_GO} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_REST_GO} / ${INSTANCES} | bc -l)
 			echo "Average EC of Go for REST for 50 records is ${AVERAGE}"
 
-			AVERAGE=$(echo ${TOTAL_GRPC_JAVA} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_GRPC_JAVA} / ${INSTANCES} | bc -l)
 			echo "Average EC of Java for gRPC for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_JAX_JAVA} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_JAX_JAVA} / ${INSTANCES} | bc -l)
 			echo "Average EC of Java for Jax WS RPC for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_REST_JAVA} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_REST_JAVA} / ${INSTANCES} | bc -l)
 			echo "Average EC of JAVA for REST for 50 records is ${AVERAGE}"
 
-			AVERAGE=$(echo ${TOTAL_GRPC_JS} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_GRPC_JS} / ${INSTANCES} | bc -l)
 			echo "Average EC of JS for gRPC for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_REST_JS} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_REST_JS} / ${INSTANCES} | bc -l)
 			echo "Average EC of JS for REST for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_RPC_JS} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_RPC_JS} / ${INSTANCES} | bc -l)
 			echo "Average EC of JS for RPC for 50 records is ${AVERAGE}"
 
-			AVERAGE=$(echo ${TOTAL_GRPC_PY} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_GRPC_PY} / ${INSTANCES} | bc -l)
 			echo "Average EC of PY for gRPC for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_REST_PY} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_REST_PY} / ${INSTANCES} | bc -l)
 			echo "Average EC of PY for REST for 50 records is ${AVERAGE}"
-			AVERAGE=$(echo ${TOTAL_RPC_PY} / ${INSTANCES} | bc)
+			AVERAGE=$(echo ${TOTAL_RPC_PY} / ${INSTANCES} | bc -l)
 			echo "Average EC of PY for RPC for 50 records is ${AVERAGE}"
 
 
@@ -123,7 +123,7 @@ for i in "${PROTOCOLS_ARRAY[@]}"; do
 			VALUE=0
 			PATH_DATA=$(echo "$1/$k/graph_data/performance_client.txt")
 	
-			if [ "$i" = "jax_ws_rpc" -a "$j" != "java" ]; then
+			if [ "$i" = "jax_ws_rpc" -a "$j" != "java," ]; then
 				break
 			else
 				VALUE=$(cat ${PATH_DATA} | grep "$i" | grep "$j" | awk -F ":" '{print $4}')
@@ -134,11 +134,11 @@ for i in "${PROTOCOLS_ARRAY[@]}"; do
 			fi
 
 
-			TOTAL=$(echo ${TOTAL} + ${VALUE} | bc)
+			TOTAL=$((TOTAL + VALUE))
 		done
-		
-		AVERAGE=$(echo ${TOTAL} / ${INSTANCES})
+		AVERAGE=$((TOTAL / INSTANCES))
 		echo "Average Time of $j for $i is ${AVERAGE}"
+		TOTAL=0
 	done
 done
 

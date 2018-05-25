@@ -55,7 +55,7 @@ for i in `ls ${DIRECTORY_PATH}`; do
 			# Now we are going to read the files, and we are going to act respectivily
 			FILE=$(echo "$j.txt")
 			case $i in 
-				energy_results_server) 
+				energy_results) 
 					TOTAL_CONSUMPTION=0
 
 					while IFS= read -r var; do 
