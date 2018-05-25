@@ -8,11 +8,15 @@ LANGUAGES_ARRAY=($LANGUAGES)
 PROTOCOLS_ARRAY=($PROTOCOLS)
 STRING=""
 
+rm ../statistics/client_performance_values.txt
+rm ../statistics/client_energy_values.txt
+rm ../statistics/server_performance_values.txt
+rm ../statistics/server_energy_values.txt
+
+
 echo
 echo "[Client] Performance measurements..."
 
-rm ../statistics/client_performance_values.txt
-rm ../statistics/client_energy_values.txt
 for i in "${PROTOCOLS_ARRAY[@]}"; do
         for j in "${LANGUAGES_ARRAY[@]}"; do
                 for k in `ls $1`; do
@@ -54,4 +58,25 @@ for i in "${PROTOCOLS_ARRAY[@]}"; do
  	done
 done
 
+echo
+echo "[Server] Energy measurements..."
+
+for i in "${PROTOCOLS_ARRAY[@]}"; do
+        for j in "${LANGUAGES_ARRAY[@]}"; do
+                for k in `ls $1`; do
+                        VALUE=""
+                        PATH_DATA=$(echo "$1/$k/graph_data/energy_server.txt")
+
+
+                                VALUE=$(cat ${PATH_DATA} | grep "$i" | grep "$j" | awk -F ":" '{print $4}')
+
+                                if [ -z "${VALUE}" ]; then
+                                        break
+				fi
+			STRING=${STRING}","${VALUE}			
+		done
+ 		echo "Results for $j and $i is ${STRING}" >> ../statistics/server_energy_values.txt
+		STRING=""
+ 	done
+done
 

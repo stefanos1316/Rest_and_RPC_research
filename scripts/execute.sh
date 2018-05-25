@@ -508,9 +508,9 @@ done
 
 # Now transer all the collected data to the server in the related directories
 # From client
-scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/ ../reports/${EnergyPerformanceLogDirName}/performance_results_client
+scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/ ../reports/${EnergyPerformanceLogDirName}/performance_results_server
 # From RPi
-scp -r ${REMOTE_HOST_EM}:/home/pi/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results ../reports/${EnergyPerformanceLogDirName}/energy_results_client
+scp -r ${REMOTE_HOST_EM}:/home/pi/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results ../reports/${EnergyPerformanceLogDirName}/energy_results_server
 
 echo "Transfer done"
 

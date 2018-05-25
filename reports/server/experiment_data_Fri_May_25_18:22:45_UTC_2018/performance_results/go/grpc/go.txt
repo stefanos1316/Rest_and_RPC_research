@@ -1,0 +1,6 @@
+2018/05/25 21:22:49 failed to listen: listen tcp :50051: bind: address already in use
+exit status 1
+
+real	0m0.550s
+user	0m0.710s
+sys	0m0.105s
