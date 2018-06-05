@@ -80,3 +80,26 @@ for i in "${PROTOCOLS_ARRAY[@]}"; do
  	done
 done
 
+
+
+echo
+echo "[Server] Performance measurements..."
+
+for i in "${PROTOCOLS_ARRAY[@]}"; do
+        for j in "${LANGUAGES_ARRAY[@]}"; do
+                for k in `ls $1`; do
+                        VALUE=""
+                        PATH_DATA=$(echo "$1/$k/graph_data/performance_server.txt")
+
+
+                                VALUE=$(cat ${PATH_DATA} | grep "$i" | grep "$j" | awk -F ":" '{print $4}')
+
+                                if [ -z "${VALUE}" ]; then
+                                        break
+				fi
+			STRING=${STRING}","${VALUE}			
+		done
+ 		echo "Results for $j and $i is ${STRING}" >> ../statistics/server_performance_values.txt
+		STRING=""
+ 	done
+done

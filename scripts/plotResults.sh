@@ -33,9 +33,9 @@ done
 
 
 PATH_TO_REPORT=${DIRECTORY_PATH}
-for z in `ls ${PATH_TO_REPORT}`; do 
+#for z in `ls ${PATH_TO_REPORT}`; do 
 
-	DIRECTORY_PATH=$(echo "${PATH_TO_REPORT}/$z")
+	#DIRECTORY_PATH=$(echo "${PATH_TO_REPORT}/$z")
 
 # Create directory where all the adjusted results will be stored
 if [ ! -d ${DIRECTORY_PATH}/graph_data ]; then
@@ -55,7 +55,7 @@ for i in `ls ${DIRECTORY_PATH}`; do
 			# Now we are going to read the files, and we are going to act respectivily
 			FILE=$(echo "$j.txt")
 			case $i in 
-				energy_results) 
+				energy_results_server) 
 					TOTAL_CONSUMPTION=0
 
 					while IFS= read -r var; do 
@@ -99,7 +99,7 @@ for i in `ls ${DIRECTORY_PATH}`; do
 	done
 done
 
-done
+#done
 
 echo Done, exiting...
 exit 1

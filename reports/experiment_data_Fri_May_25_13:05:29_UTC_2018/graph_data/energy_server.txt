@@ -1,0 +1,12 @@
+Language:grpc,Protocol:go,Energy:529.5
+Language:rest,Protocol:go,Energy:399.3
+Language:rpc,Protocol:go,Energy:414.8
+Language:grpc,Protocol:java,Energy:126.9
+Language:jax_ws_rpc,Protocol:java,Energy:1303.0
+Language:rest,Protocol:java,Energy:1502.1
+Language:grpc,Protocol:javascript,Energy:27.7
+Language:rest,Protocol:javascript,Energy:222.8
+Language:rpc,Protocol:javascript,Energy:81.5
+Language:grpc,Protocol:python,Energy:530.5
+Language:rest,Protocol:python,Energy:2105.2
+Language:rpc,Protocol:python,Energy:2417.5

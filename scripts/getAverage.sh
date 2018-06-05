@@ -16,6 +16,8 @@ TOTAL_RPC_PY=0
 TOTAL_REST_PY=0
 
 
+echo "[Client] Energy Measurements..."
+
 		for i in `ls $1`; do
 			PATH_RE=$(echo "$1/$i/graph_data/energy_client.txt")
 			VALUE_GRPC_GO=$(cat ${PATH_RE} | grep "grpc" | grep "go" | awk -F ":" '{print $4}')
@@ -115,7 +117,7 @@ AVERAGE=0
 TOTAL=0
 
 echo 
-echo "Performance measurements..."
+echo "[Client] Performance measurements..."
 
 for i in "${PROTOCOLS_ARRAY[@]}"; do 
 	for j in "${LANGUAGES_ARRAY[@]}"; do 
@@ -137,6 +139,66 @@ for i in "${PROTOCOLS_ARRAY[@]}"; do
 			TOTAL=$((TOTAL + VALUE))
 		done
 		AVERAGE=$((TOTAL / INSTANCES))
+		echo "Average Time of $j for $i is ${AVERAGE}"
+		TOTAL=0
+	done
+done
+
+TOTAL=0
+
+echo 
+echo "[Server] Performance measurements..."
+
+for i in "${PROTOCOLS_ARRAY[@]}"; do 
+	for j in "${LANGUAGES_ARRAY[@]}"; do 
+		for k in `ls $1`; do 
+			VALUE=0
+			PATH_DATA=$(echo "$1/$k/graph_data/performance_server.txt")
+	
+			if [ "$i" = "jax_ws_rpc" -a "$j" != "java," ]; then
+				break
+			else
+				VALUE=$(cat ${PATH_DATA} | grep "$i" | grep "$j" | awk -F ":" '{print $4}')
+				
+				if [ -z "${VALUE}" ]; then
+					break
+				fi
+			fi
+
+
+			TOTAL=$((TOTAL + VALUE))
+		done
+		AVERAGE=$((TOTAL / INSTANCES))
+		echo "Average Time of $j for $i is ${AVERAGE}"
+		TOTAL=0
+	done
+done
+
+TOTAL=0
+
+echo 
+echo "[Server] Energy measurements..."
+
+for i in "${PROTOCOLS_ARRAY[@]}"; do 
+	for j in "${LANGUAGES_ARRAY[@]}"; do 
+		for k in `ls $1`; do 
+			VALUE=0
+			PATH_DATA=$(echo "$1/$k/graph_data/energy_server.txt")
+	
+			if [ "$i" = "jax_ws_rpc" -a "$j" != "java," ]; then
+				break
+			else
+				VALUE=$(cat ${PATH_DATA} | grep "$i" | grep "$j" | awk -F ":" '{print $4}')
+				
+				if [ -z "${VALUE}" ]; then
+					break
+				fi
+			fi
+
+
+			TOTAL=$(echo ${TOTAL} + ${VALUE} | bc)
+		done
+		AVERAGE=$( echo ${TOTAL} / ${INSTANCES} | bc -l)
 		echo "Average Time of $j for $i is ${AVERAGE}"
 		TOTAL=0
 	done
