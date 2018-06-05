@@ -4,18 +4,22 @@ gRPC
 ====
 Go spend 95.64% of its time on futex syscall
 Java spend 79.75% of its time on wait4 syscall
-JS  spends 49.90% on clock_gettime, 23.76% on write, 13.16% on brk
-Python spends  38.25% on clock_gettime, 32.86% on sendmsg, 16.23% on recvmsg, 11.02% on epoll_wait
+JS spends 49.90% on clock_gettime, 23.76% on write, 13.16% on brk
+Python spends 38.25% on clock_gettime, 32.86% on sendmsg, 16.23% on recvmsg, 11.02% on epoll_wait
 
 
 RPC
 ===
 Go spends  80.97% on wait4, 7.51% on futex
 Java spends 100% on futex command
-JS  41.54% on socket, 18.30% on epoll_ctl, 8.45% on connect, 8.39% on write, 4.93% on munmap
-Python  38.85% on recvfrom, 21.09% on connect, 16.08% on socket, 13.52% on close, 10.31% on sendto
+JS 41.54% on socket, 18.30% on epoll_ctl, 8.45% on connect, 8.39% on write, 4.93% on munmap
+Python 38.85% on recvfrom, 21.09% on connect, 16.08% on socket, 13.52% on close, 10.31% on sendto
 
 
 REST
 ====
+Go 76.41% on wait4, 10.41% on futex
+Java 99.95% of its time on wait4 
+JS 38.21% on socket, 17.32% on epoll_ctl, 9.50% on write, 6.92% on connect, 5.84% on close, 5.13% on munmap
+Python  20.52% on recvfrom, 16.89% on connect, 14.73% on close, 14.10% on stat, 11.90% on socket, 8.42% on sendto, 8.40% on fcntl
 
