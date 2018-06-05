@@ -18,14 +18,18 @@ Python is spending 37.53% of its time on recvfrom and 13.26% of its time on send
 JavaScript and Go which are the fastest and more energy efficient implementations are mainly using only connect and socket network calls.
 
 
-SYSTEM TRACES
+ABOUT SEND, SENDTO, AND SENDMSG COMMANDS
+send(), sendto(), and sendmsg() are used to transmit message to other sockets
+send() is a simple wrapper around sendto() system call.
+sento() Send a datagram to a given address. We move the address into kernel space and check the user space data area is readable before invoking the protocol (this can have some overhead?)
+also sendto() and send() command are using buffers in contrast to sendmsg() which is using streams to do that.
+send() may be used only when the socket is in a connected state, while sendto() and sendmsg() may be used at any time.
 
-gRPC
-====
+
+ABOUS RECV, RECVFROM, AND RECVMSG COMMANDS
+recv(), recvfrom(), and recvmsg() are syscalls used to recieve messages from both connection-oriented and connectionless sockets.
+recvfrom adds the data received from the socket to a buf by first calculating the necessary lenght to allocate the appropriate buffer size.
 
 
-RPC
-===
+fcntl is used when a socket in nonblocking
 
-REST
-====
