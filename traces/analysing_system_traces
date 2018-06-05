@@ -1,0 +1,21 @@
+SYSTEM TRACES
+
+gRPC
+====
+Go spend 95.64% of its time on futex syscall
+Java spend 79.75% of its time on wait4 syscall
+JS  spends 49.90% on clock_gettime, 23.76% on write, 13.16% on brk
+Python spends  38.25% on clock_gettime, 32.86% on sendmsg, 16.23% on recvmsg, 11.02% on epoll_wait
+
+
+RPC
+===
+Go spends  80.97% on wait4, 7.51% on futex
+Java spends 100% on futex command
+JS  41.54% on socket, 18.30% on epoll_ctl, 8.45% on connect, 8.39% on write, 4.93% on munmap
+Python  38.85% on recvfrom, 21.09% on connect, 16.08% on socket, 13.52% on close, 10.31% on sendto
+
+
+REST
+====
+
