@@ -1,0 +1,23 @@
+Go
+==
+REST -> 0
+RPC -> 0.36
+gRPC -> 0.34
+
+Java
+====
+REST -> 0.4
+RPC ->  0
+gRPC -> 6.71
+
+JavaScript
+==========
+REST -> 1.12
+RPC -> 0.52
+gRPC -> 0.14
+
+Python
+======
+REST -> 3.49
+RPC -> 25.14
+gRPC -> 7.34
