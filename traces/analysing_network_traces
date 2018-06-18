@@ -31,5 +31,5 @@ recv(), recvfrom(), and recvmsg() are syscalls used to recieve messages from bot
 recvfrom adds the data received from the socket to a buf by first calculating the necessary lenght to allocate the appropriate buffer size.
 
 
-fcntl is used when a socket in nonblocking
+fcntl is used when a socket is nonblocking
 
