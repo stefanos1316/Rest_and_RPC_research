@@ -165,7 +165,7 @@ do
 							case ${TRACES_TYPE} in 
 								network) 
 									mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-									(strace -f -e trace=network -c go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/go.txt &
+									(strace -f -e trace=network -T go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/go.txt &
 									getServerPID=$!
 									# Start the client instance $j is the type of RPC or Rest
 									
@@ -174,7 +174,7 @@ do
 								;;
 								syscalls)
 									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-									(strace -c go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
+									(strace -T go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
 									getServerPID=$!
 									
 									# Start the client instance $j is the type of RPC or Rest
@@ -228,7 +228,7 @@ do
 								case ${TRACES_TYPE} in 
 									network) 
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-										(strace -f -e trace=network -c node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/javascript.txt &
+										(strace -f -e trace=network -T node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/javascript.txt &
 										getServerPID=$!
 										# Start the client instance $j is the type of RPC or Rest
 									
@@ -237,7 +237,7 @@ do
 										;;
 									syscalls)
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-										(strace -c node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/javascript.txt &
+										(strace -T node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/javascript.txt &
 										getServerPID=$!
 									
 										# Start the client instance $j is the type of RPC or Rest
@@ -290,7 +290,7 @@ do
 								case ${TRACES_TYPE} in 
 									network) 
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-										(strace -f -e trace=network -c python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/python.txt &
+										(strace -f -e trace=network -T python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/python.txt &
 										getServerPID=$!
 										# Start the client instance $j is the type of RPC or Rest
 									
@@ -299,7 +299,7 @@ do
 										;;
 									syscalls)
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-										(strace -c python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/python.txt &
+										(strace -T python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/python.txt &
 										getServerPID=$!
 									
 										# Start the client instance $j is the type of RPC or Rest
@@ -356,7 +356,7 @@ do
 										case ${TRACES_TYPE} in 
 											network) 
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-												(strace -f -e trace=network -c mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
+												(strace -f -e trace=network -T mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
 												getServerPID=$!
 												# Start the client instance $j is the type of RPC or Rest
 									
@@ -365,7 +365,7 @@ do
 												;;
 											syscalls)
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												(strace -c mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer ) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+												(strace -T mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer ) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 												getServerPID=$!
 									
 												# Start the client instance $j is the type of RPC or Rest
@@ -403,7 +403,8 @@ do
 							;;
 							rest)
 								if [ "$k" = "REST_server" ]; then
-									bash ../apache-tomcat-9.0.8/bin/catalina.sh start
+									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
+									(strace -T bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 									sleep 2
 									response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
 									if [ "${response}" == "Jersey say : Testing" ]; then
@@ -456,7 +457,7 @@ do
 										case ${TRACES_TYPE} in 
 											network) 
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-												(strace -f -e trace=network -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
+												(strace -f -e trace=network -T java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
 												getServerPID=$!
 												# Start the client instance $j is the type of RPC or Rest
 									
@@ -465,7 +466,7 @@ do
 												;;
 											syscalls)
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												(strace -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+												(strace -T java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 												getServerPID=$!
 									
 												# Start the client instance $j is the type of RPC or Rest

@@ -1,0 +1,401 @@
+execve("/usr/bin/bash", ["bash", "../apache-tomcat-9.0.8/bin/catal"..., "start"], 0x7fff185229a8 /* 52 vars */) = 0 <0.000431>
+brk(NULL)                               = 0x558c08d76000 <0.000034>
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory) <0.000077>
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3 <0.000111>
+fstat(3, {st_mode=S_IFREG|0644, st_size=107206, ...}) = 0 <0.000053>
+mmap(NULL, 107206, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7feea5055000 <0.000023>
+close(3)                                = 0 <0.000015>
+openat(AT_FDCWD, "/lib64/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = 3 <0.000026>
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \337\0\0\0\0\0\0"..., 832) = 832 <0.000018>
+fstat(3, {st_mode=S_IFREG|0755, st_size=182144, ...}) = 0 <0.000016>
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7feea5053000 <0.000019>
+mmap(NULL, 2275712, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7feea4c20000 <0.000020>
+mprotect(0x7feea4c48000, 2093056, PROT_NONE) = 0 <0.000024>
+mmap(0x7feea4e47000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x27000) = 0x7feea4e47000 <0.000027>
+close(3)                                = 0 <0.000015>
+openat(AT_FDCWD, "/lib64/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3 <0.000025>
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\16\0\0\0\0\0\0"..., 832) = 832 <0.000018>
+fstat(3, {st_mode=S_IFREG|0755, st_size=19264, ...}) = 0 <0.000016>
+mmap(NULL, 2109680, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7feea4a1c000 <0.000020>
+mprotect(0x7feea4a1f000, 2093056, PROT_NONE) = 0 <0.000023>
+mmap(0x7feea4c1e000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7feea4c1e000 <0.000022>
+close(3)                                = 0 <0.000015>
+openat(AT_FDCWD, "/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3 <0.000021>
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0@\20\2\0\0\0\0\0"..., 832) = 832 <0.000016>
+fstat(3, {st_mode=S_IFREG|0755, st_size=2066456, ...}) = 0 <0.000016>
+mmap(NULL, 3889792, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7feea4666000 <0.000020>
+mprotect(0x7feea4812000, 2097152, PROT_NONE) = 0 <0.000025>
+mmap(0x7feea4a12000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1ac000) = 0x7feea4a12000 <0.000024>
+mmap(0x7feea4a18000, 14976, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7feea4a18000 <0.000020>
+close(3)                                = 0 <0.000015>
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7feea5050000 <0.000018>
+arch_prctl(ARCH_SET_FS, 0x7feea5050740) = 0 <0.000015>
+mprotect(0x7feea4a12000, 16384, PROT_READ) = 0 <0.000025>
+mprotect(0x7feea4c1e000, 4096, PROT_READ) = 0 <0.000021>
+mprotect(0x7feea4e47000, 16384, PROT_READ) = 0 <0.000022>
+mprotect(0x558c0743c000, 16384, PROT_READ) = 0 <0.000024>
+mprotect(0x7feea5070000, 4096, PROT_READ) = 0 <0.000023>
+munmap(0x7feea5055000, 107206)          = 0 <0.000050>
+openat(AT_FDCWD, "/dev/tty", O_RDWR|O_NONBLOCK) = 3 <0.000028>
+close(3)                                = 0 <0.000018>
+brk(NULL)                               = 0x558c08d76000 <0.000015>
+brk(0x558c08d97000)                     = 0x558c08d97000 <0.000018>
+brk(NULL)                               = 0x558c08d97000 <0.000015>
+open("/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3 <0.000023>
+fstat(3, {st_mode=S_IFREG|0644, st_size=113045344, ...}) = 0 <0.000016>
+mmap(NULL, 113045344, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fee9da97000 <0.000022>
+close(3)                                = 0 <0.000015>
+getuid()                                = 1000 <0.000015>
+getgid()                                = 1000 <0.000015>
+geteuid()                               = 1000 <0.000015>
+getegid()                               = 1000 <0.000015>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000015>
+ioctl(-1, TIOCGPGRP, 0x7ffd0bbc7e34)    = -1 EBADF (Bad file descriptor) <0.000015>
+sysinfo({uptime=4695, loads=[49728, 61952, 59360], totalram=16535412736, freeram=6236164096, sharedram=178274304, bufferram=212180992, totalswap=8589930496, freeswap=8589930496, procs=1665, totalhigh=0, freehigh=0, mem_unit=1}) = 0 <0.000019>
+rt_sigaction(SIGCHLD, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0 <0.000016>
+rt_sigaction(SIGCHLD, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0 <0.000015>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000021>
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0 <0.000015>
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+rt_sigaction(SIGTSTP, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0 <0.000015>
+rt_sigaction(SIGTSTP, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+rt_sigaction(SIGTTIN, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0 <0.000015>
+rt_sigaction(SIGTTIN, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+rt_sigaction(SIGTTOU, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0 <0.000015>
+rt_sigaction(SIGTTOU, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000016>
+rt_sigaction(SIGQUIT, {sa_handler=SIG_IGN, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+uname({sysname="Linux", nodename="sense-dhcp-4.dmst.aueb.gr", ...}) = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000015>
+open("/usr/lib64/gconv/gconv-modules.cache", O_RDONLY) = 3 <0.000024>
+fstat(3, {st_mode=S_IFREG|0644, st_size=26370, ...}) = 0 <0.000024>
+mmap(NULL, 26370, PROT_READ, MAP_SHARED, 3, 0) = 0x7feea5069000 <0.000021>
+close(3)                                = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000015>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research/scripts", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000024>
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000017>
+stat("/home", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0 <0.000017>
+stat("/home/sgeorgiou", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0 <0.000017>
+stat("/home/sgeorgiou/GitHub", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000016>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000016>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research/scripts", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000016>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000016>
+getpid()                                = 3813 <0.000014>
+getppid()                               = 3810 <0.000014>
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000024>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/go/bin/bash", 0x7ffd0bbc7ab0) = -1 ENOENT (No such file or directory) <0.000019>
+stat("/usr/local/go/bin/bash", 0x7ffd0bbc7ab0) = -1 ENOENT (No such file or directory) <0.000018>
+stat("/home/sgeorgiou/eclipse/bash", 0x7ffd0bbc7ab0) = -1 ENOENT (No such file or directory) <0.000017>
+stat("/home/sgeorgiou/pycharm-community-2018.1.2/bin/bash", 0x7ffd0bbc7ab0) = -1 ENOENT (No such file or directory) <0.000016>
+stat("/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1132656, ...}) = 0 <0.000017>
+stat("/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1132656, ...}) = 0 <0.000016>
+geteuid()                               = 1000 <0.000014>
+getegid()                               = 1000 <0.000014>
+getuid()                                = 1000 <0.000014>
+getgid()                                = 1000 <0.000014>
+access("/usr/bin/bash", X_OK)           = 0 <0.000018>
+stat("/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1132656, ...}) = 0 <0.000016>
+geteuid()                               = 1000 <0.000014>
+getegid()                               = 1000 <0.000014>
+getuid()                                = 1000 <0.000014>
+getgid()                                = 1000 <0.000014>
+access("/usr/bin/bash", R_OK)           = 0 <0.000016>
+stat("/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1132656, ...}) = 0 <0.000016>
+stat("/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1132656, ...}) = 0 <0.000016>
+geteuid()                               = 1000 <0.000013>
+getegid()                               = 1000 <0.000014>
+getuid()                                = 1000 <0.000013>
+getgid()                                = 1000 <0.000014>
+access("/usr/bin/bash", X_OK)           = 0 <0.000016>
+stat("/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1132656, ...}) = 0 <0.000016>
+geteuid()                               = 1000 <0.000014>
+getegid()                               = 1000 <0.000013>
+getuid()                                = 1000 <0.000014>
+getgid()                                = 1000 <0.000014>
+access("/usr/bin/bash", R_OK)           = 0 <0.000016>
+getpid()                                = 3813 <0.000014>
+getpgrp()                               = 1324 <0.000015>
+ioctl(2, TIOCGPGRP, 0x7ffd0bbc7d04)     = -1 ENOTTY (Inappropriate ioctl for device) <0.000016>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+ioctl(2, TIOCGPGRP, 0x7ffd0bbc7ce4)     = -1 ENOTTY (Inappropriate ioctl for device) <0.000014>
+prlimit64(0, RLIMIT_NPROC, NULL, {rlim_cur=62408, rlim_max=62408}) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000015>
+openat(AT_FDCWD, "../apache-tomcat-9.0.8/bin/catalina.sh", O_RDONLY) = 3 <0.000023>
+stat("../apache-tomcat-9.0.8/bin/catalina.sh", {st_mode=S_IFREG|0775, st_size=23463, ...}) = 0 <0.000017>
+ioctl(3, TCGETS, 0x7ffd0bbc7dc0)        = -1 ENOTTY (Inappropriate ioctl for device) <0.000018>
+lseek(3, 0, SEEK_CUR)                   = 0 <0.000016>
+read(3, "#!/bin/sh\n\n# Licensed to the Apa"..., 80) = 80 <0.000019>
+lseek(3, 0, SEEK_SET)                   = 0 <0.000016>
+prlimit64(0, RLIMIT_NOFILE, NULL, {rlim_cur=1024, rlim_max=4*1024}) = 0 <0.000014>
+fcntl(255, F_GETFD)                     = -1 EBADF (Bad file descriptor) <0.000014>
+dup2(3, 255)                            = 255 <0.000016>
+close(3)                                = 0 <0.000021>
+fcntl(255, F_SETFD, FD_CLOEXEC)         = 0 <0.000015>
+fcntl(255, F_GETFL)                     = 0x8000 (flags O_RDONLY|O_LARGEFILE) <0.000014>
+fstat(255, {st_mode=S_IFREG|0775, st_size=23463, ...}) = 0 <0.000014>
+lseek(255, 0, SEEK_CUR)                 = 0 <0.000014>
+read(255, "#!/bin/sh\n\n# Licensed to the Apa"..., 8192) = 8192 <0.000021>
+pipe([3, 4])                            = 0 <0.000023>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000014>
+lseek(255, -2422, SEEK_CUR)             = 5770 <0.000014>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3814 <0.000108>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+close(4)                                = 0 <0.000015>
+read(3, "Linux\n", 128)                 = 6 <0.001172>
+read(3, "", 128)                        = 0 <0.000015>
+close(3)                                = 0 <0.000022>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000018>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 3814 <0.000022>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3814, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, 0x7ffd0bbc7190, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000014>
+rt_sigreturn({mask=[]})                 = 0 <0.000015>
+read(255, "\n# resolve links - $0 may be a s"..., 8192) = 8192 <0.000020>
+lstat("../apache-tomcat-9.0.8/bin/catalina.sh", {st_mode=S_IFREG|0775, st_size=23463, ...}) = 0 <0.000021>
+pipe([3, 4])                            = 0 <0.000021>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000016>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000014>
+lseek(255, -7888, SEEK_CUR)             = 6074 <0.000016>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3815 <0.000097>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000015>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+close(4)                                = 0 <0.000015>
+read(3, "../apache-tomcat-9.0.8/bin\n", 128) = 27 <0.001181>
+read(3, "", 128)                        = 0 <0.000016>
+close(3)                                = 0 <0.000022>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3815, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 3815 <0.000021>
+wait4(-1, 0x7ffd0bbc7110, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000015>
+rt_sigreturn({mask=[]})                 = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+read(255, "\n# Only set CATALINA_HOME if not"..., 8192) = 8192 <0.000021>
+pipe([3, 4])                            = 0 <0.000020>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000014>
+lseek(255, -8072, SEEK_CUR)             = 6194 <0.000015>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3816 <0.000095>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000028>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000065>
+close(4)                                = 0 <0.000031>
+read(3, "/home/sgeorgiou/GitHub/Rest_and_"..., 128) = 65 <0.000023>
+read(3, "", 128)                        = 0 <0.000152>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3816, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 3816 <0.000024>
+wait4(-1, 0x7ffd0bbc6fd0, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000015>
+rt_sigreturn({mask=[]})                 = 0 <0.000016>
+close(3)                                = 0 <0.000040>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000016>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+read(255, "\n# Copy CATALINA_BASE from CATAL"..., 8192) = 8192 <0.000023>
+faccessat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/bin/setenv.sh", R_OK) = -1 ENOENT (No such file or directory) <0.000026>
+faccessat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/bin/setenv.sh", R_OK) = -1 ENOENT (No such file or directory) <0.000018>
+faccessat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/bin/setclasspath.sh", R_OK) = 0 <0.000023>
+openat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/bin/setclasspath.sh", O_RDONLY) = 3 <0.000022>
+fstat(3, {st_mode=S_IFREG|0775, st_size=3680, ...}) = 0 <0.000015>
+read(3, "#!/bin/sh\n\n# Licensed to the Apa"..., 3680) = 3680 <0.000017>
+close(3)                                = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000014>
+pipe([3, 4])                            = 0 <0.000021>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000013>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3817 <0.000099>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+close(4)                                = 0 <0.000015>
+read(3, "/usr/bin/java\n", 128)         = 14 <0.001704>
+read(3, "", 128)                        = 0 <0.000344>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3817, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 3817 <0.000021>
+wait4(-1, 0x7ffd0bbc6490, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000014>
+rt_sigreturn({mask=[]})                 = 0 <0.000015>
+close(3)                                = 0 <0.000029>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+pipe([3, 4])                            = 0 <0.000019>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000015>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3819 <0.000094>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+close(4)                                = 0 <0.000016>
+read(3, "/usr/bin\n", 128)              = 9 <0.001462>
+read(3, "", 128)                        = 0 <0.000356>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3819, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 3819 <0.000020>
+wait4(-1, 0x7ffd0bbc6290, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000014>
+rt_sigreturn({mask=[]})                 = 0 <0.000015>
+close(3)                                = 0 <0.000022>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+pipe([3, 4])                            = 0 <0.000018>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000014>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3821 <0.000097>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000015>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+close(4)                                = 0 <0.000014>
+read(3, "/usr\n", 128)                  = 5 <0.001453>
+read(3, "", 128)                        = 0 <0.000366>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3821, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 3821 <0.000020>
+wait4(-1, 0x7ffd0bbc62d0, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000014>
+rt_sigreturn({mask=[]})                 = 0 <0.000015>
+close(3)                                = 0 <0.000019>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/endorsed", 0x7ffd0bbc71c0) = -1 ENOENT (No such file or directory) <0.000027>
+faccessat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/bin/tomcat-juli.jar", R_OK) = 0 <0.000028>
+pipe([3, 4])                            = 0 <0.000024>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000013>
+lseek(255, -5060, SEEK_CUR)             = 9326 <0.000015>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3823 <0.000103>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+close(4)                                = 0 <0.000014>
+read(3, "not a tty\n", 128)             = 10 <0.001130>
+read(3, "", 128)                        = 0 <0.000014>
+close(3)                                = 0 <0.000020>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3823, si_uid=1000, si_status=1, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 1}], WNOHANG, NULL) = 3823 <0.000020>
+wait4(-1, 0x7ffd0bbc7050, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000014>
+rt_sigreturn({mask=[]})                 = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000013>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000012>
+read(255, "\n# For Cygwin, switch paths to W"..., 8192) = 8192 <0.000021>
+faccessat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/conf/logging.properties", R_OK) = 0 <0.000025>
+umask(027)                              = 002 <0.000013>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/endorsed", 0x7ffd0bbc7a20) = -1 ENOENT (No such file or directory) <0.000024>
+pipe([3, 4])                            = 0 <0.000025>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000014>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000014>
+lseek(255, -6216, SEEK_CUR)             = 11302 <0.000014>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3824 <0.000097>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+rt_sigaction(SIGCHLD, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c07190db0, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000015>
+close(4)                                = 0 <0.000014>
+read(3, "0027\n", 128)                  = 5 <0.000180>
+read(3, "", 128)                        = 0 <0.000172>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3824, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 3824 <0.000020>
+wait4(-1, 0x7ffd0bbc7010, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000012>
+rt_sigreturn({mask=[]})                 = 0 <0.000017>
+close(3)                                = 0 <0.000018>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000015>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000014>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+read(255, "\nif [ -z \"$USE_NOHUP\" ]; then\n  "..., 8192) = 8192 <0.000020>
+brk(NULL)                               = 0x558c08d97000 <0.000016>
+brk(0x558c08db8000)                     = 0x558c08db8000 <0.000018>
+read(255, "pty PID file\n              FORCE"..., 8192) = 3969 <0.000018>
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0 <0.000033>
+stat("/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/go/bin/touch", 0x7ffd0bbc7370) = -1 ENOENT (No such file or directory) <0.000024>
+stat("/usr/local/go/bin/touch", 0x7ffd0bbc7370) = -1 ENOENT (No such file or directory) <0.000018>
+stat("/home/sgeorgiou/eclipse/touch", 0x7ffd0bbc7370) = -1 ENOENT (No such file or directory) <0.000016>
+stat("/home/sgeorgiou/pycharm-community-2018.1.2/bin/touch", 0x7ffd0bbc7370) = -1 ENOENT (No such file or directory) <0.000016>
+stat("/usr/bin/touch", {st_mode=S_IFREG|0755, st_size=94608, ...}) = 0 <0.000018>
+stat("/usr/bin/touch", {st_mode=S_IFREG|0755, st_size=94608, ...}) = 0 <0.000015>
+geteuid()                               = 1000 <0.000014>
+getegid()                               = 1000 <0.000014>
+getuid()                                = 1000 <0.000014>
+getgid()                                = 1000 <0.000014>
+access("/usr/bin/touch", X_OK)          = 0 <0.000018>
+stat("/usr/bin/touch", {st_mode=S_IFREG|0755, st_size=94608, ...}) = 0 <0.000015>
+geteuid()                               = 1000 <0.000013>
+getegid()                               = 1000 <0.000014>
+getuid()                                = 1000 <0.000012>
+getgid()                                = 1000 <0.000012>
+access("/usr/bin/touch", R_OK)          = 0 <0.000017>
+stat("/usr/bin/touch", {st_mode=S_IFREG|0755, st_size=94608, ...}) = 0 <0.000015>
+stat("/usr/bin/touch", {st_mode=S_IFREG|0755, st_size=94608, ...}) = 0 <0.000015>
+geteuid()                               = 1000 <0.000012>
+getegid()                               = 1000 <0.000012>
+getuid()                                = 1000 <0.000012>
+getgid()                                = 1000 <0.000012>
+access("/usr/bin/touch", X_OK)          = 0 <0.000016>
+stat("/usr/bin/touch", {st_mode=S_IFREG|0755, st_size=94608, ...}) = 0 <0.000015>
+geteuid()                               = 1000 <0.000014>
+getegid()                               = 1000 <0.000014>
+getuid()                                = 1000 <0.000014>
+getgid()                                = 1000 <0.000012>
+access("/usr/bin/touch", R_OK)          = 0 <0.000016>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [INT CHLD], 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [INT CHLD], NULL, 8) = 0 <0.000013>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3825 <0.000103>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000013>
+rt_sigaction(SIGINT, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000013>
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 3825 <0.000856>
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, {sa_handler=0x558c0718d860, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7feea469a6e0}, 8) = 0 <0.000012>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3825, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+wait4(-1, 0x7ffd0bbc6dd0, WNOHANG, NULL) = -1 ECHILD (No child processes) <0.000056>
+rt_sigreturn({mask=[]})                 = 0 <0.000040>
+openat(AT_FDCWD, "/home/sgeorgiou/GitHub/Rest_and_RPC_research/apache-tomcat-9.0.8/logs/catalina.out", O_WRONLY|O_CREAT|O_APPEND, 0666) = 3 <0.000070>
+fcntl(1, F_GETFD)                       = 0 <0.000059>
+fcntl(1, F_DUPFD, 10)                   = 10 <0.000014>
+fcntl(1, F_GETFD)                       = 0 <0.000012>
+fcntl(10, F_SETFD, FD_CLOEXEC)          = 0 <0.000014>
+dup2(3, 1)                              = 1 <0.000014>
+close(3)                                = 0 <0.000014>
+fcntl(2, F_GETFD)                       = 0 <0.000014>
+fcntl(2, F_DUPFD, 10)                   = 11 <0.000014>
+fcntl(2, F_GETFD)                       = 0 <0.000014>
+fcntl(11, F_SETFD, FD_CLOEXEC)          = 0 <0.000012>
+dup2(1, 2)                              = 2 <0.000014>
+fcntl(1, F_GETFD)                       = 0 <0.000012>
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0 <0.000015>
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7feea5050a10) = 3826 <0.000101>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000015>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000013>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [CHLD], 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) = 0 <0.000014>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [CHLD], 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) = 0 <0.000012>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [CHLD], 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) = 0 <0.000013>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000013>
+dup2(11, 2)                             = 2 <0.000013>
+fcntl(11, F_GETFD)                      = 0x1 (flags FD_CLOEXEC) <0.000013>
+close(11)                               = 0 <0.000021>
+dup2(10, 1)                             = 1 <0.000013>
+fcntl(10, F_GETFD)                      = 0x1 (flags FD_CLOEXEC) <0.000013>
+close(10)                               = 0 <0.000013>
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 2), ...}) = 0 <0.000015>
+write(1, "Tomcat started.\n", 16)       = 16 <0.000059>
+read(255, "", 8192)                     = 0 <0.000022>
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0 <0.000015>
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0 <0.000014>
+exit_group(0)                           = ?
++++ exited with 0 +++
