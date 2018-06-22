@@ -174,7 +174,7 @@ do
 								;;
 								syscalls)
 									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-									(strace -T go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
+									(strace -f -T go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
 									getServerPID=$!
 									
 									# Start the client instance $j is the type of RPC or Rest
@@ -237,12 +237,12 @@ do
 										;;
 									syscalls)
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-										(strace -T node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/javascript.txt &
+										(strace -f -T node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/javascript.txt &
 										getServerPID=$!
 									
 										# Start the client instance $j is the type of RPC or Rest
 										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/javascript.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -c node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/javascript.txt'" &
 										;;
 								esac
 							else
@@ -299,12 +299,12 @@ do
 										;;
 									syscalls)
 										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-										(strace -T python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/python.txt &
+										(strace -f -T python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/python.txt &
 										getServerPID=$!
 									
 										# Start the client instance $j is the type of RPC or Rest
 										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -c python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
 										;;
 								esac
 							else
@@ -365,12 +365,12 @@ do
 												;;
 											syscalls)
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												(strace -T mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer ) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+												(strace -f -T mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer ) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 												getServerPID=$!
 									
 												# Start the client instance $j is the type of RPC or Rest
 												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
 												;;
 										esac
 									else
@@ -404,7 +404,7 @@ do
 							rest)
 								if [ "$k" = "REST_server" ]; then
 									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-									(strace -T bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+									(strace -f -T bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 									sleep 2
 									response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
 									if [ "${response}" == "Jersey say : Testing" ]; then
@@ -425,7 +425,7 @@ do
 											syscalls) 
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
 												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (strace -c bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt && cd ~/'" &
+												ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (strace -f -c bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt && cd ~/'" &
 												;;
 										esac
 									else
@@ -466,12 +466,12 @@ do
 												;;
 											syscalls)
 												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												(strace -T java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+												(strace -f -T java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 												getServerPID=$!
 									
 												# Start the client instance $j is the type of RPC or Rest
 												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
+												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -c java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
 												;;
 										esac
 									else
