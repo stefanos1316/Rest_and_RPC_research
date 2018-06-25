@@ -183,11 +183,11 @@ do
 								;;
 							esac
 						else
-							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
+							(/usr/bin/time -v go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
 							getServerPID=$!
 
 							# Start the client instance $j is the type of RPC or Rest
-							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/go.txt'" &
+							ssh ${REMOTE_HOST_CLIENT} "sh -c '(/usr/bin/time -v go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/go.txt'" &
 						fi
 						
 			
@@ -246,11 +246,11 @@ do
 										;;
 								esac
 							else
-								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
+								(/usr/bin/time -v node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
 								getServerPID=$!									
 
 								# Start the client instance $j is the type of RPC or Rest
-								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/javascript.txt'" &
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(/usr/bin/time -v node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/javascript.txt'" &
 							fi
 
 							# Check if remote client is still running
@@ -308,12 +308,12 @@ do
 										;;
 								esac
 							else
-								(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt &		
+								(/usr/bin/time -v python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt &		
 								getServerPID=$!									
 								sleep 2
 
 								# Start the client instance $j is the type of RPC or Rest
-								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/python.txt'" &
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(/usr/bin/time -v python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/python.txt'" &
 							fi
 
 							# Check if remote client is still running
@@ -374,11 +374,11 @@ do
 												;;
 										esac
 									else
-										(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+										(/usr/bin/time -v mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 										getServerPID=$!
 
 										# Now start the remote client by entering the path where it is located
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(/usr/bin/time -v mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
 									fi
 
 									# Check if remote client is still running
@@ -430,7 +430,7 @@ do
 										esac
 									else
 										# Starting remote client,
-										ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt && cd ~/'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (/usr/bin/time -v bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt && cd ~/'" &
 									fi
 
 									 # Check if remote client is still running
@@ -475,11 +475,11 @@ do
 												;;
 										esac
 									else
-										(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+										(/usr/bin/time -v java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
 										getServerPID=$!
 									
 										# Start client java -cp ./src com.thejavageek.HelloWorldClient 
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(/usr/bin/time -v java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
 										sleep 5
 									 
 										# Check if remote client is still running
