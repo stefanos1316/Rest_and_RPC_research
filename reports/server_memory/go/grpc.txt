@@ -1,18 +1,19 @@
-	Command being timed: "go run GitHub/Rest_and_RPC_research/tasks/go/grpc/client.go"
-	User time (seconds): 6.56
-	System time (seconds): 2.15
-	Percent of CPU this job got: 60%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:14.36
+Command terminated by signal 9
+	Command being timed: "go run server.go"
+	User time (seconds): 4.19
+	System time (seconds): 0.32
+	Percent of CPU this job got: 20%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:21.56
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 121748
+	Maximum resident set size (kbytes): 124048
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 222836
-	Voluntary context switches: 132311
-	Involuntary context switches: 1410
+	Minor (reclaiming a frame) page faults: 239352
+	Voluntary context switches: 11390
+	Involuntary context switches: 1367
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 0
