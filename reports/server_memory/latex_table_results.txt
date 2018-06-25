@@ -7,9 +7,9 @@
 gRPC & Max resident set size (KB) & 121,748 & 353,872 & 688,400    & 26,700 \\
      & Minor page faults          & 222,836 & 105,346 & 170,743    & 7,285  \\
      & Voluntary context switches & 132,311 & 123,198 & 1,215      & 22,249 \\
-RPC  & Max resident set size (KB) & 88,096  &         & 469,624    & 14,180 \\
-     & Minor page faults          & 34,356  &         & 113,411    & 2,249  \\
-     & Voluntary context switches & 82,614  &         & 4,129      & 47,582 \\
+RPC  & Max resident set size (KB) & 88,096  & 127,356 & 469,624    & 14,180 \\
+     & Minor page faults          & 34,356  & 33,325  & 113,411    & 2,249  \\
+     & Voluntary context switches & 82,614  & 7,958   & 4,129      & 47,582 \\
 Rest & Max resident set size (KB) & 72,668  & 135,444 & 461,056    & 20,208 \\
      & Minor page faults          & 30,570  & 37,765  & 111,159    & 7,546  \\
      & Voluntary context switches & 152,342 & 48,951  & 4,121      & 52,020

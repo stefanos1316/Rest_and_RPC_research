@@ -202,7 +202,10 @@ do
 						echo "Killing wattsup pro"
 						
 						# Stop server instance
+						
+						ps -aux | grep server.go
 						kill -9 ${getServerPID}
+						echo "killed ${getServerPID}"
 						echo "Done with $k"
 						sleep 5
 					fi
