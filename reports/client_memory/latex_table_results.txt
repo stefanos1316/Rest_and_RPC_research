@@ -1,0 +1,17 @@
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{llllll}
+     &                            & Golang  & Java    & JavaScript & Python \\
+gRPC & Max resident set size (KB) & 121,704 & 322,064 & 687,132    & 26,896 \\
+     & Minor page faults          & 220,729 & 95,715  & 170,334    & 7,271  \\
+     & Voluntary context switches & 150,292 & 125,075 & 1,157      & 20,113 \\
+RPC  & Max resident set size (KB) & 87,968  &         & 470,068    & 14,716 \\
+     & Minor page faults          & 34,478  &         & 114,832    & 2,263  \\
+     & Voluntary context switches & 82,911  &         & 4,375      & 49,747 \\
+Rest & Max resident set size (KB) & 72,056  & 136,120 & 465,860    & 20,160 \\
+     & Minor page faults          & 30,546  & 38,931  & 112,921    & 7,555  \\
+     & Voluntary context switches & 170,067 & 48,756  & 4,172      & 47,903
+\end{tabular}
+\end{table}
