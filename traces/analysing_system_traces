@@ -1,4 +1,4 @@
-SYSTEM TRACES
+SYSTEM TRACES CLIENT
 
 gRPC
 ====
@@ -36,3 +36,29 @@ RPC ---	JavaScript RPC has the most efficient results due to the fact that opens
 	it terms of energy consumption and execution time.
 	In contrast, JavaScript is using the epoll_ctl system call (control interface for an epoll file descriptor) 
 
+===================================================================================================================================================================================================================
+
+SYSTEM TRACES SERVER
+
+gRPC
+====
+Go spends 71.5% on futex, 13.02% on stat, and 12.85% on wait4
+Java spends 63.75% on read, 5.21% on execve, 5.05% on open, 3.79% on wait
+JS spends 13.22% on mmap, 10.63% on brk, 10.37% on stat, 9.24% on read, 7.04% on mprotect, 6% on open, and 5.42% openat, and 4.78% munmap and 3% for the following syscalls fstat, futex, clone, close, lstat, and ioctl
+Python spends 22.30% on open, 21.03% openat, 19.09% on stat, 9% on read, 6.41% on fstat, 4.31% on close, 3.36% on getdents 
+
+
+RPC
+===
+Go spends 85.99% on futex, 5.44% on stat, 4% on waitid
+Java spends 32.06% on execve, 12.89% on openat, 12.52% on read, 10.39% stat, 7.88% on mmap, 6.26% on mprotect, 3.94% on munmap, and 3.63% on readlink
+JS spends 20.89% mmap, 14.28% on brk, 8.85% on mprotect, 7.68% on openat, 7.31% on execve, 6.31% on stat, 5.46% on read, 4.39% on munmap, 4.18% on fstat, and 3% of each close and futex
+Python spends 30.74% on read, 19.09% on open, 18.99% on openat, 14.05% on stat, 4.03% on fstat, 3.17% on lstat, 3.07% on close 
+
+
+REST
+====
+Go spends 43.86% on stat, 42.59% on waitid, and 9.88% on futex
+Java spends 52.31% on read, 6.23% on wait4, 5.20% on clone, 4.20% on stat, 3% of close and execve, respectively
+JS spends 16.08% on mmap, 15.21% on brk, 9.12% on mprotect, 7.42% on stat, 6.39% for munmap and read, 5.26% on openat, 3% of fstat and ioctl
+Python spends 50.84% on read, 13.86% on socket, 11.59% on open, 11.55% on openat, and 5.44% on stat
