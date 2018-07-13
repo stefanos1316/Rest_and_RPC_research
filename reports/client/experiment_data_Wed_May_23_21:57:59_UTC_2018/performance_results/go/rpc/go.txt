@@ -1,6 +1,0 @@
-2018/05/24 00:58:49 Couldn't start listening on port 1234. Error listen tcp :12345: bind: address already in use
-exit status 1
-
-real	0m0.292s
-user	0m0.317s
-sys	0m0.074s

@@ -1,5 +1,0 @@
-POM file ../tasks//java/grpc/ specified with the -f/--file command line argument does not exist
-
-real	0m16.638s
-user	0m5.644s
-sys	0m0.181s
