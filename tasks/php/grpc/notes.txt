@@ -1,0 +1,3 @@
+After writing the task do no forget to:
+1) set proper permissions: chown -R apache:apache storage (for Fedora)
+2) php artisan key:generate (to generate enrcypte key)
