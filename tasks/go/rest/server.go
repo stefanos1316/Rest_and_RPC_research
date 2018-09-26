@@ -1,7 +1,7 @@
 package main
 
 import (
-    "net/http"
+	"net/http"
 )
 
 func response(rw http.ResponseWriter, request *http.Request) {

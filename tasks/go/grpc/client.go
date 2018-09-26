@@ -29,7 +29,7 @@ import (
 )
 
 const (
-	address     = "195.251.251.27:50051"
+	address     = "100.69.12.250:50051"
 	defaultName = "world"
 )
 

@@ -15,7 +15,6 @@ TOTAL_GRPC_PY=0
 TOTAL_RPC_PY=0
 TOTAL_REST_PY=0
 
-
 echo "[Client] Energy Measurements..."
 
 		for i in `ls $1`; do

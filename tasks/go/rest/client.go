@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-    	url := "http://195.251.251.27:3000"
+    	url := "http://100.69.12.250:3000"
     	req, err := http.NewRequest(http.MethodGet, url, nil)
 		if err != nil {
 			log.Fatal(err)
@@ -23,10 +23,10 @@ func main() {
     		if err != nil {
         		panic(err)
     		}
-	
+
     	//fmt.Printf("STATUS: ",resp.Status)
    	body, _ := ioutil.ReadAll(resp.Body)
- 	_ = body 
+ 	_ = body
    	//fmt.Println("response Body:", string(body))
 	}
 	fmt.Println("Done")
