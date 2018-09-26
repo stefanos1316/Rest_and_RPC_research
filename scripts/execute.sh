@@ -145,7 +145,7 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in 
-				g)
+				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 					if [ "$k" = "server.go" ]; then	
 						echo "Executing $j from $i"
@@ -213,7 +213,7 @@ do
 					fi
 				 ;;
 
-				javascrip) 
+				javascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
@@ -339,7 +339,7 @@ do
 						fi	
 					fi
 				;;
-				jav) 
+				java) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
 						echo "Executing $j from $i"
 				
