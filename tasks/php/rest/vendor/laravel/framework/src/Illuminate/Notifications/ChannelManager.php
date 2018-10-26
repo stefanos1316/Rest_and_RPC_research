@@ -2,7 +2,6 @@
 
 namespace Illuminate\Notifications;
 
-use Illuminate\Mail\Markdown;
 use InvalidArgumentException;
 use Illuminate\Support\Manager;
 use Nexmo\Client as NexmoClient;
@@ -23,6 +22,13 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     protected $defaultChannel = 'mail';
 
     /**
+     * The locale used when sending notifications.
+     *
+     * @var string|null
+     */
+    protected $locale;
+
+    /**
      * Send the given notification to the given notifiable entities.
      *
      * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
@@ -32,7 +38,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     public function send($notifiables, $notification)
     {
         return (new NotificationSender(
-            $this, $this->app->make(Bus::class), $this->app->make(Dispatcher::class))
+            $this, $this->app->make(Bus::class), $this->app->make(Dispatcher::class), $this->locale)
         )->send($notifiables, $notification);
     }
 
@@ -47,7 +53,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     public function sendNow($notifiables, $notification, array $channels = null)
     {
         return (new NotificationSender(
-            $this, $this->app->make(Bus::class), $this->app->make(Dispatcher::class))
+            $this, $this->app->make(Bus::class), $this->app->make(Dispatcher::class), $this->locale)
         )->sendNow($notifiables, $notification, $channels);
     }
 
@@ -89,9 +95,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
      */
     protected function createMailDriver()
     {
-        return $this->app->make(Channels\MailChannel::class)->setMarkdownResolver(function () {
-            return $this->app->make(Markdown::class);
-        });
+        return $this->app->make(Channels\MailChannel::class);
     }
 
     /**
@@ -170,5 +174,18 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     public function deliverVia($channel)
     {
         $this->defaultChannel = $channel;
+    }
+
+    /**
+     * Set the locale of notifications.
+     *
+     * @param  string  $locale
+     * @return $this
+     */
+    public function locale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 }

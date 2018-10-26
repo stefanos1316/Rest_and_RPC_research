@@ -25,7 +25,7 @@ class SendQueuedNotifications implements ShouldQueue
     public $notification;
 
     /**
-     * All of the channels to send the notification too.
+     * All of the channels to send the notification to.
      *
      * @var array
      */
@@ -65,5 +65,29 @@ class SendQueuedNotifications implements ShouldQueue
     public function displayName()
     {
         return get_class($this->notification);
+    }
+
+    /**
+     * Call the failed method on the notification instance.
+     *
+     * @param  \Exception  $e
+     * @return void
+     */
+    public function failed($e)
+    {
+        if (method_exists($this->notification, 'failed')) {
+            $this->notification->failed($e);
+        }
+    }
+
+    /**
+     * Prepare the instance for cloning.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->notifiables = clone $this->notifiables;
+        $this->notification = clone $this->notification;
     }
 }

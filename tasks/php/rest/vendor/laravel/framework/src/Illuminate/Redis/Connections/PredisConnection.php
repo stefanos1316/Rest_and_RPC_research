@@ -3,8 +3,12 @@
 namespace Illuminate\Redis\Connections;
 
 use Closure;
+use Illuminate\Contracts\Redis\Connection as ConnectionContract;
 
-class PredisConnection extends Connection
+/**
+ * @mixin \Predis\Client
+ */
+class PredisConnection extends Connection implements ConnectionContract
 {
     /**
      * Create a new Predis connection.

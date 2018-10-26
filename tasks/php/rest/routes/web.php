@@ -12,17 +12,9 @@
 */
 
 Route::get('/', function () {
-	return 'Hello, World and Stefan!';
+    return view('welcome');
 });
 
-Route::get('/hello/{message?}', function ($message = null) {
-    $msg = 'Example: /hello/good-bye';
-    if ($message != null) {
-        $msg = 'Hello, ' . $message;
-    }
-    // resources/views/hello.blade.php
-    return view('hello', ['message' => $msg]);
+Route::get('/hello', function () {
+    return 'Hello World';
 });
-
-Route::get('/world/{message?}', 'WorldController@show');
-
