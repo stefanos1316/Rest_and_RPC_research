@@ -132,7 +132,7 @@ class JsonRpc
 }
 
 for ( $i = 0; $i < 20000; $i++) {
-	$client = new JsonRpc( 'http://195.251.251.27/json_rpc_server.php' );
+	$client = new JsonRpc( 'http://195.251.251.20/json_rpc_server.php' );
  	$result = $client->helloWorld(' S ');
 }
 ?>
