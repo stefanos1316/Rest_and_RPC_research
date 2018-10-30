@@ -4,3 +4,6 @@ apache-tomcat-9.0.8/logs/*
 reports/*
 apache-tomcat-9.0.8/logs/catalina.out
 tasks/go/src/*
+tasks/javascript/grpc/node_modules/*
+tasks/javascript/rest/node_modules/*
+tasks/javascript/rpc/node_modules/*

@@ -22,7 +22,7 @@ var services = require('./helloworld_grpc_pb');
 var grpc = require('grpc');
 
 function main() {
-  var client = new services.GreeterClient('100.69.12.250:50051',
+  var client = new services.GreeterClient('195.251.251.20:50051',
                                           grpc.credentials.createInsecure());
   var request = new messages.HelloRequest();
   var user;
