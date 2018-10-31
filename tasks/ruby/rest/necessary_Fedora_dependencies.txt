@@ -1,0 +1,2 @@
+install redhat-rpm-config
+install sqlite-devel
