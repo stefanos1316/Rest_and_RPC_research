@@ -1,0 +1,14 @@
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/GreeterClient.deps.json
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/GreeterClient.runtimeconfig.json
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/GreeterClient.runtimeconfig.dev.json
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/GreeterClient.dll
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/GreeterClient.pdb
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/Greeter.dll
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/bin/Debug/netcoreapp2.1/Greeter.pdb
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.csprojAssemblyReference.cache
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.csproj.CoreCompileInputs.cache
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.AssemblyInfoInputs.cache
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.AssemblyInfo.cs
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.csproj.CopyComplete
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.dll
+/home/sgeorgiou/GitHub/grpc/examples/csharp/Helloworld/GreeterClient/obj/Debug/netcoreapp2.1/GreeterClient.pdb

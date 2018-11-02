@@ -1,2 +1,10 @@
-dotnet publish --configuration Release
-dotnet bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001
+Server
+======
+Compile: dotnet publish --configuration Release
+Execute: dotnet bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001
+
+
+Client
+======
+Compile: mcs Client.cs -r:System.Net.Http -sdk:2.1
+Execute: time mono Client.exe 
