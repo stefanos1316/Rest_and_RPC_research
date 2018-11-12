@@ -8,3 +8,7 @@ Client
 ======
 Compile: mcs Client.cs -r:System.Net.Http -sdk:2.1
 Execute: time mono Client.exe 
+
+RPi
+===
+follow instrucitons to install the necessary components: https://www.hanselman.com/blog/BuildingRunningAndTestingNETCoreAndASPNETCore21InDockerOnARaspberryPiARM32.aspx
