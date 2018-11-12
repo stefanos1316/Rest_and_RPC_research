@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;    
 using System.Net.Sockets;    
 using System.Net;    
-    
+   
 namespace server_test    
 {    
     class Program    
@@ -20,8 +20,10 @@ namespace server_test
                 Console.WriteLine("Server is Running on Port: 8000");    
                 Console.WriteLine("Local endpoint:" + mylist.LocalEndpoint);    
                 Console.WriteLine("Waiting for Connections...");    
+                int end = 0;
+		while (end == 0) {
                 Socket s = mylist.AcceptSocket();    
-                Console.WriteLine("Connection Accepted From:" + s.RemoteEndPoint);    
+	       	Console.WriteLine("Connection Accepted From:" + s.RemoteEndPoint);    
                 byte[] b = new byte[100];    
                 int k = s.Receive(b);    
                 Console.WriteLine("Recieved..");    
@@ -32,8 +34,10 @@ namespace server_test
                 ASCIIEncoding asencd = new ASCIIEncoding();    
                 s.Send(asencd.GetBytes("Automatic Message:" + "String Received byte server !"));    
                 Console.WriteLine("\nAutomatic Message is Sent");    
-                s.Close();    
-                mylist.Stop();    
+		end++;
+		s.Close();    
+		}
+		mylist.Stop();    
                 Console.ReadLine();    
             }    
             catch (Exception ex)    
