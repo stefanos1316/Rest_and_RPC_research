@@ -9,7 +9,7 @@ namespace HttpClientTest
         {
             var client = new HttpClient();
             for (int i = 0; i < 20000; ++i) {
-	    	var response = client.GetAsync("http://195.251.251.27:5001").Result;
+	    	var response = client.GetAsync("http://195.251.251.20:5001").Result;
             	Console.WriteLine(response.StatusCode);
 	    }
         }
