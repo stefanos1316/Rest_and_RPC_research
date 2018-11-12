@@ -8,3 +8,4 @@ tasks/javascript/grpc/node_modules/*
 tasks/javascript/rest/node_modules/*
 tasks/javascript/rpc/node_modules/*
 tasks/javascript/express-rpc/node_modules/*
+tasks/csharp/rest/obj/*
