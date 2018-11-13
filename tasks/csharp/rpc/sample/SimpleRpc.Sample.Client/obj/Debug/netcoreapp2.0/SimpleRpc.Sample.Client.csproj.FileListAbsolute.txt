@@ -1,0 +1,16 @@
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.deps.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.runtimeconfig.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.runtimeconfig.dev.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Shared.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.xml
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Shared.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.csproj.CoreCompileInputs.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.AssemblyInfoInputs.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.AssemblyInfo.cs
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.csproj.CopyComplete
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Client/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Client.pdb
