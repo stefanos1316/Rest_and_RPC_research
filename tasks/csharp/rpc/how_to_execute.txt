@@ -1,0 +1,9 @@
+Server
+======
+dotnet publish --configuration Release
+dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001
+
+Client
+======
+dotnet publish --configuration Release
+dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll

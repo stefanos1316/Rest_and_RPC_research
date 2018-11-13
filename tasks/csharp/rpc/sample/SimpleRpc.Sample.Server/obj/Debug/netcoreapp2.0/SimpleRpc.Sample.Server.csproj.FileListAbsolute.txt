@@ -1,0 +1,17 @@
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.deps.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.runtimeconfig.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.runtimeconfig.dev.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Shared.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.xml
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/bin/Debug/netcoreapp2.0/SimpleRpc.Sample.Shared.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.csprojAssemblyReference.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.csproj.CoreCompileInputs.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.AssemblyInfoInputs.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.AssemblyInfo.cs
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.csproj.CopyComplete
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/Debug/netcoreapp2.0/SimpleRpc.Sample.Server.pdb

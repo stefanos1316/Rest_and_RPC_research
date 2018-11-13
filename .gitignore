@@ -10,3 +10,6 @@ tasks/javascript/rpc/node_modules/*
 tasks/javascript/express-rpc/node_modules/*
 tasks/csharp/rest/obj/*
 tasks/csharp/rest/bin/*
+tasks/csharp/rpc/src/SimpleRpc/bin/*
+tasks/csharp/rpc/sample/SimpleRpc.Sample.Server/obj/*
+tasks/csharp/rpc/sample/SimpleRpc.Sample.Client/obj/*

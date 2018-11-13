@@ -1,0 +1,10 @@
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/bin/Debug/netstandard2.0/SimpleRpc.deps.json
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/bin/Debug/netstandard2.0/SimpleRpc.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/bin/Debug/netstandard2.0/SimpleRpc.pdb
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/bin/Debug/netstandard2.0/SimpleRpc.xml
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/Debug/netstandard2.0/SimpleRpc.csproj.CoreCompileInputs.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/Debug/netstandard2.0/SimpleRpc.AssemblyInfoInputs.cache
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/Debug/netstandard2.0/SimpleRpc.AssemblyInfo.cs
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/Debug/netstandard2.0/SimpleRpc.dll
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/Debug/netstandard2.0/SimpleRpc.xml
+/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/Debug/netstandard2.0/SimpleRpc.pdb
