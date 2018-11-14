@@ -5098,20 +5098,20 @@
     ]
   },
   "packageFolders": {
-    "/home/sgeorgiou/.nuget/packages/": {}
+    "/home/pi/.nuget/packages/": {}
   },
   "project": {
     "version": "0.0.1",
     "restore": {
-      "projectUniqueName": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/src/SimpleRpc/SimpleRpc.csproj",
+      "projectUniqueName": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/SimpleRpc.csproj",
       "projectName": "SimpleRpc",
-      "projectPath": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/src/SimpleRpc/SimpleRpc.csproj",
-      "packagesPath": "/home/sgeorgiou/.nuget/packages/",
-      "outputPath": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/src/SimpleRpc/obj/",
+      "projectPath": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/SimpleRpc.csproj",
+      "packagesPath": "/home/pi/.nuget/packages/",
+      "outputPath": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/obj/",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "configFilePaths": [
-        "/home/sgeorgiou/.nuget/NuGet/NuGet.Config"
+        "/home/pi/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net461",

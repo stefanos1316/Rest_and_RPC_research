@@ -1502,10 +1502,10 @@
           "System.Runtime.CompilerServices.Unsafe": "4.5.0"
         },
         "compile": {
-          "ref/netstandard2.0/System.Memory.dll": {}
+          "ref/netstandard2.0/_._": {}
         },
         "runtime": {
-          "lib/netstandard2.0/System.Memory.dll": {}
+          "lib/netstandard2.0/_._": {}
         }
       },
       "System.Net.Http/4.3.3": {
@@ -2184,6 +2184,10 @@
       "SimpleRpc.Sample.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.AspNetCore": "2.1.2",
+          "System.Memory": "4.5.1"
+        },
         "compile": {
           "bin/placeholder/SimpleRpc.Sample.Shared.dll": {}
         },
@@ -6822,23 +6826,24 @@
       "Microsoft.AspNetCore >= 2.1.2",
       "Microsoft.NETCore.App >= 2.0.0",
       "SimpleRpc >= 0.0.1",
-      "SimpleRpc.Sample.Shared >= 1.0.0"
+      "SimpleRpc.Sample.Shared >= 1.0.0",
+      "System.Memory >= 4.5.1"
     ]
   },
   "packageFolders": {
-    "/home/sgeorgiou/.nuget/packages/": {}
+    "/home/pi/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/SimpleRpc.Sample.Server.csproj",
+      "projectUniqueName": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/SimpleRpc.Sample.Server.csproj",
       "projectName": "SimpleRpc.Sample.Server",
-      "projectPath": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/SimpleRpc.Sample.Server.csproj",
-      "packagesPath": "/home/sgeorgiou/.nuget/packages/",
-      "outputPath": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/",
+      "projectPath": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/SimpleRpc.Sample.Server.csproj",
+      "packagesPath": "/home/pi/.nuget/packages/",
+      "outputPath": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Server/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/sgeorgiou/.nuget/NuGet/NuGet.Config"
+        "/home/pi/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -6849,11 +6854,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Shared/SimpleRpc.Sample.Shared.csproj": {
-              "projectPath": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Shared/SimpleRpc.Sample.Shared.csproj"
+            "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Shared/SimpleRpc.Sample.Shared.csproj": {
+              "projectPath": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/sample/SimpleRpc.Sample.Shared/SimpleRpc.Sample.Shared.csproj"
             },
-            "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/SimpleRpc.csproj": {
-              "projectPath": "/home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/SimpleRpc.csproj"
+            "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/SimpleRpc.csproj": {
+              "projectPath": "/home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/SimpleRpc/src/SimpleRpc/SimpleRpc.csproj"
             }
           }
         }
@@ -6875,6 +6880,11 @@
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true
+          },
+          "System.Memory": {
+            "include": "None",
+            "target": "Package",
+            "version": "[4.5.1, )"
           }
         },
         "imports": [

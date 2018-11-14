@@ -27,7 +27,8 @@
           "Microsoft.AspNetCore": "2.1.2",
           "Microsoft.NETCore.App": "2.0.0",
           "SimpleRpc": "0.0.1",
-          "SimpleRpc.Sample.Shared": "1.0.0"
+          "SimpleRpc.Sample.Shared": "1.0.0",
+          "System.Memory": "4.5.1"
         },
         "runtime": {
           "SimpleRpc.Sample.Server.dll": {}
@@ -1279,15 +1280,6 @@
       "System.Memory/4.5.1": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.5.1"
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.Memory.dll": {
-            "assemblyVersion": "4.0.1.0",
-            "fileVersion": "4.6.26606.5"
-          }
-        },
-        "compile": {
-          "ref/netstandard2.0/System.Memory.dll": {}
         }
       },
       "System.Net.Http/4.3.3": {
@@ -1806,6 +1798,10 @@
         }
       },
       "SimpleRpc.Sample.Shared/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore": "2.1.2",
+          "System.Memory": "4.5.1"
+        },
         "runtime": {
           "SimpleRpc.Sample.Shared.dll": {}
         },
