@@ -15,7 +15,7 @@ namespace SimpleRpc.Sample.Client
 
             sc.AddSimpleRpcClient("sample", new HttpClientTransportOptions
             {
-                Url = "http://195.251.251.27:5001/rpc",
+                Url = "http://195.251.251.20:5001/rpc",
             //    Serializer = "wire"
             });
 

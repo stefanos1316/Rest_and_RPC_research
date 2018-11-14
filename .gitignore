@@ -12,9 +12,5 @@ tasks/csharp/rest/obj/*
 tasks/csharp/rest/bin/*
 tasks/csharp/rpc/src/SimpleRpc/bin/*
 tasks/csharp/rpc/src/SimpleRpc/obj/*
-tasks/csharp/rpc/sample/SimpleRpc.Sample.Server/obj/*
-tasks/csharp/rpc/sample/SimpleRpc.Sample.Client/obj/*
-tasks/csharp/rpc/sample/SimpleRpc.Sample.Client/bin/*
-tasks/csharp/rpc/sample/SimpleRpc.Sample.Server/bin/*
-tasks/csharp/rpc/src/SimpleRpc/bin/*
-tasks/csharp/rpc/src/SimpleRpc/obj/*
+tasks/csharp/rpc/sample/*/obj/*
+tasks/csharp/rpc/sample/*/bin/*
