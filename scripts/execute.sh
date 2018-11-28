@@ -148,7 +148,7 @@ do
 			case "$i" in
 				ruby)
                                         getServerPID=0
-					if [ "$j" = "rpc" -a "$k" = "server.ru" ]; then
+					if [ "$j" = "rpc" -o "$j" = "grpc" -a "$k" = "server.ru" ]; then
                                                 echo "Executing $j from $i"
                                                 # Start RPi to collect energy consumption
                                                 # A second of delay since the wattsup has it as a startup delay
