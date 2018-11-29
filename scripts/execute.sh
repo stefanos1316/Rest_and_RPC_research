@@ -148,7 +148,8 @@ do
 			case "$i" in
 				ruby)
                                         getServerPID=0
-					if [ "$j" = "rpc" -o "$j" = "grpc" -a "$k" = "server.ru" ]; then
+					if [ "$j" = "rpc" -o "$j" = "grpc" ]; then
+						if [ "$k" = "server.ru" ]; then
                                                 echo "Executing $j from $i"
                                                 # Start RPi to collect energy consumption
                                                 # A second of delay since the wattsup has it as a startup delay
@@ -164,28 +165,7 @@ do
 						# Start the server
 						(time ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
 						getServerPID=$!
-					fi
-
-				
-					if [ "$j" = "rest" -a "$k" = "bin"]; then
-                                                echo "Executing $j from $i"
-                                                # Start RPi to collect energy consumption
-                                                # A second of delay since the wattsup has it as a startup delay
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
-
-                                                # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt' &" &
-
-                                                # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too                           
-                                                sleep 2
-                                                
-						# Start the server
-						curretDirectory=$(PWD)
-						(cd ${DIRECTORY_PATH}/$i/$j && time rails s -b ${SERVER_IP_ADDRESS} -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
-						getServerPID=$!
-					fi
-
+						
 						# Start the client instance $j is the type of RPC or Rest
 						ssh ${REMOTE_HOST_CLIENT} "sh -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
 					
@@ -198,15 +178,64 @@ do
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
 						echo "Killing wattsup pro"
-						
+					
 						# Stop server instance
-						pkill -P ${getServerPID}
-						echo "Killing server processes"
+						#pkill -P ${getServerPID}
+						#echo "Killing server processes"
 						
 						# Get create PID from go server and remove them
-						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep server | awk -F "/" '{print $1}')
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby-mri | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
+						fi
+					fi
+
+				
+					if [ "$j" = "rest" -a "$k" = "bin" ]; then
+                                                echo "Executing $j from $i"
+                                                # Start RPi to collect energy consumption
+                                                # A second of delay since the wattsup has it as a startup delay
+                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt
+                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
+
+                                                # Run the wattsup in the background
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt' &" &
+
+                                                # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too                           
+                                                sleep 2
+                                             
+						# Start the server
+						cd ${DIRECTORY_PATH}/$i/$j
+						(time rails s -b ${SERVER_IP_ADDRESS} -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
+						getServerPID=$!
+						cd ../../../scripts/
+	
+						# Start the client instance $j is the type of RPC or Rest
+                                                ssh ${REMOTE_HOST_CLIENT} "sh -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
+
+				        	#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.ru > /dev/null ;
+						do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "Killing wattsup pro"
+					
+						# Stop server instance
+						#pkill -P ${getServerPID}
+						#echo "Killing server processes"
+						
+						# Get create PID from go server and remove them
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby-mri | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
+                                                kill -9 ${REMAINING}
+						sleep 5
+
+					fi
+
 					;;
 				lgo)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then

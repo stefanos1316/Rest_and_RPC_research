@@ -1,6 +1,6 @@
 require "xmlrpc/server"
 
-s = XMLRPC::Server.new(8080, "195.251.251.27")
+s = XMLRPC::Server.new(9090, "195.251.251.27")
 
 s.add_handler("michael.add") do |a,b|
 	a + b
