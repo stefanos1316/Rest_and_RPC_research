@@ -148,8 +148,9 @@ do
 			case "$i" in
 				php)	
 					getServerPID=0
-					if [ "$j" = "grpc" ]; then
-						if [ "$k" = "server.js" ]; then
+					getClientName=""
+					if [ "$j" = "grpc" -o "$j" = "rest" ]; then
+						if [ "$k" = "server.js" -o "$k" = "app" ]; then
 							echo "Executing $j from $i"
                                                		# Start RPi to collect energy consumption
                                                 	# A second of delay since the wattsup has it as a startup delay
@@ -161,33 +162,51 @@ do
                                                		# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too                           
                                                 	sleep 2
                                                 
-							# Start the server
-							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt &
-							getServerPID=$!
-						
-						# Start the client instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_CLIENT} "sh -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
-				        	#Check if remote client is still running
-						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i run_greeter_client.sh > /dev/null ;
-						do
-							sleep 1
-						done
-					
-						# Once the client stopped running kill Server and WattsUp?Pro instances.
-						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "Killing wattsup pro"
-					
-						# Stop server instance
-						#pkill -P ${getServerPID}
-						#echo "Killing server processes"
-						
-						# Get create PID from go server and remove them
-						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep server | awk -F "/" '{print $1}')
-						kill -9 ${REMAINING}
-						sleep 5
+							# Start the server for grpc
+							if [ "$j" = "grpc" ]; then
+								# Run grpc's server 
+								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt &
+								getServerPID=$!
 
+								# Run grpc's Client
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
+								getClientName=$(echo "run_greeter_client.sh")
+							else
+								(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
+								getServerPID=$!
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
+								getClientName=$(echo "client.php")
+							fi
+
+					
+							# Start the client instance $j is the type of RPC or Rest
+				        		#Check if remote client is still running
+							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null ;
+							do
+								sleep 1
+							done
+					
+							# Once the client stopped running kill Server and WattsUp?Pro instances.
+							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+							echo "Killing wattsup pro"
+					
+							# Stop server instance
+							#pkill -P ${getServerPID}
+							#echo "Killing server processes"
+						
+							# Get create PID from go server and remove them
+							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
+							kill -9 ${REMAINING}
+							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
+							kill -9 ${REMAINING}
+
+							sleep 5
 
 						fi
+
+						# 
+
+
 					fi
 					;;
 				rubyl)
