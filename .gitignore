@@ -14,3 +14,6 @@ tasks/csharp/rpc/src/SimpleRpc/bin/*
 tasks/csharp/rpc/src/SimpleRpc/obj/*
 tasks/csharp/rpc/sample/*/obj/*
 tasks/csharp/rpc/sample/*/bin/*
+tasks/ruby/rest/tmp/*
+tasks/ruby/rest/log/*
+tasks/php/grpc/node_modules/*

@@ -26,7 +26,7 @@ require 'grpc'
 require 'helloworld_services_pb'
 
 def main
-  stub = Helloworld::Greeter::Stub.new('195.251.251.27:50051', :this_channel_is_insecure)
+  stub = Helloworld::Greeter::Stub.new('195.251.251.20:50051', :this_channel_is_insecure)
   user = ARGV.size > 0 ?  ARGV[0] : 'world'
   (0..20000).each do |i|
     message = stub.say_hello(Helloworld::HelloRequest.new(name: user)).message

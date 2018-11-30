@@ -56,6 +56,7 @@ REMOTE_HOST_NAME_CLIENT=""
 REMOTE_HOST_ADDRESS_CLIENT=""
 TRACES_TYPE=""
 TRACES_FLAG=false
+SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
 
 OPTIONS=`getopt -o p:n:a:hb:d:t: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient:,straces: -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
@@ -112,10 +113,10 @@ REMOTE_HOST_EM=${REMOTE_HOST_NAME_EM}@${REMOTE_HOST_ADDRESS_EM}
 REMOTE_HOST_CLIENT=${REMOTE_HOST_NAME_CLIENT}@${REMOTE_HOST_ADDRESS_CLIENT}
 
 # If the script is still running it means ssh connection is fine.
-mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_results
+mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_server
 
-ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results
-ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results
+ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client
+ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client
 
 if [ $? -eq 0 ];
 then
@@ -127,7 +128,7 @@ else
 fi
 
 # Create Performance locally since the execution is done here.
-mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results
+mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_server
 
 # Now we will run the experiment and collect out data.
 for i in `ls ${DIRECTORY_PATH}`
@@ -136,16 +137,170 @@ do
 	for j in `ls ${DIRECTORY_PATH}/${i}` 
 	do
 		if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" -o "$j" = "jax_ws_rpc" ]; then
-			ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j
-			ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j
+			ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j
+			ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j
 		fi
-		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_results/$i/$j
+		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_server/$i/$j
 
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
 		do
 			# At this point we already reached the source code of a specific implemetation
-			case "$i" in 
-				go)
+			case "$i" in
+				php)	
+					getServerPID=0
+					getClientName=""
+					if [ "$j" = "grpc" -o "$j" = "rest" ]; then
+						if [ "$k" = "server.js" -o "$k" = "app" ]; then
+							echo "Executing $j from $i"
+                                               		# Start RPi to collect energy consumption
+                                                	# A second of delay since the wattsup has it as a startup delay
+                                                	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/php.txt
+                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
+
+                                                	# Run the wattsup in the background
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/php.txt' &" &
+                                               		# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too                           
+                                                	sleep 2
+                                                
+							# Start the server for grpc
+							if [ "$j" = "grpc" ]; then
+								# Run grpc's server 
+								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt &
+								getServerPID=$!
+
+								# Run grpc's Client
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
+								getClientName=$(echo "run_greeter_client.sh")
+							else
+								(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
+								getServerPID=$!
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
+								getClientName=$(echo "client.php")
+							fi
+
+					
+							# Start the client instance $j is the type of RPC or Rest
+				        		#Check if remote client is still running
+							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null ;
+							do
+								sleep 1
+							done
+					
+							# Once the client stopped running kill Server and WattsUp?Pro instances.
+							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+							echo "Killing wattsup pro"
+					
+							# Stop server instance
+							#pkill -P ${getServerPID}
+							#echo "Killing server processes"
+						
+							# Get create PID from go server and remove them
+							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
+							kill -9 ${REMAINING}
+							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
+							kill -9 ${REMAINING}
+
+							sleep 5
+
+						fi
+
+						# 
+
+
+					fi
+					;;
+				rubyl)
+                                        getServerPID=0
+					if [ "$j" = "rpc" -o "$j" = "grpc" ]; then
+						if [ "$k" = "server.ru" ]; then
+                                                echo "Executing $j from $i"
+                                                # Start RPi to collect energy consumption
+                                                # A second of delay since the wattsup has it as a startup delay
+                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt
+                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
+
+                                                # Run the wattsup in the background
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt' &" &
+
+                                                # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too                           
+                                                sleep 2
+                                                
+						# Start the server
+						(time ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
+						getServerPID=$!
+						
+						# Start the client instance $j is the type of RPC or Rest
+						ssh ${REMOTE_HOST_CLIENT} "sh -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
+					
+				        	#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.ru > /dev/null ;
+						do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "Killing wattsup pro"
+					
+						# Stop server instance
+						#pkill -P ${getServerPID}
+						#echo "Killing server processes"
+						
+						# Get create PID from go server and remove them
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby-mri | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						sleep 5
+						fi
+					fi
+
+				
+					if [ "$j" = "rest" -a "$k" = "bin" ]; then
+                                                echo "Executing $j from $i"
+                                                # Start RPi to collect energy consumption
+                                                # A second of delay since the wattsup has it as a startup delay
+                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt
+                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
+
+                                                # Run the wattsup in the background
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt' &" &
+
+                                                # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too                           
+                                                sleep 2
+                                             
+						# Start the server
+						cd ${DIRECTORY_PATH}/$i/$j
+						(time rails s -b ${SERVER_IP_ADDRESS} -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
+						getServerPID=$!
+						cd ../../../scripts/
+	
+						# Start the client instance $j is the type of RPC or Rest
+                                                ssh ${REMOTE_HOST_CLIENT} "sh -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
+
+				        	#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.ru > /dev/null ;
+						do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "Killing wattsup pro"
+					
+						# Stop server instance
+						#pkill -P ${getServerPID}
+						#echo "Killing server processes"
+						
+						# Get create PID from go server and remove them
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby-mri | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
+                                                kill -9 ${REMAINING}
+						sleep 5
+
+					fi
+
+					;;
+				lgo)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 					if [ "$k" = "server.go" ]; then	
 						echo "Executing $j from $i"
@@ -213,7 +368,7 @@ do
 					fi
 				 ;;
 
-				javascript) 
+				ljavascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
@@ -275,7 +430,7 @@ do
 						fi	
 					fi
 				;;
-				python) 
+				lpython) 
 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
@@ -339,7 +494,7 @@ do
 						fi	
 					fi
 				;;
-				java) 
+				ljava) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
 						echo "Executing $j from $i"
 				
@@ -512,9 +667,9 @@ done
 
 # Now transer all the collected data to the server in the related directories
 # From client
-scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/ ../reports/${EnergyPerformanceLogDirName}/performance_results_server
+scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client ../reports/${EnergyPerformanceLogDirName}/
 # From RPi
-scp -r ${REMOTE_HOST_EM}:/home/pi/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results ../reports/${EnergyPerformanceLogDirName}/energy_results_server
+scp -r ${REMOTE_HOST_EM}:/home/pi/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client ../reports/${EnergyPerformanceLogDirName}/
 
 echo "Transfer done"
 
