@@ -146,11 +146,11 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
-				php)	
+				php)
 					getServerPID=0
 					getClientName=""
-					if [ "$j" = "grpc" -o "$j" = "rest" ]; then
-						if [ "$k" = "server.js" -o "$k" = "app" ]; then
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$J" = "rpc" ]; then
+						if [ "$k" = "server.js" -o "$k" = "app" -o "$k" = "instructions_rpc.txt" ]; then
 							echo "Executing $j from $i"
                                                		# Start RPi to collect energy consumption
                                                 	# A second of delay since the wattsup has it as a startup delay
@@ -171,13 +171,17 @@ do
 								# Run grpc's Client
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 								getClientName=$(echo "run_greeter_client.sh")
-							else
+							elif [ "$j" = "rest" ]; then
 								(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
 								getServerPID=$!
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 								getClientName=$(echo "client.php")
+							else
+								# In case of rpc no need to init server since it is located in /var/www/html
+								# Run rpc's client
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
+								getClientName=$(echo "client.php")				
 							fi
-
 					
 							# Start the client instance $j is the type of RPC or Rest
 				        		#Check if remote client is still running
