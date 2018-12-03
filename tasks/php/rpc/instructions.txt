@@ -1,0 +1,1 @@
+Move the whole direcotry in /var/www/html otherwise you cannot hit the server
