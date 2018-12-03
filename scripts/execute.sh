@@ -56,7 +56,6 @@ REMOTE_HOST_NAME_CLIENT=""
 REMOTE_HOST_ADDRESS_CLIENT=""
 TRACES_TYPE=""
 TRACES_FLAG=false
-SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
 
 OPTIONS=`getopt -o p:n:a:hb:d:t: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient:,straces: -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
@@ -146,10 +145,11 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
+
 				php)
 					getServerPID=0
 					getClientName=""
-					if [ "$j" = "grpc" -o "$j" = "rest" -o "$J" = "rpc" ]; then
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "server.js" -o "$k" = "app" -o "$k" = "instructions_rpc.txt" ]; then
 							echo "Executing $j from $i"
                                                		# Start RPi to collect energy consumption
@@ -172,6 +172,7 @@ do
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 								getClientName=$(echo "run_greeter_client.sh")
 							elif [ "$j" = "rest" ]; then
+								SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
 								(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
 								getServerPID=$!
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
@@ -203,17 +204,11 @@ do
 							kill -9 ${REMAINING}
 							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
 							kill -9 ${REMAINING}
-
 							sleep 5
-
 						fi
-
-						# 
-
-
 					fi
 					;;
-				rubyl)
+				ruby1)
                                         getServerPID=0
 					if [ "$j" = "rpc" -o "$j" = "grpc" ]; then
 						if [ "$k" = "server.ru" ]; then
@@ -260,6 +255,7 @@ do
 				
 					if [ "$j" = "rest" -a "$k" = "bin" ]; then
                                                 echo "Executing $j from $i"
+						SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
                                                 # Start RPi to collect energy consumption
                                                 # A second of delay since the wattsup has it as a startup delay
                                                 ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/ruby.txt
@@ -273,10 +269,11 @@ do
                                              
 						# Start the server
 						cd ${DIRECTORY_PATH}/$i/$j
-						(time rails s -b ${SERVER_IP_ADDRESS} -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
+						(time rails s -b 195.251.251.27 -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
 						getServerPID=$!
 						cd ../../../scripts/
-	
+						sleep 1
+							
 						# Start the client instance $j is the type of RPC or Rest
                                                 ssh ${REMOTE_HOST_CLIENT} "sh -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
 

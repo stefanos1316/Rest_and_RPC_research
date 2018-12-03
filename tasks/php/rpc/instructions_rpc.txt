@@ -1,1 +1,2 @@
-Move the whole direcotry in /var/www/html otherwise you cannot hit the server
+Move the whole direcotry in /var/www/html otherwise you cannot hit the server.
+When running remotely do not forget to open the http trust zone from the firewall.
