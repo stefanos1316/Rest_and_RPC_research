@@ -1,6 +1,6 @@
 require "xmlrpc/client"
 
-server = XMLRPC::Client.new("195.251.251.20", "/RPC2", 8080)
+server = XMLRPC::Client.new("195.251.251.27", "/RPC2", 9090)
 begin
 	(0..20000).each do |i|
       		param = server.call("michael.add", 2, 2)

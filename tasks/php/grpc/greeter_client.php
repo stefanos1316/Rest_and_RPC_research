@@ -28,7 +28,7 @@ require dirname(__FILE__).'/vendor/autoload.php';
 
 function greet($name)
 {
-    $client = new Helloworld\GreeterClient('localhost:50051', [
+    $client = new Helloworld\GreeterClient('195.251.251.27:50051', [
         'credentials' => Grpc\ChannelCredentials::createInsecure(),
     ]);
     $request = new Helloworld\HelloRequest();
