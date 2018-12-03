@@ -42,8 +42,12 @@ namespace GreeterServer
             server.Start();
 
             Console.WriteLine("Greeter server listening on port " + Port);
-            Console.WriteLine("Press any key to stop the server...");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to stop the server...");
+     	   // Console.ReadKey();
+
+		while(true) {
+		;
+		}
 
             server.ShutdownAsync().Wait();
         }

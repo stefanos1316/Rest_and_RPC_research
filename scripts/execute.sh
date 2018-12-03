@@ -145,8 +145,56 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
+				csharp)
+					getServerPID=0
+					getClientName=""
+					if [ "$j" = "grpc" ]; then
+						if [ "$k" = "GreeterServer" ]; then
+							echo "Executing $j from $i"
+                                                        # Start RPi to collect energy consumption
+                                                        # A second of delay since the wattsup has it as a startup delay
+                                                        ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/csharp.txt
+                                                        touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
 
-				php)
+                                                        # Run the wattsup in the background
+                                                        ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/csharp.txt' &" &
+                                                        # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
+                                                        sleep 2
+						
+							(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
+							getServerPID=$!
+
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
+							getClientName=$(echo "GreeterClient.dll")
+						
+							# Warm up time for server and client
+							sleep 2
+
+				        		#Check if remote client is still running
+							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null ;
+							do
+								sleep 1
+							done
+					
+							# Once the client stopped running kill Server and WattsUp?Pro instances.
+							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+							echo "Killing wattsup pro"
+					
+							# Stop server instance
+							#pkill -P ${getServerPID}
+							#echo "Killing server processes"
+						
+							# Get create PID from go server and remove them
+							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
+							kill -9 ${REMAINING}
+							sleep 5
+
+						fi
+					fi
+					#dotnet run -f netcoreapp2.1 -p grpc/GreeterServer/
+					;;
+				sphp)
 					getServerPID=0
 					getClientName=""
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
@@ -272,6 +320,8 @@ do
 						(time rails s -b 195.251.251.27 -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
 						getServerPID=$!
 						cd ../../../scripts/
+
+						# Necessary warm up time
 						sleep 1
 							
 						# Start the client instance $j is the type of RPC or Rest

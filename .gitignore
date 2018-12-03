@@ -14,6 +14,12 @@ tasks/csharp/rpc/src/SimpleRpc/bin/*
 tasks/csharp/rpc/src/SimpleRpc/obj/*
 tasks/csharp/rpc/sample/*/obj/*
 tasks/csharp/rpc/sample/*/bin/*
+tasks/csharp/grpc/Greeter/bin/*
+tasks/csharp/grpc/GreeterServer/bin/*
+tasks/csharp/grpc/GreeterClient/bin/*
+tasks/csharp/grpc/Greeter/obj/*
+tasks/csharp/grpc/GreeterServer/obj/*
+tasks/csharp/grpc/GreeterClient/obj/*
 tasks/ruby/rest/tmp/*
 tasks/ruby/rest/log/*
 tasks/php/grpc/node_modules/*
