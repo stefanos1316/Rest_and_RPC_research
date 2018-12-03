@@ -148,8 +148,8 @@ do
 				csharp)
 					getServerPID=0
 					getClientName=""
-					if [ "$j" = "grpc" -o "$j" = "rest" ]; then
-						if [ "$k" = "GreeterServer" -o "$k" = "bin" ]; then
+					if [ "$j" = "sgrpc" -o "$j" = "srest" -o "$j" = "rpc" ]; then
+						if [ "$k" = "GreeterServer" -o "$k" = "bin" -o "$k" = "sample" ]; then
 							echo "Executing $j from $i"
                                                         # Start RPi to collect energy consumption
                                                         # A second of delay since the wattsup has it as a startup delay
@@ -161,14 +161,15 @@ do
                                                         # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                         sleep 2
 				
-							if [ "$j" = "grpc" ]; then
+							if [ "$j" = "sgrpc" ]; then
 								(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 								getServerPID=$!
 
 								# Run grpc's Client
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
 								getClientName=$(echo "GreeterClient.dll")
-							elif [ "$j" = "rest" ]; then
+								sleep 2
+							elif [ "$j" = "srest" ]; then
 								(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 								getServerPID=$!
 								sleep 2
@@ -176,10 +177,16 @@ do
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mono GitHub/Rest_and_RPC_research/tasks/$i/$j/Client.exe) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
 								getClientName=$(echo "Client.exe")
 							else
-								echo
+								# In case of RPC
+							       	(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
+                                                                getServerPID=$!
+                                                                
+                                                                #Run rest's Client
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
+                                                                getClientName=$(echo "SimpleRpc.dll")	
+								sleep 1
 							fi
 							# Warm up time for server and client
-							sleep 2
 
 				        		#Check if remote client is still running
 							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null ;
