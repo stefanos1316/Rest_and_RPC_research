@@ -1,5 +1,6 @@
 Server
 ======
+Note: before compiling more Client.cs outside of the project because you will get a multiple entry point error
 Compile: dotnet publish --configuration Release
 Execute: dotnet bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001
 
