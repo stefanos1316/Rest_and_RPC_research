@@ -537,12 +537,22 @@ do
 										;;
 								esac
 							else
-								(time python3 ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &		
-								getServerPID=$!									
-								sleep 2
+								if [ "$j" = "grpc" ]; then
+									(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
+									getServerPID=$!									
+									sleep 2
 
-								# Start the client instance $j is the type of RPC or Rest
-								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python3 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
+									# Start the client instance $j is the type of RPC or Rest
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
+							
+								else
+									(time python3 ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
+									getServerPID=$!									
+									sleep 2
+
+									# Start the client instance $j is the type of RPC or Rest
+									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python3 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
+								fi
 							fi
 
 							# Check if remote client is still running
