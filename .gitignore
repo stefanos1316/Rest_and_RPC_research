@@ -25,3 +25,4 @@ tasks/ruby/rest/log/*
 tasks/php/grpc/node_modules/*
 tasks/php/rpc/vendor/*
 tasks/csharp/rest/bin/*
+tasks/java/grpc/target/*
