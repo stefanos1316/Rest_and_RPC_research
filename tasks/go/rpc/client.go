@@ -15,7 +15,7 @@ func main() {
 		A: "Stefanos",
 	}
 	var result rpcexample.Result
-	for i := 0; i < 20000; i++ { 	
+	for i := 0; i < 20000; i++ {
 		err = client.Call("Arith.Multiply", args, &result)
 		if err != nil {
 			log.Fatalf("error in Arith", err)

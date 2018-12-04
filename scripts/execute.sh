@@ -148,7 +148,7 @@ do
 				csharp)
 					getServerPID=0
 					getClientName=""
-					if [ "$j" = "sgrpc" -o "$j" = "srest" -o "$j" = "rpc" ]; then
+					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "GreeterServer" -o "$k" = "bin" -o "$k" = "sample" ]; then
 							echo "Executing $j from $i"
                                                         # Start RPi to collect energy consumption
@@ -161,7 +161,7 @@ do
                                                         # Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                         sleep 2
 				
-							if [ "$j" = "sgrpc" ]; then
+							if [ "$j" = "grpc" ]; then
 								(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 								getServerPID=$!
 
@@ -169,7 +169,7 @@ do
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
 								getClientName=$(echo "GreeterClient.dll")
 								sleep 2
-							elif [ "$j" = "srest" ]; then
+							elif [ "$j" = "rest" ]; then
 								(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 								getServerPID=$!
 								sleep 2
@@ -184,7 +184,7 @@ do
                                                                 #Run rest's Client
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
                                                                 getClientName=$(echo "SimpleRpc.dll")	
-								sleep 1
+								sleep 2
 							fi
 							# Warm up time for server and client
 
@@ -212,7 +212,7 @@ do
 					#dotnet csharp/rest/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001
 					
 					;;
-				sphp)
+				php)
 					getServerPID=0
 					getClientName=""
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
@@ -274,7 +274,7 @@ do
 						fi
 					fi
 					;;
-				ruby1)
+				ruby)
                                         getServerPID=0
 					if [ "$j" = "rpc" -o "$j" = "grpc" ]; then
 						if [ "$k" = "server.ru" ]; then
@@ -369,17 +369,17 @@ do
 					fi
 
 					;;
-				lgo)
+				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 					if [ "$k" = "server.go" ]; then	
 						echo "Executing $j from $i"
 						# Start RPi to collect energy consumption
 						# A second of delay since the wattsup has it as a startup delay
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/go.txt
-						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/go.txt
+						touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt
 
 						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/go.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/go.txt' &" &
 	
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2
@@ -407,11 +407,11 @@ do
 								;;
 							esac
 						else
-							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/go.txt &
+							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt &
 							getServerPID=$!
 
 							# Start the client instance $j is the type of RPC or Rest
-							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/go.txt'" &
+							ssh ${REMOTE_HOST_CLIENT} "sh -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/go.txt'" &
 						fi
 						
 			
@@ -437,15 +437,15 @@ do
 					fi
 				 ;;
 
-				ljavascript) 
+				javascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/javascript.txt
-                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/javascript.txt
+                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt
 
                                                 	# Run the wattsup in the background
-                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/javascript.txt' &" &
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/javascript.txt' &" &
 
                                                 	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                 	sleep 2
@@ -474,11 +474,11 @@ do
 										;;
 								esac
 							else
-								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/javascript.txt &		
+								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt &		
 								getServerPID=$!									
 
 								# Start the client instance $j is the type of RPC or Rest
-								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/javascript.txt'" &
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/javascript.txt'" &
 							fi
 
 							# Check if remote client is still running
@@ -499,16 +499,16 @@ do
 						fi	
 					fi
 				;;
-				lpython) 
+				python) 
 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/python.txt
-                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/python.txt
+                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt
 
                                                 	# Run the wattsup in the background
-                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/python.txt' &" &
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/python.txt' &" &
 
                                                 	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                 	sleep 2
@@ -537,12 +537,12 @@ do
 										;;
 								esac
 							else
-								(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/python.txt &		
+								(time python3 ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &		
 								getServerPID=$!									
 								sleep 2
 
 								# Start the client instance $j is the type of RPC or Rest
-								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/python.txt'" &
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python3 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
 							fi
 
 							# Check if remote client is still running
@@ -563,16 +563,16 @@ do
 						fi	
 					fi
 				;;
-				ljava) 
+				java) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
 						echo "Executing $j from $i"
 				
 						# At this point we are in the main directory where all the java files are locate such as src, target, and pom.xmls.
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/java.txt
-						touch  ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/java.txt
+						touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt
 
 						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_results/$i/$j/java.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts | ts "%H:%M:%S" >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_client/$i/$j/java.txt' &" &
 	
 						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2					
@@ -604,11 +604,11 @@ do
 												;;
 										esac
 									else
-										(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+										(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
 										getServerPID=$!
 
 										# Now start the remote client by entering the path where it is located
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
 									fi
 
 									# Check if remote client is still running
@@ -631,13 +631,13 @@ do
 									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
 									(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
 									sleep 2
-									response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
-									if [ "${response}" == "Jersey say : Testing" ]; then
-										echo "Apache tomcat working and RESTfulServer deployed"
-									else
-										&>2 echo "Error, apache tomcat may not run or RESTfulServer may not be deployed"
-										exit
-									fi
+									#response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
+									#if [ "${response}" == "Jersey say : Testing" ]; then
+									#	echo "Apache tomcat working and RESTfulServer deployed"
+									#else
+								#		&>2 echo "Error, apache tomcat may not run or RESTfulServer may not be deployed"
+								#		exit
+								#	fi
 
 									if [ "${TRACES_FLAG}" = "true" ]; then
 										case ${TRACES_TYPE} in
@@ -655,7 +655,7 @@ do
 										esac
 									else
 										# Starting remote client,
-										ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt && cd ~/'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client/$i/$j/java.txt && cd ~/'" &
 									fi
 
 									 # Check if remote client is still running
@@ -700,11 +700,11 @@ do
 												;;
 										esac
 									else
-										(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_results/$i/$j/java.txt &
+										(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
 										getServerPID=$!
 									
 										# Start client java -cp ./src com.thejavageek.HelloWorldClient 
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_results/$i/$j/java.txt'" &
+										ssh ${REMOTE_HOST_CLIENT} "sh -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
 										sleep 5
 									fi	 
 										# Check if remote client is still running

@@ -22,7 +22,7 @@ import helloworld_pb2_grpc
 
 
 def run():
-    channel = grpc.insecure_channel('195.251.251.20:50051')
+    channel = grpc.insecure_channel('195.251.251.27:50051')
 
     for x in range(20000):	
     	stub = helloworld_pb2_grpc.GreeterStub(channel)
