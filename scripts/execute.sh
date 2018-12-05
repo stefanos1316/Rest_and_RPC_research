@@ -164,7 +164,7 @@ do
 							if [ "$j" = "grpc" ]; then
 								(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 								getServerPID=$!
-
+	
 								# Run grpc's Client
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
 								getClientName=$(echo "GreeterClient.dll")
@@ -180,11 +180,10 @@ do
 								# In case of RPC
 							       	(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
                                                                 getServerPID=$!
-                                                                
+                                                                sleep 2
                                                                 #Run rest's Client
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
                                                                 getClientName=$(echo "SimpleRpc.dll")	
-								sleep 2
 							fi
 							# Warm up time for server and client
 
@@ -537,22 +536,13 @@ do
 										;;
 								esac
 							else
-								if [ "$j" = "grpc" ]; then
-									(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
-									getServerPID=$!									
-									sleep 2
 
-									# Start the client instance $j is the type of RPC or Rest
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
-							
-								else
-									(time python3 ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
-									getServerPID=$!									
-									sleep 2
+								(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
+								getServerPID=$!									
+								sleep 2
 
-									# Start the client instance $j is the type of RPC or Rest
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python3 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
-								fi
+								# Start the client instance $j is the type of RPC or Rest
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
 							fi
 
 							# Check if remote client is still running
@@ -573,7 +563,7 @@ do
 						fi	
 					fi
 				;;
-				java) 
+				java)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
 						echo "Executing $j from $i"
 				
@@ -591,7 +581,7 @@ do
 						# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
 						case "$j" in			
 							grpc)
-								if [ "$k" = "src" ]; then
+								if [ "$k" = "android" ]; then
 									if [ "${TRACES_FLAG}" = "true" ]; then
 										case ${TRACES_TYPE} in 
 											network) 
@@ -639,7 +629,8 @@ do
 							rest)
 								if [ "$k" = "REST_server" ]; then
 									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-									(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+									#(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
+									(time bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
 									sleep 2
 									#response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
 									#if [ "${response}" == "Jersey say : Testing" ]; then
