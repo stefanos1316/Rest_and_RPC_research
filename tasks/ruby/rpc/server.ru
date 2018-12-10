@@ -1,22 +1,19 @@
-require "xmlrpc/server"
+require 'jimson'
+require '~/.gem/ruby/gems/rest-client-1.8.0/lib/rest_client'
 
-s = XMLRPC::Server.new(9090, "195.251.251.27")
+class MyHandler
+  extend Jimson::Handler
 
-s.add_handler("michael.add") do |a,b|
-	a + b
-end
-
-s.add_handler("michael.div") do |a, b|
-  if b == 0
-    raise XMLRPC::FaultException.new(1, "division by zero")
-  else
-    a / b
+  def helloWorld(a)
+    a + a
   end
 end
 
-s.set_default_handler do |name, *args|
-  raise XMLRPC::FaultException.new(-99, "Method #{name} missing" +
-                                   " or wrong number of parameters!")
-end
+server = Jimson::Server.new(MyHandler.new,
+			    :host =>  '195.251.251.27',
+     			    :port =>  8888)
+server.start # serve with webrick on http://0.0.0.0:8999/
+#
 
-s.serve
+#server = Jimson::Server.new("195.251.251.27:9090")
+#server.start

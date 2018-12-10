@@ -313,6 +313,8 @@ do
 						# Get create PID from go server and remove them
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby-mri | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
 						sleep 5
 						fi
 					fi
@@ -499,7 +501,6 @@ do
 					fi
 				;;
 				python) 
-
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
@@ -657,6 +658,7 @@ do
 									else
 										# Starting remote client,
 										ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client/$i/$j/java.txt && cd ~/'" &
+										sleep 1
 									fi
 
 									 # Check if remote client is still running

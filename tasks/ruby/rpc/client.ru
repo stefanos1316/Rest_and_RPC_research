@@ -1,13 +1,6 @@
-require "xmlrpc/client"
+require 'jsonrpc-client'
 
-server = XMLRPC::Client.new("195.251.251.27", "/RPC2", 9090)
-begin
-	(0..20000).each do |i|
-      		param = server.call("michael.add", 2, 2)
-  		#puts "4 + 5 = #{param}"
-	end
-rescue XMLRPC::FaultException => e
-  puts "Error:"
-  puts e.faultCode
-  puts e.faultString
+(0..20000).each do |i|
+	client = JSONRPC::Client.new('http://195.251.251.27:8888')
+	client.helloWorld('Stefanos' + i.to_s)
 end
