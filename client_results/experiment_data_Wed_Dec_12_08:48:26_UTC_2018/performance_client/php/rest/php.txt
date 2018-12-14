@@ -1,0 +1,9 @@
+PHP Fatal error:  Uncaught GuzzleHttp\Exception\ConnectException: cURL error 7: Failed to connect to 195.251.251.27 port 8001: Connection refused (see http://curl.haxx.se/libcurl/c/libcurl-errors.html) in /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php:185
+Stack trace:
+#0 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(149): GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle), Array)
+#1 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php(102): GuzzleHttp\Handler\CurlFactory::finishError(Object(GuzzleHttp\Handler\CurlHandler), Object(GuzzleHttp\Handler\EasyHandle), Object(GuzzleHttp\Handler\CurlFactory))
+#2 /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client/vendor/guzzlehttp/guzzle/src/Handler/CurlHandler.php(43): GuzzleHttp\Handler\CurlFactory::finish(Object(GuzzleHttp\ in /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php on line 185
+
+real	0m0.181s
+user	0m0.037s
+sys	0m0.011s

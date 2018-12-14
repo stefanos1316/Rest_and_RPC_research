@@ -1,0 +1,15 @@
+/usr/share/ruby/net/http.rb:939:in `rescue in block in connect': Failed to open TCP connection to 195.251.251.27:8080 (Connection refused - connect(2) for "195.251.251.27" port 8080) (Errno::ECONNREFUSED)
+	from /usr/share/ruby/net/http.rb:936:in `block in connect'
+	from /usr/share/ruby/timeout.rb:93:in `block in timeout'
+	from /usr/share/ruby/timeout.rb:103:in `timeout'
+	from /usr/share/ruby/net/http.rb:935:in `connect'
+	from /usr/share/ruby/net/http.rb:920:in `do_start'
+	from /usr/share/ruby/net/http.rb:909:in `start'
+	from /usr/share/ruby/net/http.rb:609:in `start'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/rest/client.ru:6:in `block in <main>'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/rest/client.ru:3:in `each'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/rest/client.ru:3:in `<main>'
+
+real	0m0.166s
+user	0m0.068s
+sys	0m0.023s

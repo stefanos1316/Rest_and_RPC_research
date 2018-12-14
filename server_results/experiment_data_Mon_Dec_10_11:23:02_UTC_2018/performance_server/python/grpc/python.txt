@@ -1,0 +1,5 @@
+execute.sh: line 147: 18663 Killed                  python ${DIRECTORY_PATH}/$i/$j/server.py
+
+real	0m35.409s
+user	0m17.101s
+sys	0m4.568s

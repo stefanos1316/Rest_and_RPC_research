@@ -1,0 +1,5 @@
+execute.sh: line 147: 31370 Terminated              go run ${DIRECTORY_PATH}/$i/$j/server.go
+
+real	0m15.622s
+user	0m0.513s
+sys	0m0.097s

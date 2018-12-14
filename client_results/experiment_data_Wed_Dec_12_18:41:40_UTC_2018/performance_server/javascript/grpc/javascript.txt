@@ -1,0 +1,5 @@
+execute.sh: line 147: 23953 Killed                  node ${DIRECTORY_PATH}/$i/$j/server.js
+
+real	0m3.054s
+user	0m1.178s
+sys	0m0.122s

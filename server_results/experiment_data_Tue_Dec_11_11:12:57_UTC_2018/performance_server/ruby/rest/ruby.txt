@@ -1,0 +1,5 @@
+execute.sh: line 147: 24599 Killed                  rails s -b 195.251.251.27 -p 8080
+
+real	4m58.718s
+user	3m44.003s
+sys	0m28.109s

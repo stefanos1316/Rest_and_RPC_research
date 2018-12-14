@@ -1,0 +1,5 @@
+execute.sh: line 147:  2930 Killed                  dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll --urls=http://195.251.251.27:5001
+
+real	1m4.158s
+user	0m41.470s
+sys	0m12.252s

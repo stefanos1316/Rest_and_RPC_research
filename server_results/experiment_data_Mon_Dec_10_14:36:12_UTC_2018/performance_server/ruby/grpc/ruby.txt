@@ -1,0 +1,5 @@
+execute.sh: line 147:  9300 Killed                  ruby ${DIRECTORY_PATH}/$i/$j/server.ru
+
+real	0m35.179s
+user	0m11.485s
+sys	0m2.315s
