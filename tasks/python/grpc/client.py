@@ -24,7 +24,7 @@ import helloworld_pb2_grpc
 def run():
     channel = grpc.insecure_channel('195.251.251.27:50051')
 
-    for x in range(20000):	
+    for x in range(5000):	
     	stub = helloworld_pb2_grpc.GreeterStub(channel)
     	response = stub.SayHello(helloworld_pb2.HelloRequest(name='you'+str(x)))
     	print("Greeter client received: " + response.message)
