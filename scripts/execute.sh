@@ -145,7 +145,7 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
-				1csharp)
+				csharp)
 					getServerPID=0
 					getClientName=""
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
@@ -228,7 +228,7 @@ do
                                                 	sleep 2
                                                 
 							# Start the server for grpc
-							if [ "$j" = "1grpc" ]; then
+							if [ "$j" = "grpc" ]; then
 								# Run grpc's server 
 								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt &
 								getServerPID=$!
@@ -236,7 +236,7 @@ do
 								# Run grpc's Client
 								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 								getClientName=$(echo "run_greeter_client.sh")
-							elif [ "$j" = "1rest" ]; then
+							elif [ "$j" = "rest" ]; then
 								SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
 								(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
 								getServerPID=$!
@@ -273,7 +273,7 @@ do
 						fi
 					fi
 					;;
-				1ruby)
+				ruby)
                                         getServerPID=0
 					if [ "$j" = "rpc" -o "$j" = "grpc" ]; then
 						if [ "$k" = "server.ru" ]; then
@@ -370,7 +370,7 @@ do
 					fi
 
 					;;
-				1go)
+				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 					if [ "$k" = "server.go" ]; then	
 						echo "Executing $j from $i"
@@ -438,7 +438,7 @@ do
 					fi
 				 ;;
 
-				1javascript) 
+				javascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
@@ -500,7 +500,7 @@ do
 						fi	
 					fi
 				;;
-				1python) 
+				python) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
@@ -564,7 +564,7 @@ do
 						fi	
 					fi
 				;;
-				1java)
+				java)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
 						echo "Executing $j from $i"
 				
