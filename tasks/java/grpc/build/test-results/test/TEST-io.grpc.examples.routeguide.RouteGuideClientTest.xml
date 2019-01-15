@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.grpc.examples.routeguide.RouteGuideClientTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2019-01-08T20:01:11" hostname="192.168.1.12" time="0.13">
+  <properties/>
+  <testcase name="recordRoute_serverError" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.02"/>
+  <testcase name="routeChat_echoResponse" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.013"/>
+  <testcase name="routeChat_simpleResponse" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.009"/>
+  <testcase name="getFeature" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.004"/>
+  <testcase name="routeChat_errorResponse" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.006"/>
+  <testcase name="listFeatures" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.057"/>
+  <testcase name="recordRoute" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.008"/>
+  <testcase name="listFeatures_error" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.006"/>
+  <testcase name="getFeature_error" classname="io.grpc.examples.routeguide.RouteGuideClientTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RecordRoute
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RecordRoute Failed: Status{code=INVALID_ARGUMENT, description=null, cause=null}
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RouteChat
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "First message" at 0, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message "First message" at 0, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Second message" at 0, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message "Second message" at 0, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Third message" at 1, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message "Third message" at 1, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Fourth message" at 1, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message "Fourth message" at 1, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "First message" at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Second message" at 0, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Third message" at 1, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Fourth message" at 1, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message "dummy msg1" at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message "dummy msg2" at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** GetFeature: lat=-1 lon=-1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Found feature called "dummyFeature" at -0, -0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "First message" at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RouteChat Failed: Status{code=PERMISSION_DENIED, description=null, cause=null}
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Second message" at 0, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Third message" at 1, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message "Fourth message" at 1, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** ListFeatures: lowLat=1 lowLon=2 hiLat=3 hiLon=4
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Result #1: name: "feature 1"
+
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Result #2: name: "feature 2"
+
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RecordRoute
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished trip with 7 points. Passed 8 features. Travelled 9 meters. It took 10 seconds.
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished RecordRoute
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** ListFeatures: lowLat=1 lowLon=2 hiLat=3 hiLon=4
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Result #1: name: "feature 1"
+
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RPC failed: Status{code=INVALID_ARGUMENT, description=null, cause=null}
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** GetFeature: lat=-1 lon=-1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RPC failed: Status{code=DATA_LOSS, description=null, cause=null}
+]]></system-err>
+</testsuite>

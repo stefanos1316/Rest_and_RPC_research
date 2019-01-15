@@ -6,12 +6,12 @@ io/grpc/examples/routeguide/RouteGuideClientTest$8.class
 io/grpc/examples/header/HeaderClientInterceptorTest.class
 io/grpc/examples/routeguide/RouteGuideClientTest$10$1.class
 io/grpc/examples/routeguide/RouteGuideClientTest$7.class
-io/grpc/examples/routeguide/RouteGuideClientTest$5.class
 io/grpc/examples/routeguide/RouteGuideClientTest$2.class
+io/grpc/examples/routeguide/RouteGuideClientTest$5.class
 io/grpc/examples/routeguide/RouteGuideClientTest$9$1.class
 io/grpc/examples/routeguide/RouteGuideClientTest$6$1.class
-io/grpc/examples/header/HeaderServerInterceptorTest.class
 io/grpc/examples/header/HeaderServerInterceptorTest$1SpyingClientInterceptor$1.class
+io/grpc/examples/header/HeaderServerInterceptorTest.class
 io/grpc/examples/routeguide/RouteGuideClientTest.class
 io/grpc/examples/routeguide/RouteGuideClientTest$7$1.class
 io/grpc/examples/routeguide/RouteGuideClientTest$4.class
@@ -23,6 +23,6 @@ io/grpc/examples/routeguide/RouteGuideClientTest$10.class
 io/grpc/examples/routeguide/RouteGuideServerTest$1.class
 io/grpc/examples/helloworld/HelloWorldClientTest$1.class
 io/grpc/examples/header/HeaderServerInterceptorTest$1.class
-io/grpc/examples/routeguide/RouteGuideClientTest$6.class
 io/grpc/examples/routeguide/RouteGuideClientTest$1.class
+io/grpc/examples/routeguide/RouteGuideClientTest$6.class
 io/grpc/examples/helloworld/HelloWorldServerTest.class

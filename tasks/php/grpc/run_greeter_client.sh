@@ -15,7 +15,7 @@
 
 set -e
 cd $(dirname $0)
-for i in `seq 1 20000`;
+for i in `seq 1 5000`;
 do
 	php -d extension=grpc.so -d max_execution_time=300 greeter_client.php $1
 done

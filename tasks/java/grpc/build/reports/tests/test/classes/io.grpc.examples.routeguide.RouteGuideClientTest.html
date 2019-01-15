@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class io.grpc.examples.routeguide.RouteGuideClientTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class io.grpc.examples.routeguide.RouteGuideClientTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/io.grpc.examples.routeguide.html">io.grpc.examples.routeguide</a> &gt; RouteGuideClientTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">9</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.127s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">getFeature</td>
+<td>0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getFeature_error</td>
+<td>0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">listFeatures</td>
+<td>0.057s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">listFeatures_error</td>
+<td>0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">recordRoute</td>
+<td>0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">recordRoute_serverError</td>
+<td>0.020s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">routeChat_echoResponse</td>
+<td>0.013s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">routeChat_errorResponse</td>
+<td>0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">routeChat_simpleResponse</td>
+<td>0.009s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RecordRoute
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RecordRoute Failed: Status{code=INVALID_ARGUMENT, description=null, cause=null}
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RouteChat
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;First message&quot; at 0, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message &quot;First message&quot; at 0, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Second message&quot; at 0, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message &quot;Second message&quot; at 0, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Third message&quot; at 1, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message &quot;Third message&quot; at 1, 0
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Fourth message&quot; at 1, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message &quot;Fourth message&quot; at 1, 1
+Jan 08, 2019 10:01:11 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;First message&quot; at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Second message&quot; at 0, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Third message&quot; at 1, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Fourth message&quot; at 1, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message &quot;dummy msg1&quot; at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Got message &quot;dummy msg2&quot; at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** GetFeature: lat=-1 lon=-1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Found feature called &quot;dummyFeature&quot; at -0, -0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RouteChat
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;First message&quot; at 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RouteChat Failed: Status{code=PERMISSION_DENIED, description=null, cause=null}
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Second message&quot; at 0, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Third message&quot; at 1, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Sending message &quot;Fourth message&quot; at 1, 1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** ListFeatures: lowLat=1 lowLon=2 hiLat=3 hiLon=4
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Result #1: name: &quot;feature 1&quot;
+
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Result #2: name: &quot;feature 2&quot;
+
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** RecordRoute
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Visiting point 0, 0
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished trip with 7 points. Passed 8 features. Travelled 9 meters. It took 10 seconds.
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Finished RecordRoute
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** ListFeatures: lowLat=1 lowLon=2 hiLat=3 hiLon=4
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: Result #1: name: &quot;feature 1&quot;
+
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RPC failed: Status{code=INVALID_ARGUMENT, description=null, cause=null}
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient info
+INFO: *** GetFeature: lat=-1 lon=-1
+Jan 08, 2019 10:01:12 PM io.grpc.examples.routeguide.RouteGuideClient warning
+WARNING: RPC failed: Status{code=DATA_LOSS, description=null, cause=null}
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 4.3</a> at Jan 8, 2019 10:01:12 PM</p>
+</div>
+</div>
+</body>
+</html>

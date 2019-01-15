@@ -15,7 +15,7 @@ func main() {
 		log.Fatalf("Format of service Arith isn't correct. %s", err)
 	}
 	rpc.HandleHTTP()
-	l, e := net.Listen("tcp", "195.251.251.27:12345")
+	l, e := net.Listen("tcp", "192.168.1.12:12345")
 	if e != nil {
 		log.Fatalf("Couldn't start listening on port 1234. Error %s", e)
 	}

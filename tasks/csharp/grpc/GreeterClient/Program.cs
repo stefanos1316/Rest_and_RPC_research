@@ -26,7 +26,7 @@ namespace GreeterClient
 
             var client = new Greeter.GreeterClient(channel);
             String user = "you";
-            for (int i = 0; i < 20000; ++i) {
+            for (int i = 0; i < 5000; ++i) {
                 var reply = client.SayHello(new HelloRequest { Name = user });
                //Console.WriteLine("Greeting: " + reply.Message);
             }
