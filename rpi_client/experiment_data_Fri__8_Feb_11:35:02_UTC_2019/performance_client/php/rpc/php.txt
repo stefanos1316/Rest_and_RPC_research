@@ -1,0 +1,12 @@
+PHP Fatal error:  Uncaught JsonRPC\Exception\InvalidJsonFormatException: Malformed payload in /home/pi/GitHub/Rest_and_RPC_research/tasks/php/rpc/vendor/fguillot/json-rpc/src/JsonRPC/Validator/JsonFormatValidator.php:25
+Stack trace:
+#0 /home/pi/GitHub/Rest_and_RPC_research/tasks/php/rpc/vendor/fguillot/json-rpc/src/JsonRPC/Response/ResponseParser.php(85): JsonRPC\Validator\JsonFormatValidator::validate(NULL)
+#1 /home/pi/GitHub/Rest_and_RPC_research/tasks/php/rpc/vendor/fguillot/json-rpc/src/JsonRPC/Client.php(195): JsonRPC\Response\ResponseParser->parse()
+#2 /home/pi/GitHub/Rest_and_RPC_research/tasks/php/rpc/vendor/fguillot/json-rpc/src/JsonRPC/Client.php(177): JsonRPC\Client->sendPayload('{"jsonrpc":"2.0...', Array)
+#3 /home/pi/GitHub/Rest_and_RPC_research/tasks/php/rpc/client.php(9): JsonRPC\Client->execute('helloWord', Array)
+#4 {main}
+  thrown in /home/pi/GitHub/Rest_and_RPC_research/tasks/php/rpc/vendor/fguillot/json-rpc/src/JsonRPC/Validator/JsonFormatValidator.php on line 25
+
+real	0m0.127s
+user	0m0.101s
+sys	0m0.020s

@@ -1,0 +1,7 @@
+/home/pi/.rvm/gems/ruby-2.5.3/gems/jimson-0.11.0/lib/jimson/server.rb:136: warning: constant ::Fixnum is deprecated
+/home/pi/.rvm/gems/ruby-2.5.3/gems/jimson-0.11.0/lib/jimson/server.rb:136: warning: constant ::Bignum is deprecated
+execute_pi.sh: line 147:  5221 Killed                  /home/pi/.rvm/bin/ruby-rvm-env ${DIRECTORY_PATH}/$i/$j/server.ru
+
+real	36m12.197s
+user	0m14.275s
+sys	0m2.454s
