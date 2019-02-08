@@ -575,46 +575,27 @@ do
 							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/python.txt
                                                 	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt
 
+							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
+							getServerPID=$!									
+
+							while true; do	
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then
+									break
+								fi
+							done
+
                                                 	# Run the wattsup in the background
                                                 	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/python.txt' &" &
-
-                                                	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
                                                 	sleep 2
-							getServerPID=0
 
-                                                	# Start the server
-							if [ "${TRACES_FLAG}" = "true" ]; then
-								case ${TRACES_TYPE} in 
-									network) 
-										mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-										(strace -f -e trace=network -T python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/python.txt &
-										getServerPID=$!
-										# Start the client instance $j is the type of RPC or Rest
-									
-										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/python.txt'" &
-										;;
-									syscalls)
-										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-										(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/python.txt &
-										getServerPID=$!
-									
-										# Start the client instance $j is the type of RPC or Rest
-										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/python.txt'" &
-										;;
-								esac
-							else
 
-								(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
-								getServerPID=$!									
-								sleep 3
-								if [ "$j" == "rpc" ]; then
+							if [ "$j" == "rpc" ]; then
 								# Start the client instance $j is the type of RPC or Rest
-									ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python3.6 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
-								else
-									ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
-								fi
+								ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python3.6 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
+							else
+								ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
 							fi
 
 							# Check if remote client is still running
@@ -625,12 +606,11 @@ do
 					
 							# Once the client stopped running kill Server and WattsUp?Pro instances.
 							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-							echo "Killing wattsup pro"
+							echo "[Energy monitoring] Stopped"
 						
 							# Stop server instance
 							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep python | awk -F "/" '{print $1}')
                                                         kill -9 ${REMAINING}
-							echo "Done with $k"
 							sleep 5
 						fi	
 					fi
