@@ -148,12 +148,11 @@ do
 				csharp)
 					getServerPID=0
 					getClientName=""
-					echo "Executing $j from $i"
 
-                                        ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
-                                        touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
-
-					if [ "$j" == "grpc" -a "$k" == "GreeterServer" ]; then
+					if [ "$j" == "1grpc" -a "$k" == "GreeterServer" ]; then
+						echo "Executing $j from $i"
+                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
+                                        	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
 						(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 						getServerPID=$!
 						
@@ -165,14 +164,31 @@ do
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
 						getClientName=$(echo "GreeterClient.dll")
 						sleep 2
+				        
+						#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "[Energy Monitoring] Stopped"
+
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						sleep 5
+
 					elif [ "$j" == "rest" -a "$k" == "Client.cs" ]; then
+						echo "Executing $j from $i"
+                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
+                                        	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
 						(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 						getServerPID=$!
 								
 						while true; do
 							STATUS=""
-							STATUS=(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
-							if [ "$STATUS" =="" ]; then
+							STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
+							if [ "$STATUS" == "" ]; then
 								break
 							fi
 						done
@@ -183,14 +199,31 @@ do
 						#Run rest's Client
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time mono GitHub/Rest_and_RPC_research/tasks/$i/$j/Client.exe) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
 						getClientName=$(echo "Client.exe")
+						
+						#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "[Energy Monitoring] Stopped"
+
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						sleep 5
+
 					elif [ "$j" == "rpc" -a "$k" == "sample" ]; then
-						# In case of RPC
+						echo "Executing $j from $i"
+                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
+                                        	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
+
 						(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
                                                	getServerPID=$!
                                                               
 						while true; do
 							STATUS=""
-							STATUS=(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
+							STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
 							if [ "$STATUS" =="" ]; then
 								break
 							fi
@@ -202,35 +235,35 @@ do
                                                 #Run rest's Client
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
                                                 getClientName=$(echo "SimpleRpc.dll")	
-					fi
-
-				        #Check if remote client is still running
-					while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
+						
+						#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
 							sleep 1
-					done
+						done
 					
-					# Once the client stopped running kill Server and WattsUp?Pro instances.
-					ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-					echo "[Energy Monitoring] Stopped"
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "[Energy Monitoring] Stopped"
 
-					REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
-					kill -9 ${REMAINING}
-					sleep 5
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						sleep 5
+					fi
 					;;
-				php)
+				1php)
 					getServerPID=0
 					getClientName=""
-					echo "Executing $j from $i"
-                                              
+                                             
 					# Start the server for grpc
 					if [ "$j" = "grpc" -a "$k" == "server.js" ]; then
+						echo "Executing $j from $i"
 						# Run grpc's server 
 						(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt &
 						getServerPID=$!
 								
 						while true; do
 							STATUS=""
-							STATUS=$(curl http://195.251.251.27:50051)
+							STATUS=$(curl http://195.251.251.27:50051 2>&1 | grep Failed)
 							if [ "$STATUS" == "" ]; then
 								break
 							fi
@@ -246,8 +279,22 @@ do
 						# Run grpc's Client
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 						getClientName=$(echo "run_greeter_client.sh")
+				        	
+						#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "[Energy monitoring] Stopped"
+						
+						# Get create PID from go server and remove them
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
 
 					elif [ "$j" = "rest" -a "$k" == "app" ]; then
+						echo "Executing $j from $i"
 						SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
 						(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
 						getServerPID=$!
@@ -269,7 +316,20 @@ do
 
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 						getClientName=$(echo "client.php")
-					elif [ "$j" == "rpc" -a "$k" == "instructions_rpc.tx" ]; then
+				        	
+						#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "[Energy monitoring] Stopped"
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+
+					elif [ "$j" == "rpc" -a "$k" == "instructions_rpc.txt" ]; then
+						echo "Executing $j from $i"
 						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
 
@@ -279,23 +339,22 @@ do
 
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php7.0 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 						getClientName=$(echo "client.php")				
-					fi
-		
-				        #Check if remote client is still running
-					while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
-						sleep 1
-					done
 					
-					# Once the client stopped running kill Server and WattsUp?Pro instances.
-					ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-					echo "[Energy monitoring] Stopped"
+	
+				        	#Check if remote client is still running
+						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
+							sleep 1
+						done
+					
+						# Once the client stopped running kill Server and WattsUp?Pro instances.
+						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+						echo "[Energy monitoring] Stopped"
 						
-					# Get create PID from go server and remove them
-					REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
-					kill -9 ${REMAINING}
-					REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
-					kill -9 ${REMAINING}
-					sleep 5
+						# Get create PID from go server and remove them
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
+						kill -9 ${REMAINING}
+						sleep 5
+					fi
 				;;
 				1ruby)
                                         getServerPID=0
