@@ -178,7 +178,7 @@ do
 						kill -9 ${REMAINING}
 						sleep 5
 
-					elif [ "$j" == "rest" -a "$k" == "Client.cs" ]; then
+					elif [ "$j" == "rest" -a "$k" == "wwwroot" ]; then
 						echo "Executing $j from $i"
                                         	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
                                         	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
@@ -224,7 +224,7 @@ do
 						while true; do
 							STATUS=""
 							STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
-							if [ "$STATUS" =="" ]; then
+							if [ "$STATUS" == "" ]; then
 								break
 							fi
 						done
