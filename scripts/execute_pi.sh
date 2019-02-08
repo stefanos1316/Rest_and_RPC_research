@@ -482,7 +482,7 @@ do
 					fi
 
 					;;
-				go)
+				1go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "server.go" ]; then	
 							echo "Executing $j from $i"
@@ -533,44 +533,24 @@ do
 							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/javascript.txt
                                                 	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt
 
-                                                	# Run the wattsup in the background
+							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt &		
+							getServerPID=$!									
+						
+							while true; do	
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then
+									break
+								fi
+							done
+                                                	
+							# Run the wattsup in the background
                                                 	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/javascript.txt' &" &
+							sleep 2
 
-                                                	# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too
-                                                	sleep 2
-							getServerPID=0
-
-                                                	# Start the server
-							if [ "${TRACES_FLAG}" = "true" ]; then
-								case ${TRACES_TYPE} in 
-									network) 
-										mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-										(strace -f -e trace=network -T node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/javascript.txt &
-										getServerPID=$!
-										# Start the client instance $j is the type of RPC or Rest
-									
-										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/javascript.txt'" &
-										;;
-									syscalls)
-										mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-										(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/javascript.txt &
-										getServerPID=$!
-									
-										# Start the client instance $j is the type of RPC or Rest
-										ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-										ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/javascript.txt'" &
-										;;
-								esac
-							else
-								(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt &		
-								getServerPID=$!									
-								sleep 2
-								# Start the client instance $j is the type of RPC or Rest
-								ssh ${REMOTE_HOST_CLIENT} "bash -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/javascript.txt'" &
-								sleep 2
-							fi
-
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/javascript.txt'" &
+							
 							# Check if remote client is still running
 							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.js > /dev/null ;
 							do
@@ -579,17 +559,16 @@ do
 					
 							# Once the client stopped running kill Server and WattsUp?Pro instances.
 							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-							echo "Killing wattsup pro"
+							echo "[Energy monitoring] Stopped"
 						
 							# Stop server instance
 							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
                                                         kill -9 ${REMAINING}
-							echo "Done with $k"
 							sleep 5
 						fi	
 					fi
 				;;
-				1python) 
+				python) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
