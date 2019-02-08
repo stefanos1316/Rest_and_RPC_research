@@ -145,7 +145,7 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
-				csharp)
+				1csharp)
 					getServerPID=0
 					getClientName=""
 
@@ -482,74 +482,47 @@ do
 					fi
 
 					;;
-				1go)
+				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
-					if [ "$k" = "server.go" ]; then	
-						echo "Executing $j from $i"
-						# Start RPi to collect energy consumption
-						# A second of delay since the wattsup has it as a startup delay
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/go.txt
-						touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt
+						if [ "$k" = "server.go" ]; then	
+							echo "Executing $j from $i"
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/go.txt
+							touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt
 
-						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/go.txt' &" &
-	
-						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
-						sleep 2
-						getServerPID=0
-						# Start the server
-						if [ "${TRACES_FLAG}" = "true" ]; then 
-							case ${TRACES_TYPE} in 
-								network) 
-									mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-									(strace -fte trace=network go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/go.txt &
-									getServerPID=$!
-									# Start the client instance $j is the type of RPC or Rest
-									
-									ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/go.txt'" &
-								;;
-								syscalls)
-									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-									(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/go.txt &
-									getServerPID=$!
-									
-									# Start the client instance $j is the type of RPC or Rest
-									ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-									ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/go.txt'" &
-								;;
-							esac
-						else
+							getServerPID=0
 							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt &
 							getServerPID=$!
-
+							
+							while true; do	
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then
+									break
+								fi
+							done
+						
+							# Run the wattsup in the background
+							ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/go.txt' &" &
 							sleep 2
 
 							# Start the client instance $j is the type of RPC or Rest
 							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time /usr/local/go/bin/go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/go.txt'" &
 							sleep 1
-						fi
-						
-			
-						# Check if remote client is still running
-						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.go > /dev/null ;
-						do
-							sleep 1
-						done
+
+							# Check if remote client is still running
+							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.go > /dev/null ;
+							do
+								sleep 1
+							done
 					
-						# Once the client stopped running kill Server and WattsUp?Pro instances.
-						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "Killing wattsup pro"
+							# Once the client stopped running kill Server and WattsUp?Pro instances.
+							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
+							echo "[Energy monitoring] Stopped"
 						
-						# Stop server instance
-						pkill -P ${getServerPID}
-						echo "Killing server processes"
-						
-						# Get create PID from go server and remove them
-						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep server | awk -F "/" '{print $1}')
-						kill -9 ${REMAINING}
-						sleep 5
-					fi
+							# Get create PID from go server and remove them
+							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep server | awk -F "/" '{print $1}')
+							kill -9 ${REMAINING}
+						fi
 					fi
 				 ;;
 
