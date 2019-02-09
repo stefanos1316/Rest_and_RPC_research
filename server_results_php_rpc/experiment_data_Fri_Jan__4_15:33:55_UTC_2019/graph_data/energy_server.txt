@@ -1,3 +1,0 @@
-Language:grpc,Protocol:php,Energy:0
-Language:rest,Protocol:php,Energy:27.1
-Language:rpc,Protocol:php,Energy:2544.0

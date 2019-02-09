@@ -1,8 +1,0 @@
-PHP Fatal error:  Uncaught Error: Class 'yii\httpclient\Client' not found in /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client.php:4
-Stack trace:
-#0 {main}
-  thrown in /home/sgeorgiou/GitHub/Rest_and_RPC_research/tasks/php/rest/client.php on line 4
-
-real	0m0.019s
-user	0m0.012s
-sys	0m0.007s
