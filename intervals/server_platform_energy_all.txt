@@ -1,4 +1,4 @@
-gRPC	RPC	Rest
+server_RPC	server_RPC	server_Rest
 675.3	1013.1	1888.7
 412.1	381.3	405.1
 846.1	1391.2	1659.1

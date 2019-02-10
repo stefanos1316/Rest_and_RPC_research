@@ -1,4 +1,4 @@
-gRPC	RPC	Rest	gRPC	RPC	Rest	gRPC    RPC     Rest	gRPC    RPC	Rest
+pltform_client_gRPC	pltform_client_RPC	pltform_client_Rest	pltform_server_gRPC	pltform_server_RPC	pltform_server_Rest	rpi_client_gRPC    rpi_client_RPC     rpi_clientRest	rpi_server_gRPC    rpi_server_RPC	rpi_server_Rest
 502.9	1054.1	2281.8	675.3	1013.1	1888.7	0	333.6	114.1	0	732.1	243.3
 434.6	389.5	418.2	412.1	381.3	405.1	22.5	16.2	16.4	30.8	15.8	18.2
 821.3	1471.9	1654.4	846.1	1391.2	1659.1	172.0	453.4	62.0	187.7	459.5	84.3

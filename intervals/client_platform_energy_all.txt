@@ -1,4 +1,4 @@
-gRPC	RPC	Rest
+client_gRPC	client_RPC	client_Rest
 502.9	1054.1	2281.8
 434.6	389.5	418.2
 821.3	1471.9	1654.4
