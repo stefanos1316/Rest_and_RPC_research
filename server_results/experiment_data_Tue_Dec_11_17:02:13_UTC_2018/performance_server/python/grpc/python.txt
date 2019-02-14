@@ -1,5 +1,0 @@
-execute.sh: line 147: 26516 Killed                  python ${DIRECTORY_PATH}/$i/$j/server.py
-
-real	0m33.000s
-user	0m14.715s
-sys	0m4.080s

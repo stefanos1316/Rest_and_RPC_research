@@ -1,2 +1,0 @@
-Dec 12, 2018 11:11:13 AM io.grpc.examples.helloworld.HelloWorldServer start
-INFO: Server started, listening on 50051

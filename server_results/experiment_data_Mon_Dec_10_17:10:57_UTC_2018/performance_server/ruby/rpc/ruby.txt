@@ -1,7 +1,0 @@
-/home/sgeorgiou/.gem/ruby/gems/jimson-0.11.0/lib/jimson/server.rb:136: warning: constant ::Fixnum is deprecated
-/home/sgeorgiou/.gem/ruby/gems/jimson-0.11.0/lib/jimson/server.rb:136: warning: constant ::Bignum is deprecated
-execute.sh: line 147:  8070 Killed                  ruby ${DIRECTORY_PATH}/$i/$j/server.ru
-
-real	0m46.166s
-user	0m8.450s
-sys	0m2.439s
