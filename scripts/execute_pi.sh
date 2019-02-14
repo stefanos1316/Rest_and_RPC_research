@@ -145,7 +145,7 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
-				1csharp)
+				csharp)
 					getServerPID=0
 					getClientName=""
 
@@ -229,6 +229,7 @@ do
 							fi
 						done
 
+						echo 'CHsarps RPC server started...'
                                                 ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt' &" &
                                                 sleep 2
 
@@ -250,7 +251,7 @@ do
 						sleep 5
 					fi
 					;;
-				1php)
+				php)
 					getServerPID=0
 					getClientName=""
                                              
@@ -339,7 +340,7 @@ do
 
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php7.0 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 						getClientName=$(echo "client.php")				
-					
+						sleep 2
 	
 				        	#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
@@ -349,14 +350,9 @@ do
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
 						echo "[Energy monitoring] Stopped"
-						
-						# Get create PID from go server and remove them
-						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
-						kill -9 ${REMAINING}
-						sleep 5
 					fi
 				;;
-				1ruby)
+				ruby)
                                         getServerPID=0
 					if [ "$j" = "grpc" -a "$k" == "server.ru" ]; then
                                                 echo "Executing $j from $i"
@@ -430,9 +426,9 @@ do
 						echo "[Energy Monitoring] Stopped"
 					
 						# Get create PID from go server and remove them
-						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby-mri | awk -F "/" '{print $1}')
+						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
-
+						kill -9 ${getServerPID}
 						sleep 5
 					fi
 
@@ -457,7 +453,8 @@ do
 								break
 							fi
 						done
-
+				
+						echo 'Ruby Rest server started'
                                                 # Run the wattsup in the background
                                                 ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt' &" &
                                                 sleep 2
@@ -482,7 +479,7 @@ do
 					fi
 
 					;;
-				1go)
+				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "server.go" ]; then	
 							echo "Executing $j from $i"
@@ -526,7 +523,7 @@ do
 					fi
 				 ;;
 
-				1javascript) 
+				javascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
@@ -568,6 +565,7 @@ do
 						fi	
 					fi
 				;;
+
 				python) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
@@ -615,174 +613,98 @@ do
 						fi	
 					fi
 				;;
-			java1)
-					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "jax_ws_rpc" ]; then
+				java)
+					# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
+					if [ "$j" == "grpc" -a "$k" == "android" ]; then
 						echo "Executing $j from $i"
-				
-						# At this point we are in the main directory where all the java files are locate such as src, target, and pom.xmls.
 						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt
 						touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt
 
+						(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
+						getServerPID=$!
+						while true; do	
+							STATUS=""
+							STATUS=$(curl -v --silent http://195.251.251.27:50051/ 2>&1 | grep Failed)
+							if [ "${STATUS}" == "" ]; then
+								break
+							fi
+						done
+								
 						# Run the wattsup in the background
 						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
-	
-						# Watts Up utility has 2 seconds of delay before start capturing measurements, thus we delay the execution system too				
 						sleep 2					
-						getServerPID=0
+						# Now start the remote client by entering the path where it is located
+						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time /opt/apache-maven-3.2.5/bin/mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
 
-						# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
-						case "$j" in			
-							grpc)
-								if [ "$k" = "android" ]; then
-									if [ "${TRACES_FLAG}" = "true" ]; then
-										case ${TRACES_TYPE} in 
-											network) 
-												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-												(strace -f -e trace=network -T mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
-												getServerPID=$!
-												# Start the client instance $j is the type of RPC or Rest
-									
-												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/java.txt'" &
-												;;
-											syscalls)
-												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer ) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
-												getServerPID=$!
-									
-												# Start the client instance $j is the type of RPC or Rest
-												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
-												;;
-										esac
-									else
-										(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
-										sleep 15
-										getServerPID=$!
+						# Check if remote client is still running
+                                                while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i HelloWorldClient > /dev/null; do
+                                                	sleep 1
+                                                done
 
-										# Now start the remote client by entering the path where it is located
-										ssh ${REMOTE_HOST_CLIENT} "bash -c '(time /opt/apache-maven-3.2.5/bin/mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
-										sleep 1
-									fi
+                                               	REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep java | awk -F "/" '{print $1}')
+                                                kill -9 ${REMAINING}
+						sleep 5
+					fi
+					
+					if [ "$j" == "rest" -a "$k" == "REST_server" ]; then
+						echo "Executing $j from $i"
+						(time bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
 
-									# Check if remote client is still running
-                                                                        while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
-                                                                        do
-                                                                                sleep 1
-                                                                        done
+						while true; do	
+							STATUS=""
+							STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+							if [ "${STATUS}" == "" ]; then
+								break
+							fi
+						done
+						
+					        # Run the wattsup in the background
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
+						sleep 2					
 
-                                                                        # Stop server instance
-                                                                       	kill -9 ${getServerPID}
-                                                                        echo "Done with $k"
-                                                                        REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep java | awk -F "/" '{print $1}')
-                                                                        kill -9 ${REMAINING}
-									sleep 5
-									
-								fi
-							;;
-							1rest)
-								if [ "$k" = "REST_server" ]; then
-									mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-									#(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
-									(time bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
-									sleep 2
-									#response=$(curl http://195.251.251.27:8080/RESTfulServer/rest/hello/Testing)
-									#if [ "${response}" == "Jersey say : Testing" ]; then
-									#	echo "Apache tomcat working and RESTfulServer deployed"
-									#else
-								#		&>2 echo "Error, apache tomcat may not run or RESTfulServer may not be deployed"
-								#		exit
-								#	fi
+						# Starting remote client,
+						ssh ${REMOTE_HOST_CLIENT} "bash -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client/$i/$j/java.txt && cd ~/'" &
 
-									if [ "${TRACES_FLAG}" = "true" ]; then
-										case ${TRACES_TYPE} in
-											network) 
-												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
+						# Check if remote client is still running
+                                                while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
+                                                do
+                                                	sleep 1
+                                                done
 
-												ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (strace -f -e trace=network -c bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt && cd ~/'" &
-												;;
-											syscalls) 
-												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt && cd ~/'" &
-												;;
-										esac
-									else
-										# Starting remote client,
-										ssh ${REMOTE_HOST_CLIENT} "bash -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client/$i/$j/java.txt && cd ~/'" &
-										sleep 1
-									fi
-
-									 # Check if remote client is still running
-                                                                        while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i execwquteJavaClient.sh > /dev/null ;
-                                                                        do
-                                                                                sleep 1
-                                                                        done
-
-									bash ../apache-tomcat-9.0.8/bin/catalina.sh stop
-
-                                                                        # Stop server instance
-                                                                       	#kill -9 ${getServerPID}
-                                                                        echo "Done with $k"
-                                                                        sleep 5
-
-								fi
-							;;
-							1jax_ws_rpc) 
-								if [ "$k" = "src" ]; then
-
-									getServerPID=0
-									# Start server java -cp ./src com.thejavageek.HelloWorldServerPublisher
-									if [ "${TRACES_FLAG}" = "true" ]; then
-										case ${TRACES_TYPE} in 
-											network) 
-												mkdir -p ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j
-												(strace -f -e trace=network -T java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> ../reports/${EnergyPerformanceLogDirName}/network_traces/$i/$j/java.txt &
-												getServerPID=$!
-												# Start the client instance $j is the type of RPC or Rest
-									
-												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -f -e trace=network -c mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/network_traces/$i/$j/java.txt'" &
-												;;
-											syscalls)
-												mkdir -p ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j
-												(strace -fte 'trace=!futex,waitid,wait4,epoll_wait,pselect6' java -cp ~/GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/syscall_traces/$i/$j/java.txt &
-												getServerPID=$!
-									
-												# Start the client instance $j is the type of RPC or Rest
-												ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j
-												ssh ${REMOTE_HOST_CLIENT} "sh -c '(strace -fte 'trace=!futex,wait4,waitid,epoll_wait,pselect6' java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/syscall_traces/$i/$j/java.txt'" &
-												;;
-										esac
-									else
-										(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
-										getServerPID=$!
-										sleep 2
-										# Start client java -cp ./src com.thejavageek.HelloWorldClient 
-										ssh ${REMOTE_HOST_CLIENT} "bash -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
-										sleep 5
-									fi	 
-										# Check if remote client is still running
-                                                                        	while ssh ${REMOTE_HOST_CLIENT} ps -aux | grep -i HelloWorldClient > /dev/null ;
-                                                                        	do
-                                                                                	sleep 1
-                                                                        	done
+						bash ../apache-tomcat-9.0.8/bin/catalina.sh stop
+						sleep 1
+					fi
 								
+					if [ "$j" == "jax_ws_rpc" -a "$k" == "src" ]; then
+						echo "Executing $j from $i"
+						(time java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
+						getServerPID=$!
+						
+						while true; do	
+							STATUS=""
+							STATUS=$(curl -v --silent http://195.251.251.27:9876/ 2>&1 | grep Failed)
+							if [ "${STATUS}" == "" ]; then
+								break
+							fi
+						done
+						
+					        # Run the wattsup in the background
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
+						sleep 2					
 
-                                                                        # Stop server instance
-                                                                        kill -9 ${getServerPID}
-									echo "Killing server processes"
-                                                        		REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep java | awk -F "/" '{print $1}')
-                        			                        kill -9 ${REMAINING}
-									sleep 5
-								fi	
-							;;
-						esac
+						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
 
+						# Check if remote client is still running
+                                                while ssh ${REMOTE_HOST_CLIENT} ps -aux | grep -i HelloWorldClient > /dev/null; do
+                                                	sleep 1
+                                             	done
+							
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "Killing wattsup pro"		
+						echo "[Energy monitoring] Stopped"
+
+                                                REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep java | awk -F "/" '{print $1}')
+                        			kill -9 ${REMAINING}
 					fi
 				;;
 			esac
