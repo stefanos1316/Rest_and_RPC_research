@@ -16,16 +16,16 @@ if [ ${#files[@]} -gt 0 ]; then
 	rm -rf ${files}/*
 fi
 
-for i in `ls $1`; do
-	bash plotResults.sh -p $1/$i
+for scenario in ${ipc}; do
+	pathToData=$(echo $2/${scenario}.txt)
+	echo ${languages}  >> ${pathToData}
+	for i in `ls $1`; do
+		if [ ! -d $1/$i/graph_data ]; then
+			bash plotResults.sh -p $1/$i
+		fi
 
-	for j in `ls $1/$i`; do
-		if [ "$j" == "graph_data" ]; then
-			for scenario in ${ipc}; do
-				pathToData=$(echo $2_${scenario})
-				echo ${languages}  >> ${pathToData}
-
-				
+		for j in `ls $1/$i`; do
+			if [ "$j" == "graph_data" ]; then
 				for energy in ${languages}; do
 					tmp=""
 					tmp=$(grep -w ${energy} $1/${i}/${j}/energy_server.txt | grep -w ${scenario} | awk -F":" '{print $NF}')
@@ -36,9 +36,11 @@ for i in `ls $1`; do
 					results=$(echo "${results}	${tmp}")
 				done
 				echo ${results} >> ${pathToData} 
+			
+				echo $i"  "${results}
 				results=""
-			done
-		fi
+			fi
+		done
 	done
 done
 
