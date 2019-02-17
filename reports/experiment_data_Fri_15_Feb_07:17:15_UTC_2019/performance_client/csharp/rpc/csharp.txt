@@ -1,0 +1,23 @@
+
+Unhandled Exception: System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at System.Net.Http.HttpConnectionPool.CreateConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at System.Net.Http.HttpConnectionPool.WaitForCreatedConnectionAsync(ValueTask`1 creationTask)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at SimpleRpc.Transports.Http.Client.HttpClientTransport.SendRequest[T](RpcRequest rpcRequest) in /home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/src/SimpleRpc/Transports/Http/Client/HttpClientTransport.cs:line 55
+   at SimpleRpc.Transports.Http.Client.HttpClientTransport.HandleSync(RpcRequest rpcRequest) in /home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/src/SimpleRpc/Transports/Http/Client/HttpClientTransport.cs:line 43
+   at SimpleRpc.Transports.Abstractions.Client.BaseClientTransport.Intercept(IInvocation invocation) in /home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/src/SimpleRpc/Transports/Abstractions/Client/BaseClientTransport.cs:line 55
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IFooServiceProxy.Plus(Int32 a, Int32 b)
+   at SimpleRpc.Sample.Client.Program.Main(String[] args) in /home/pi/GitHub/Rest_and_RPC_research/tasks/csharp/rpc/sample/SimpleRpc.Sample.Client/Program.cs:line 31
+
+real	0m53.739s
+user	0m42.128s
+sys	0m3.454s

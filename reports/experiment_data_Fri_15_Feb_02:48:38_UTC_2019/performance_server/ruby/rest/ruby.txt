@@ -1,0 +1,5 @@
+execute_pi.sh: line 147:  4313 Killed                  rails s -b 195.251.251.27 -p 8080
+
+real	0m16.164s
+user	0m11.677s
+sys	0m1.396s

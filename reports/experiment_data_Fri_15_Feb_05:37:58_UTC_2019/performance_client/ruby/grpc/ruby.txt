@@ -1,0 +1,15 @@
+/home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/active_call.rb:31:in `check_status': 14:Connect Failed (GRPC::Unavailable)
+	from /home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/active_call.rb:181:in `attach_status_results_and_complete_call'
+	from /home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/active_call.rb:377:in `request_response'
+	from /home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/client_stub.rb:178:in `block in request_response'
+	from /home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/interceptors.rb:170:in `intercept!'
+	from /home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/client_stub.rb:177:in `request_response'
+	from /home/pi/.rvm/gems/ruby-2.5.3/gems/grpc-1.16.0/src/ruby/lib/grpc/generic/service.rb:170:in `block (3 levels) in rpc_stub_class'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/grpc/client.ru:32:in `block in main'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/grpc/client.ru:31:in `each'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/grpc/client.ru:31:in `main'
+	from GitHub/Rest_and_RPC_research/tasks/ruby/grpc/client.ru:37:in `<main>'
+
+real	0m1.176s
+user	0m1.090s
+sys	0m0.106s

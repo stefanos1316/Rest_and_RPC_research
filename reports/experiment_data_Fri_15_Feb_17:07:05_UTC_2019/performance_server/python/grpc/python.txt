@@ -1,0 +1,5 @@
+execute_pi.sh: line 147: 28950 Killed                  python ${DIRECTORY_PATH}/$i/$j/server.py
+
+real	0m23.738s
+user	0m11.628s
+sys	0m1.379s
