@@ -13,32 +13,40 @@ files=$2
 if [ ${#files[@]} -gt 0 ]; then
    	echo "File already exist..."
 	echo Deleting
-	rm -rf ${files}/*
+	rm -rf ${files}/*.txt
 fi
 
-for i in `ls $1`; do
-	bash plotResults.sh -p $1/$i
 
-	for j in `ls $1/$i`; do
-		if [ "$j" == "graph_data" ]; then
-			for scenario in ${ipc}; do
-				pathToData=$(echo $2_${scenario})
-				echo ${languages}  >> ${pathToData}
+for scenario in ${ipc}; do
+	pathToData=$(echo $2/${scenario}.txt)
+	echo ${languages}  >> ${pathToData}
+	for i in `ls $1`; do
+		#bash plotResults.sh -p $1/$i
 
-				
+		for j in `ls $1/$i`; do
+			if [ "$j" == "graph_data" ]; then
 				for energy in ${languages}; do
 					tmp=""
-					tmp=$(grep -w ${energy} $1/${i}/${j}/energy_server.txt | grep -w ${scenario} | awk -F":" '{print $NF}')
+					if [ "${energy}" == "java" -a "$scenario" == "rpc" ]; then
+						tmp=$(grep -w ${energy} $1/${i}/${j}/energy_server.txt | grep -w jax_ws_rpc | awk -F":" '{print $NF}')
+					else	
+						tmp=$(grep -w ${energy} $1/${i}/${j}/energy_server.txt | grep -w ${scenario} | awk -F":" '{print $NF}')
+					fi
+
+					if [ "${tmp}" == "0" ]; then
+						tmp='NaN'
+					fi
 
 					if [ "${tmp}" == "" ]; then
-						tmp='0'
+						tmp="0"
 					fi
+
 					results=$(echo "${results}	${tmp}")
 				done
 				echo ${results} >> ${pathToData} 
 				results=""
-			done
-		fi
+			fi	
+		done
 	done
 done
 
