@@ -293,6 +293,7 @@ do
 						# Get create PID from go server and remove them
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
+						sleep 5
 
 					elif [ "$j" = "rest" -a "$k" == "app" ]; then
 						echo "Executing $j from $i"
@@ -328,6 +329,7 @@ do
 						echo "[Energy monitoring] Stopped"
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
+						sleep 5
 
 					elif [ "$j" == "rpc" -a "$k" == "instructions_rpc.txt" ]; then
 						echo "Executing $j from $i"
@@ -389,7 +391,7 @@ do
 
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
-					
+						sleep 5
 					fi      
 						
 					if [ "$j" == "rpc" -a "$k" == "server.ru" ]; then	
@@ -519,6 +521,7 @@ do
 							# Get create PID from go server and remove them
 							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep server | awk -F "/" '{print $1}')
 							kill -9 ${REMAINING}
+							sleep 5
 						fi
 					fi
 				 ;;
@@ -543,7 +546,7 @@ do
                                                 	
 							# Run the wattsup in the background
                                                 	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/javascript.txt' &" &
-							sleep 2
+							sleep 3
 
 							# Start the client instance $j is the type of RPC or Rest
 							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/javascript.txt'" &
@@ -643,7 +646,7 @@ do
 
                                                	REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep java | awk -F "/" '{print $1}')
                                                 kill -9 ${REMAINING}
-						sleep 5
+						sleep 10
 					fi
 					
 					if [ "$j" == "rest" -a "$k" == "REST_server" ]; then
@@ -672,7 +675,7 @@ do
                                                 done
 
 						bash ../apache-tomcat-9.0.8/bin/catalina.sh stop
-						sleep 1
+						sleep 5
 					fi
 								
 					if [ "$j" == "jax_ws_rpc" -a "$k" == "src" ]; then
@@ -688,6 +691,8 @@ do
 							fi
 						done
 						
+						sleep 2
+							
 					        # Run the wattsup in the background
 						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
 						sleep 2					
@@ -705,6 +710,7 @@ do
 
                                                 REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep java | awk -F "/" '{print $1}')
                         			kill -9 ${REMAINING}
+						sleep 5
 					fi
 				;;
 			esac
