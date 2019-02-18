@@ -43,7 +43,7 @@ for scenario in ${ipc}; do
 
 					results=$(echo "${results}	${tmp}")
 				done
-				echo ${results} >> ${pathToData} 
+				echo "${i}	${results}" >> ${pathToData} 
 				results=""
 			fi	
 		done
