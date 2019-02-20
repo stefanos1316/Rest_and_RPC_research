@@ -1,0 +1,98 @@
+
+Unhandled Exception:
+System.AggregateException: One or more errors occurred. ---> System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
+  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000d1] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0019b] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+   --- End of inner exception stack trace ---
+  at System.Net.HttpWebRequest.EndGetResponse (System.IAsyncResult asyncResult) [0x00064] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Threading.Tasks.TaskFactory`1[TResult].FromAsyncCoreLogic (System.IAsyncResult iar, System.Func`2[T,TResult] endFunction, System.Action`1[T] endAction, System.Threading.Tasks.Task`1[TResult] promise, System.Boolean requiresSynchronization) [0x00014] in <8f2c484307284b51944a1a13a14c0266>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClientHandler+<SendAsync>c__async0.MoveNext () [0x0041e] in <41c316444c8a4380b9344ba09eeb18de>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClient+<SendAsyncWorker>c__async0.MoveNext () [0x000f3] in <41c316444c8a4380b9344ba09eeb18de>:0 
+   --- End of inner exception stack trace ---
+  at System.Threading.Tasks.Task.ThrowIfExceptional (System.Boolean includeTaskCanceledExceptions) [0x00014] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Threading.Tasks.Task`1[TResult].GetResultCore (System.Boolean waitCompletionNotification) [0x00034] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Threading.Tasks.Task`1[TResult].get_Result () [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at HttpClientTest.Program.Main (System.String[] args) [0x00018] in <9d0194c7cdf7497ca97ee37fc28d93d5>:0 
+---> (Inner Exception #0) System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
+  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000d1] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0019b] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+   --- End of inner exception stack trace ---
+  at System.Net.HttpWebRequest.EndGetResponse (System.IAsyncResult asyncResult) [0x00064] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Threading.Tasks.TaskFactory`1[TResult].FromAsyncCoreLogic (System.IAsyncResult iar, System.Func`2[T,TResult] endFunction, System.Action`1[T] endAction, System.Threading.Tasks.Task`1[TResult] promise, System.Boolean requiresSynchronization) [0x00014] in <8f2c484307284b51944a1a13a14c0266>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClientHandler+<SendAsync>c__async0.MoveNext () [0x0041e] in <41c316444c8a4380b9344ba09eeb18de>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClient+<SendAsyncWorker>c__async0.MoveNext () [0x000f3] in <41c316444c8a4380b9344ba09eeb18de>:0 <---
+
+[ERROR] FATAL UNHANDLED EXCEPTION: System.AggregateException: One or more errors occurred. ---> System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
+  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000d1] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0019b] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+   --- End of inner exception stack trace ---
+  at System.Net.HttpWebRequest.EndGetResponse (System.IAsyncResult asyncResult) [0x00064] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Threading.Tasks.TaskFactory`1[TResult].FromAsyncCoreLogic (System.IAsyncResult iar, System.Func`2[T,TResult] endFunction, System.Action`1[T] endAction, System.Threading.Tasks.Task`1[TResult] promise, System.Boolean requiresSynchronization) [0x00014] in <8f2c484307284b51944a1a13a14c0266>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClientHandler+<SendAsync>c__async0.MoveNext () [0x0041e] in <41c316444c8a4380b9344ba09eeb18de>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClient+<SendAsyncWorker>c__async0.MoveNext () [0x000f3] in <41c316444c8a4380b9344ba09eeb18de>:0 
+   --- End of inner exception stack trace ---
+  at System.Threading.Tasks.Task.ThrowIfExceptional (System.Boolean includeTaskCanceledExceptions) [0x00014] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Threading.Tasks.Task`1[TResult].GetResultCore (System.Boolean waitCompletionNotification) [0x00034] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Threading.Tasks.Task`1[TResult].get_Result () [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at HttpClientTest.Program.Main (System.String[] args) [0x00018] in <9d0194c7cdf7497ca97ee37fc28d93d5>:0 
+---> (Inner Exception #0) System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
+  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000d1] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0019b] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+   --- End of inner exception stack trace ---
+  at System.Net.HttpWebRequest.EndGetResponse (System.IAsyncResult asyncResult) [0x00064] in <bd46d4d4f7964dfa9beea098499ab597>:0 
+  at System.Threading.Tasks.TaskFactory`1[TResult].FromAsyncCoreLogic (System.IAsyncResult iar, System.Func`2[T,TResult] endFunction, System.Action`1[T] endAction, System.Threading.Tasks.Task`1[TResult] promise, System.Boolean requiresSynchronization) [0x00014] in <8f2c484307284b51944a1a13a14c0266>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClientHandler+<SendAsync>c__async0.MoveNext () [0x0041e] in <41c316444c8a4380b9344ba09eeb18de>:0 
+--- End of stack trace from previous location where exception was thrown ---
+  at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw () [0x0000c] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess (System.Threading.Tasks.Task task) [0x0004e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification (System.Threading.Tasks.Task task) [0x0002e] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd (System.Threading.Tasks.Task task) [0x0000b] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1+ConfiguredTaskAwaiter[TResult].GetResult () [0x00000] in <8f2c484307284b51944a1a13a14c0266>:0 
+  at System.Net.Http.HttpClient+<SendAsyncWorker>c__async0.MoveNext () [0x000f3] in <41c316444c8a4380b9344ba09eeb18de>:0 <---
+
+
+real	0m0.765s
+user	0m0.756s
+sys	0m0.020s
