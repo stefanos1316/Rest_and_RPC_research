@@ -1,5 +1,0 @@
-signal: killed
-
-real	0m14.263s
-user	0m4.705s
-sys	0m1.265s

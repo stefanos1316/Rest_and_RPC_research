@@ -1,6 +1,0 @@
-
-The build failed. Please fix the build errors and run again.
-
-real	0m35.848s
-user	0m46.978s
-sys	0m3.037s

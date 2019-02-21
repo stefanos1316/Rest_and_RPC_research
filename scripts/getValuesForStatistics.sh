@@ -21,7 +21,7 @@ for scenario in ${ipc}; do
 	pathToData=$(echo $2/${scenario}.txt)
 	echo ${languages}  >> ${pathToData}
 	for i in `ls $1`; do
-		#bash plotResults.sh -p $1/$i
+		bash plotResults.sh -p $1/$i
 
 		for j in `ls $1/$i`; do
 			if [ "$j" == "graph_data" ]; then
@@ -43,7 +43,8 @@ for scenario in ${ipc}; do
 
 					results=$(echo "${results}	${tmp}")
 				done
-				echo "${i}	${results}" >> ${pathToData} 
+				#echo "${i}	${results}" >> ${pathToData} 
+				echo "${results}" >> ${pathToData}
 				results=""
 			fi	
 		done

@@ -1,7 +1,0 @@
- * Running on http://195.251.251.27:8080/ (Press CTRL+C to quit)
-195.251.251.27 - - [15/Feb/2019 11:45:36] "GET / HTTP/1.1" 200 -
-execute_pi.sh: line 147:  7017 Killed                  python ${DIRECTORY_PATH}/$i/$j/server.py
-
-real	0m3.769s
-user	0m0.542s
-sys	0m0.069s

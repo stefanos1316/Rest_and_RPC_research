@@ -1,5 +1,0 @@
-execute_pi.sh: line 147: 13823 Killed                  java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher
-
-real	4m24.565s
-user	0m19.683s
-sys	0m1.568s
