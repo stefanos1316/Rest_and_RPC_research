@@ -1,0 +1,118 @@
+strace: Process 23381 attached
+strace: Process 23382 attached
+strace: Process 23383 attached
+strace: Process 23384 attached
+strace: Process 23385 attached
+strace: Process 23386 attached
+strace: Process 23387 attached
+strace: Process 23388 attached
+strace: Process 23393 attached
+strace: Process 23394 attached
+strace: Process 23395 attached
+strace: Process 23396 attached
+strace: Process 23398 attached
+strace: Process 23399 attached
+strace: Process 23400 attached
+strace: Process 23401 attached
+strace: Process 23402 attached
+strace: Process 23403 attached
+strace: Process 23397 attached
+strace: Process 23406 attached
+strace: Process 23407 attached
+strace: Process 23404 attached
+strace: Process 23408 attached
+strace: Process 23409 attached
+strace: Process 23410 attached
+strace: Process 23405 attached
+strace: Process 23412 attached
+strace: Process 23411 attached
+strace: Process 23413 attached
+strace: Process 23414 attached
+strace: Process 23416 attached
+strace: Process 23417 attached
+strace: Process 23418 attached
+strace: Process 23415 attached
+strace: Process 23419 attached
+strace: Process 23421 attached
+strace: Process 23420 attached
+strace: Process 23422 attached
+strace: Process 23423 attached
+strace: Process 23425 attached
+strace: Process 23424 attached
+[pid 23423] ????( <detached ...>
+strace: Process 23426 attached
+strace: Process 23427 attached
+strace: Process 23428 attached
+strace: Process 23429 attached
+strace: Process 23430 attached
+strace: Process 23431 attached
+strace: Process 23432 attached
+strace: Process 23433 attached
+strace: Process 23434 attached
+strace: Process 23435 attached
+strace: Process 23436 attached
+strace: Process 23437 attached
+strace: Process 23438 attached
+strace: Process 23439 attached
+strace: Process 23440 attached
+strace: Process 23441 attached
+strace: Process 23442 attached
+strace: Process 23443 attached
+strace: Process 23444 attached
+strace: Process 23445 attached
+strace: Process 23446 attached
+[pid 23381] ????( <detached ...>
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 64.74    1.028327          17     61157           clock_gettime
+ 14.14    0.224612          14     15850      5017 read
+ 12.08    0.191909          34      5632           write
+  2.02    0.032135          15      2181           sched_yield
+  1.28    0.020280           4      4521      4448 epoll_ctl
+  1.25    0.019814           6      3182         1 lstat64
+  1.21    0.019253           9      2240         1 openat
+  0.76    0.012142           5      2291           close
+  0.30    0.004796           2      2293           _llseek
+  0.25    0.003898           4       890       382 stat64
+  0.23    0.003679           2      1826           rt_sigaction
+  0.21    0.003383          15       222           rt_sigprocmask
+  0.21    0.003303          10       324           mmap2
+  0.21    0.003260         181        18        12 unlinkat
+  0.15    0.002373          10       231           getdents64
+  0.12    0.001951          31        62           clone
+  0.12    0.001881         188        10           wait4
+  0.11    0.001767          16       112           fcntl
+  0.10    0.001642          63        26           munmap
+  0.10    0.001557          13       124           sigaltstack
+  0.08    0.001210          23        53           mprotect
+  0.06    0.000925          10        92           gettid
+  0.05    0.000800          30        27           pipe2
+  0.05    0.000796           8        98           pread64
+  0.04    0.000607          55        11           readlinkat
+  0.03    0.000462         116         4           mkdirat
+  0.02    0.000328          14        23           set_robust_list
+  0.01    0.000171          17        10         2 rt_sigreturn
+  0.01    0.000124           6        22           getpid
+  0.01    0.000118         118         1         1 connect
+  0.01    0.000106           5        22           fstat64
+  0.01    0.000103           6        17           brk
+  0.01    0.000101          13         8         6 access
+  0.01    0.000091          30         3           epoll_create1
+  0.01    0.000084          17         5           setsockopt
+  0.00    0.000074          25         3           utimensat
+  0.00    0.000054           5        11           execve
+  0.00    0.000049           4        11           sched_getaffinity
+  0.00    0.000045          45         1           socket
+  0.00    0.000037           1        28           dup2
+  0.00    0.000034           9         4           getcwd
+  0.00    0.000023          12         2           uname
+  0.00    0.000023          23         1           getsockname
+  0.00    0.000022          11         2           cacheflush
+  0.00    0.000016           8         2           ugetrlimit
+  0.00    0.000015           8         2           set_tid_address
+  0.00    0.000015          15         1           getpeername
+  0.00    0.000015           8         2           set_tls
+  0.00    0.000009           9         1           getsockopt
+  0.00    0.000000           0         1           chdir
+------ ----------- ----------- --------- --------- ----------------
+100.00    1.588419                103660      9870 total

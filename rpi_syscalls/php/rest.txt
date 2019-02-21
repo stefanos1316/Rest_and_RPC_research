@@ -1,0 +1,40 @@
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_mysql.so' (tried: /usr/lib/php/20170718/pdo_mysql.so (/usr/lib/php/20170718/pdo_mysql.so: undefined symbol: pdo_parse_params), /usr/lib/php/20170718/pdo_mysql.so.so (/usr/lib/php/20170718/pdo_mysql.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 26.39    0.253902          51      5000      5000 connect
+ 22.17    0.213295          42      5069           close
+ 16.39    0.157704          32      5000           send
+ 16.27    0.156551           8     19791           recv
+  8.95    0.086088          17      5001           socket
+  6.74    0.064829           4     15000           fcntl64
+  2.61    0.025107           5      5000           getsockopt
+  0.10    0.000958          10       100           mmap2
+  0.06    0.000623           8        77        12 openat
+  0.06    0.000576           8        75           read
+  0.05    0.000508          11        47           mprotect
+  0.05    0.000493          11        44        19 access
+  0.05    0.000490           3       172           fstat64
+  0.03    0.000275           5        52         2 _llseek
+  0.03    0.000242           5        48           munmap
+  0.02    0.000223           3        75         7 lstat64
+  0.02    0.000168          84         2           write
+  0.00    0.000045           5        10           brk
+  0.00    0.000024           6         4           stat64
+  0.00    0.000014          14         1           set_tls
+  0.00    0.000011           3         4         4 ioctl
+  0.00    0.000011          11         1           sysinfo
+  0.00    0.000004           2         2           cacheflush
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         2           readlink
+  0.00    0.000000           0         1           uname
+  0.00    0.000000           0        82           rt_sigaction
+  0.00    0.000000           0         5           rt_sigprocmask
+  0.00    0.000000           0         4           getcwd
+  0.00    0.000000           0         2           ugetrlimit
+  0.00    0.000000           0         2           getdents64
+  0.00    0.000000           0         1         1 madvise
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+  0.00    0.000000           0         2           getrandom
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.962141                 60679      5045 total
