@@ -1,0 +1,5 @@
+execute_pi.sh: line 147: 18378 Killed                  /home/pi/.rvm/bin/ruby-rvm-env ${DIRECTORY_PATH}/$i/$j/server.ru
+
+real	0m18.194s
+user	0m6.061s
+sys	0m1.082s
