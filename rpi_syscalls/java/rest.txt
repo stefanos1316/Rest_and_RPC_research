@@ -1,0 +1,72 @@
+strace: Process 25521 attached
+strace: Process 25522 attached
+strace: Process 25523 attached
+strace: Process 25524 attached
+strace: Process 25525 attached
+strace: Process 25526 attached
+strace: Process 25527 attached
+strace: Process 25528 attached
+strace: Process 25529 attached
+strace: Process 25537 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 34.12    0.150887          25      6028           recv
+ 20.17    0.089220          18      4950           poll
+ 19.07    0.084320           3     29331           cacheflush
+ 18.13    0.080166          16      5000           send
+  1.97    0.008722           3      3000           read
+  1.26    0.005555           2      2939           _llseek
+  0.71    0.003125           7       466           mprotect
+  0.70    0.003115          19       168        84 openat
+  0.69    0.003063           6       519       408 stat64
+  0.63    0.002776          13       216           mmap2
+  0.36    0.001613          31        52         2 connect
+  0.29    0.001288          25        51           dup2
+  0.23    0.001029           8       124           close
+  0.18    0.000818           9        94           fstat64
+  0.16    0.000695          21        33        15 access
+  0.13    0.000558          11        53           socket
+  0.12    0.000523          21        25           munmap
+  0.11    0.000505          11        48           rt_sigaction
+  0.09    0.000418          18        23           brk
+  0.09    0.000404           8        49           rt_sigprocmask
+  0.09    0.000386           4       100           setsockopt
+  0.08    0.000370           3       144         2 lstat64
+  0.07    0.000315           5        68           sched_getaffinity
+  0.05    0.000218          20        11           write
+  0.04    0.000179          36         5           madvise
+  0.04    0.000171          13        13           geteuid32
+  0.04    0.000162           3        51         1 getsockname
+  0.03    0.000134         134         1           unlink
+  0.03    0.000129          14         9           ugetrlimit
+  0.03    0.000126          32         4           sysinfo
+  0.03    0.000123          21         6           getdents64
+  0.03    0.000116          13         9           getgid32
+  0.03    0.000115          12        10           getuid32
+  0.03    0.000114          13         9           getegid32
+  0.02    0.000078           8        10           clone
+  0.02    0.000073          37         2           readlink
+  0.02    0.000067          34         2           ftruncate
+  0.01    0.000062           3        21         1 fcntl64
+  0.01    0.000061          12         5           getpid
+  0.01    0.000061          15         4         4 ioctl
+  0.01    0.000053          11         5           uname
+  0.01    0.000053          13         4           fchdir
+  0.01    0.000043           4        10           set_robust_list
+  0.01    0.000041          41         1           socketpair
+  0.01    0.000034          17         2           clock_getres
+  0.01    0.000027          27         1         1 mkdir
+  0.01    0.000027          14         2           set_tls
+  0.00    0.000019          10         2           execve
+  0.00    0.000019          19         1           sigreturn
+  0.00    0.000018           2        10           gettid
+  0.00    0.000015          15         1           set_tid_address
+  0.00    0.000014          14         1           getppid
+  0.00    0.000014          14         1           getpgrp
+  0.00    0.000014          14         1           prlimit64
+  0.00    0.000013           2         7           rt_sigreturn
+  0.00    0.000009           9         1           shutdown
+  0.00    0.000000           0         3           sched_yield
+  0.00    0.000000           0         1           getcwd
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.442273                 53707       518 total

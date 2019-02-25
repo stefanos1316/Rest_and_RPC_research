@@ -1,0 +1,67 @@
+strace: Process 6480 attached
+strace: Process 6483 attached
+strace: Process 6484 attached
+strace: Process 6485 attached
+strace: Process 6486 attached
+strace: Process 6487 attached
+strace: Process 6488 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 38.88    0.433517           5     90484           getcpu
+ 19.94    0.222395           6     40272           clock_gettime
+ 14.84    0.165435          33      5021           sendmsg
+  7.77    0.086619          17      5006           write
+  7.64    0.085177           8     10046      5023 recvmsg
+  4.84    0.054010           5     10010           getpid
+  4.74    0.052845          10      5406         2 read
+  0.40    0.004511           4      1262           lstat64
+  0.35    0.003849           6       639       325 openat
+  0.11    0.001258           2       600       546 stat64
+  0.10    0.001067           3       333           close
+  0.07    0.000731          13        55           mmap2
+  0.06    0.000625           3       210           fstat64
+  0.05    0.000586          14        43           mprotect
+  0.03    0.000294           1       213       211 ioctl
+  0.03    0.000280          18        16           getdents64
+  0.02    0.000277           8        35           brk
+  0.02    0.000242           4        59           _llseek
+  0.02    0.000217           2        99           fcntl64
+  0.01    0.000151          11        14           munmap
+  0.01    0.000136           2        72           getuid32
+  0.01    0.000124          16         8         7 access
+  0.01    0.000120           2        73           getegid32
+  0.01    0.000118           2        72           getgid32
+  0.01    0.000118           2        73           geteuid32
+  0.01    0.000071           4        18           rt_sigaction
+  0.00    0.000047           8         6           madvise
+  0.00    0.000043          43         1           shutdown
+  0.00    0.000031          16         2           ugetrlimit
+  0.00    0.000022          11         2           getrandom
+  0.00    0.000022          22         1           cacheflush
+  0.00    0.000020           2        10         1 epoll_ctl
+  0.00    0.000019           3         6           epoll_create1
+  0.00    0.000017           2         8           set_robust_list
+  0.00    0.000015          15         1           readlink
+  0.00    0.000015           5         3           sched_getaffinity
+  0.00    0.000015          15         1           prlimit64
+  0.00    0.000014           5         3           rt_sigprocmask
+  0.00    0.000014           1        10           getcwd
+  0.00    0.000014          14         1           set_tid_address
+  0.00    0.000013           2         8           chdir
+  0.00    0.000013          13         1           set_tls
+  0.00    0.000010           1         7           eventfd2
+  0.00    0.000008           4         2           getsockopt
+  0.00    0.000002           0         7           clone
+  0.00    0.000002           0         5           prctl
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           sysinfo
+  0.00    0.000000           0         1           uname
+  0.00    0.000000           0         2           mremap
+  0.00    0.000000           0         3           sigaltstack
+  0.00    0.000000           0         2           socket
+  0.00    0.000000           0         1           bind
+  0.00    0.000000           0         1         1 connect
+  0.00    0.000000           0         2           setsockopt
+  0.00    0.000000           0         2           pipe2
+------ ----------- ----------- --------- --------- ----------------
+100.00    1.115129                170240      6116 total

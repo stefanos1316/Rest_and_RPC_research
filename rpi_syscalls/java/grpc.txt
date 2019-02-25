@@ -1,0 +1,90 @@
+strace: Process 23907 attached
+strace: Process 23908 attached
+strace: Process 23909 attached
+strace: Process 23910 attached
+strace: Process 23911 attached
+strace: Process 23912 attached
+strace: Process 23913 attached
+strace: Process 23914 attached
+strace: Process 23915 attached
+strace: Process 23916 attached
+strace: Process 23917 attached
+strace: Process 23918 attached
+strace: Process 23919 attached
+strace: Process 23920 attached
+strace: Process 23921 attached
+strace: Process 23922 attached
+strace: Process 23923 attached
+strace: Process 23924 attached
+strace: Process 23925 attached
+strace: Process 23926 attached
+strace: Process 23927 attached
+strace: Process 23928 attached
+strace: Process 23929 attached
+strace: Process 23930 attached
+strace: Process 23931 attached
+strace: Process 23932 attached
+strace: Process 23933 attached
+strace: Process 23979 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 33.36    1.165935          14     84395           write
+ 32.03    1.119465          10    115713           read
+ 24.84    0.868388          38     22688           writev
+  7.96    0.278204           4     77649           cacheflush
+  0.47    0.016286           2     10483           _llseek
+  0.31    0.010779           4      2979      1615 stat64
+  0.20    0.006881           4      1848           mprotect
+  0.18    0.006285           7       878       119 openat
+  0.15    0.005112           8       621           mmap2
+  0.12    0.004221           2      2624         2 lstat64
+  0.08    0.002808           2      1714           fstat64
+  0.08    0.002779           4       719           close
+  0.05    0.001639           2       866           fcntl64
+  0.04    0.001372         172         8           wait4
+  0.03    0.001191          14        88           munmap
+  0.02    0.000581           5       126           sched_getaffinity
+  0.01    0.000401           8        48        30 access
+  0.01    0.000395           8        48           rt_sigaction
+  0.01    0.000329          21        16           pipe
+  0.01    0.000226           8        28           clone
+  0.00    0.000171          14        12           getdents64
+  0.00    0.000165          41         4           readlink
+  0.00    0.000158          20         8           sigreturn
+  0.00    0.000140           2        66           rt_sigprocmask
+  0.00    0.000138           5        30           brk
+  0.00    0.000115           5        21           set_robust_list
+  0.00    0.000109          22         5         5 connect
+  0.00    0.000092          31         3           sysinfo
+  0.00    0.000092          18         5         2 faccessat
+  0.00    0.000090          11         8           dup2
+  0.00    0.000089          11         8           ugetrlimit
+  0.00    0.000075           7        11           geteuid32
+  0.00    0.000067           6        11           socket
+  0.00    0.000066          33         2           ftruncate
+  0.00    0.000066           4        15           uname
+  0.00    0.000062          12         5           sched_yield
+  0.00    0.000060           3        20           gettid
+  0.00    0.000041          14         3           getppid
+  0.00    0.000037           4        10           execve
+  0.00    0.000032          16         2           clock_getres
+  0.00    0.000031           6         5           getpid
+  0.00    0.000029           7         4           fchdir
+  0.00    0.000029           3        10           set_tls
+  0.00    0.000021           2        11           rt_sigreturn
+  0.00    0.000014          14         1         1 mkdir
+  0.00    0.000014          14         1           set_tid_address
+  0.00    0.000014          14         1           prlimit64
+  0.00    0.000012           0        25           madvise
+  0.00    0.000011          11         1           getcwd
+  0.00    0.000009           0        19           ioctl
+  0.00    0.000007           7         1           getuid32
+  0.00    0.000005           0        11           epoll_ctl
+  0.00    0.000002           1         3         1 getsockname
+  0.00    0.000001           0         3           getsockopt
+  0.00    0.000000           0         1           unlink
+  0.00    0.000000           0         8           epoll_create
+  0.00    0.000000           0         1           socketpair
+  0.00    0.000000           0         3           setsockopt
+------ ----------- ----------- --------- --------- ----------------
+100.00    3.495341                323897      1775 total

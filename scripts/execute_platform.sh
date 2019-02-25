@@ -245,7 +245,7 @@ do
 							else
 								# In case of rpc no need to init server since it is located in /var/www/html
 								# Run rpc's client
-								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
+								ssh ${REMOTE_HOST_CLIENT} "sh -c '(time php7.0 GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
 								getClientName=$(echo "client.php")				
 							fi
 					

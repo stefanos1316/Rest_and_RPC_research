@@ -1,0 +1,51 @@
+strace: Process 5867 attached
+strace: Process 5868 attached
+strace: Process 5869 attached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 40.99    0.584913           6     94038           rt_sigaction
+ 13.93    0.198824          38      5180           close
+  9.74    0.138997          28      5002      5002 connect
+  9.58    0.136644          27      5000           send
+  6.42    0.091566          18      5003           socket
+  4.54    0.064838          13      5000           recv
+  4.23    0.060331           6     10000           fcntl64
+  2.54    0.036177           7      5000           setsockopt
+  2.31    0.033033           7      5000           getpeername
+  2.31    0.032991           7      5000           getsockopt
+  2.11    0.030160           6      5000           getsockname
+  0.21    0.003029          21       147           munmap
+  0.21    0.002988          10       296           mmap2
+  0.20    0.002836          14       197        28 openat
+  0.14    0.001927           6       340           read
+  0.13    0.001840           8       219           mprotect
+  0.10    0.001498           6       249         2 _llseek
+  0.09    0.001287          25        52        16 stat64
+  0.08    0.001092           5       203           fstat64
+  0.04    0.000503           6        80        73 access
+  0.03    0.000449          14        33        33 ioctl
+  0.02    0.000247           7        37         7 lstat64
+  0.02    0.000233          58         4         1 madvise
+  0.01    0.000198          50         4           getdents64
+  0.01    0.000089           7        12           getcpu
+  0.01    0.000081           5        15           brk
+  0.00    0.000034           9         4           set_robust_list
+  0.00    0.000033          11         3           eventfd2
+  0.00    0.000024           8         3           prctl
+  0.00    0.000022           6         4           getcwd
+  0.00    0.000017           6         3           clone
+  0.00    0.000012           6         2         1 epoll_ctl
+  0.00    0.000010          10         1           sysinfo
+  0.00    0.000006           2         3           getrandom
+  0.00    0.000004           2         2           ugetrlimit
+  0.00    0.000003           2         2           epoll_create1
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         4           getpid
+  0.00    0.000000           0         3           setitimer
+  0.00    0.000000           0         3           uname
+  0.00    0.000000           0         5           rt_sigprocmask
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           cacheflush
+  0.00    0.000000           0         1           set_tls
+------ ----------- ----------- --------- --------- ----------------
+100.00    1.426936                151157      5163 total
