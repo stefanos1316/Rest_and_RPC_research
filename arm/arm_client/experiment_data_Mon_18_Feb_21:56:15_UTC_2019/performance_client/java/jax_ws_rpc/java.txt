@@ -1,0 +1,43 @@
+com.sun.xml.internal.ws.streaming.XMLReaderException: Unable to create StAX reader or writer
+	at com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory$Default.doCreate(XMLStreamReaderFactory.java:384)
+	at com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.create(XMLStreamReaderFactory.java:160)
+	at com.sun.xml.internal.ws.wsdl.parser.RuntimeWSDLParser.createReader(RuntimeWSDLParser.java:1023)
+	at com.sun.xml.internal.ws.wsdl.parser.RuntimeWSDLParser.resolveWSDL(RuntimeWSDLParser.java:385)
+	at com.sun.xml.internal.ws.wsdl.parser.RuntimeWSDLParser.parse(RuntimeWSDLParser.java:216)
+	at com.sun.xml.internal.ws.wsdl.parser.RuntimeWSDLParser.parse(RuntimeWSDLParser.java:194)
+	at com.sun.xml.internal.ws.wsdl.parser.RuntimeWSDLParser.parse(RuntimeWSDLParser.java:163)
+	at com.sun.xml.internal.ws.client.WSServiceDelegate.parseWSDL(WSServiceDelegate.java:348)
+	at com.sun.xml.internal.ws.client.WSServiceDelegate.<init>(WSServiceDelegate.java:306)
+	at com.sun.xml.internal.ws.client.WSServiceDelegate.<init>(WSServiceDelegate.java:215)
+	at com.sun.xml.internal.ws.client.WSServiceDelegate.<init>(WSServiceDelegate.java:196)
+	at com.sun.xml.internal.ws.client.WSServiceDelegate.<init>(WSServiceDelegate.java:192)
+	at com.sun.xml.internal.ws.spi.ProviderImpl.createServiceDelegate(ProviderImpl.java:104)
+	at javax.xml.ws.Service.<init>(Service.java:77)
+	at javax.xml.ws.Service.create(Service.java:707)
+	at com.thejavageek.HelloWorldClient.main(HelloWorldClient.java:18)
+Caused by: javax.xml.stream.XMLStreamException: java.io.IOException: Premature EOF
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.setInputSource(XMLStreamReaderImpl.java:212)
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.<init>(XMLStreamReaderImpl.java:184)
+	at com.sun.xml.internal.stream.XMLInputFactoryImpl.getXMLStreamReaderImpl(XMLInputFactoryImpl.java:262)
+	at com.sun.xml.internal.stream.XMLInputFactoryImpl.createXMLStreamReader(XMLInputFactoryImpl.java:149)
+	at com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory$Default.doCreate(XMLStreamReaderFactory.java:382)
+	... 15 more
+Caused by: java.io.IOException: Premature EOF
+	at sun.net.www.http.ChunkedInputStream.readAheadBlocking(ChunkedInputStream.java:565)
+	at sun.net.www.http.ChunkedInputStream.readAhead(ChunkedInputStream.java:609)
+	at sun.net.www.http.ChunkedInputStream.read(ChunkedInputStream.java:696)
+	at java.io.FilterInputStream.read(FilterInputStream.java:133)
+	at sun.net.www.protocol.http.HttpURLConnection$HttpInputStream.read(HttpURLConnection.java:3336)
+	at sun.net.www.protocol.http.HttpURLConnection$HttpInputStream.read(HttpURLConnection.java:3329)
+	at sun.net.www.protocol.http.HttpURLConnection$HttpInputStream.read(HttpURLConnection.java:3317)
+	at com.sun.org.apache.xerces.internal.impl.XMLEntityManager$RewindableInputStream.read(XMLEntityManager.java:2899)
+	at com.sun.org.apache.xerces.internal.impl.XMLEntityManager.setupCurrentEntity(XMLEntityManager.java:674)
+	at com.sun.org.apache.xerces.internal.impl.XMLEntityManager.startEntity(XMLEntityManager.java:1305)
+	at com.sun.org.apache.xerces.internal.impl.XMLEntityManager.startDocumentEntity(XMLEntityManager.java:1256)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.setInputSource(XMLDocumentScannerImpl.java:257)
+	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.setInputSource(XMLStreamReaderImpl.java:199)
+	... 19 more
+
+real	0m0.621s
+user	0m0.498s
+sys	0m0.011s

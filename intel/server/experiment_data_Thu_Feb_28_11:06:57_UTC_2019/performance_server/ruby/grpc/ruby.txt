@@ -1,0 +1,5 @@
+execute_platform.sh: line 147: 32312 Killed                  ruby ${DIRECTORY_PATH}/$i/$j/server.ru
+
+real	0m37.049s
+user	0m11.249s
+sys	0m2.299s

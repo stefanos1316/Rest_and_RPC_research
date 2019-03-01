@@ -1,0 +1,5 @@
+execute_platform.sh: line 147: 14550 Killed                  java -cp ./../tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldServerPublisher
+
+real	14m26.993s
+user	0m20.005s
+sys	0m3.990s

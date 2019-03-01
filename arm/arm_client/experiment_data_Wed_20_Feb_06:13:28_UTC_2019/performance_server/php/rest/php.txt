@@ -1,0 +1,5 @@
+Killed
+
+real	3m48.089s
+user	2m34.759s
+sys	0m49.080s
