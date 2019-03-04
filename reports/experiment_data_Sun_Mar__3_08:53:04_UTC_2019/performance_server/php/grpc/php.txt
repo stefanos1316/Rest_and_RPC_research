@@ -1,0 +1,5 @@
+execute_platform.sh: line 147: 17433 Killed                  node ${DIRECTORY_PATH}/$i/$j/server.js
+
+real	8m3.158s
+user	0m17.537s
+sys	0m6.223s

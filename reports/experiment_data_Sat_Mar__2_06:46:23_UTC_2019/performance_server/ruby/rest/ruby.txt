@@ -1,0 +1,5 @@
+execute_platform.sh: line 147: 29995 Killed                  rails s -b 195.251.251.27 -p 8080
+
+real	5m0.642s
+user	3m43.933s
+sys	0m27.134s
