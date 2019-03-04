@@ -1,7 +1,0 @@
- * Running on http://195.251.251.27:8080/ (Press CTRL+C to quit)
-195.251.251.27 - - [18/Feb/2019 18:47:12] "GET / HTTP/1.1" 404 -
-execute_pi.sh: line 147: 13780 Killed                  python ${DIRECTORY_PATH}/$i/$j/server.py
-
-real	0m3.837s
-user	0m0.599s
-sys	0m0.078s

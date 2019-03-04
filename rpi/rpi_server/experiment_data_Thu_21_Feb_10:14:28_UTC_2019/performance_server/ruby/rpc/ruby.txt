@@ -1,2 +1,0 @@
-/home/pi/.rvm/gems/ruby-2.5.3/gems/jimson-0.11.0/lib/jimson/server.rb:136: warning: constant ::Fixnum is deprecated
-/home/pi/.rvm/gems/ruby-2.5.3/gems/jimson-0.11.0/lib/jimson/server.rb:136: warning: constant ::Bignum is deprecated

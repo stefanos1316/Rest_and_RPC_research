@@ -1,5 +1,0 @@
-execute_pi.sh: line 147: 24921 Killed                  node ${DIRECTORY_PATH}/$i/$j/server.js
-
-real	0m23.215s
-user	0m13.145s
-sys	0m1.357s

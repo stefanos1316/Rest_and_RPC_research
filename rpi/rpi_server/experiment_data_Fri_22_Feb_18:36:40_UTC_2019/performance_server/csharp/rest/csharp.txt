@@ -1,5 +1,0 @@
-execute_pi.sh: line 147:  4850 Killed                  dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll --urls=http://195.251.251.27:5001
-
-real	1m17.574s
-user	0m49.089s
-sys	0m11.721s
