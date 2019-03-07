@@ -3,7 +3,7 @@ Language:csharp,Protocol:rpc,Time:198
 Language:go,Protocol:grpc,Time:18
 Language:go,Protocol:rest,Time:14
 Language:go,Protocol:rpc,Time:14
-Language:java,Protocol:grpc,Time:84
+Language:java,Protocol:grpc,Time:85
 Language:java,Protocol:jax_ws_rpc,Time:265
 Language:java,Protocol:rest,Time:0
 Language:javascript,Protocol:grpc,Time:13

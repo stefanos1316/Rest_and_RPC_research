@@ -13,7 +13,7 @@ Language:php,Protocol:grpc,Time:339
 Language:php,Protocol:rest,Time:225
 Language:php,Protocol:rpc,Time:0
 Language:python,Protocol:grpc,Time:25
-Language:python,Protocol:rest,Time:80
+Language:python,Protocol:rest,Time:81
 Language:python,Protocol:rpc,Time:56
 Language:ruby,Protocol:grpc,Time:18
 Language:ruby,Protocol:rest,Time:689

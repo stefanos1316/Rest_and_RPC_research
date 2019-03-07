@@ -51,7 +51,9 @@ for i in `ls ${DIRECTORY_PATH}`; do
 		#echo "Programming language sequence is $j"
 		for k in `ls ${DIRECTORY_PATH}/$i/$j`; do
 			#echo "Protocol is $k"
-			
+		
+			if [ "$k" == "grpc" -o "$k" == "rest" -o "$k" == "rpc" -o "$k" == "jax_ws_rpc" ]; then
+
 			# Now we are going to read the files, and we are going to act respectivily
 			FILE=$(echo "$j.txt")
 			case $i in 
@@ -71,30 +73,86 @@ for i in `ls ${DIRECTORY_PATH}`; do
 					done < "${DIRECTORY_PATH}/$i/$j/$k/${FILE}"
 					echo "Language:$k,Protocol:$j,Energy:${TOTAL_CONSUMPTION}" >> ${DIRECTORY_PATH}/graph_data/energy_client.txt
 					;;
-				performance_server) 
-					MINUTES=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "real" | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $1}')
-					SECONDS=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "real" | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $2}')
+				performance_server)
+					MINUTES=0
+					SECONDS=0
+					SYS_MINUTES=0
+					SYS_SECONDS=0
+					getReal=""
+					getReal=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "real" )
+					
 
-					if [ ${MINUTES} -ne 0 ]; then
+					if [ "$getReal" != "" ]; then
+						MINUTES=$( echo $getReal |awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $1}')
+						SECONDS=$( echo $getReal | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $2}')
+					fi
+					
+					getSys=""
+					getSys=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "sys")
+					
+					if [ "$getSys" != "" ]; then 
+						SYS_MINUTES=$( echo $getSys | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $1}')
+						SYS_SECONDS=$( echo $getSys | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $2}')
+					fi
+			
+					if [ ${SECONDS} -ne 0 -o ${MINUTES} -ne 0 ]; then
+						
 						MINUTES_TO_SECONDS=$((MINUTES * 60))
 						SECONDS=$((SECONDS + MINUTES_TO_SECONDS))
 					fi
 
+					DIFFERENCE=0
+					if [ ${SYS_SECONDS} -ne 0 -o ${SYS_MINUTES} -ne 0 ]; then
+						SYS_MINUTES_TO_SECONDS=$((SYS_MINUTES * 60))
+						SYS_SECONDS=$((SYS_SECONDS + SYS_MINUTES_TO_SECONDS))
+					
+						DIFFERENCE=$((SECONDS / SYS_SECONDS))
+					fi
+
+	
 					echo "Language:$j,Protocol:$k,Time:${SECONDS}" >> ${DIRECTORY_PATH}/graph_data/performance_server.txt
+					echo "Language:$j,Protocol:$k,Time:${SYS_SECONDS},Difference:${DIFFERENCE}" >> ${DIRECTORY_PATH}/graph_data/kernel_server.txt
 					;;
-				performance_client) 
-					FILE=$(echo "$j.txt")
-					MINUTES=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "real" | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $1}')
-					SECONDS=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "real" | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $2}')
+				performance_client)
+					MINUTES=0
+					SECONDS=0
+					SYS_MINUTES=0
+					SYS_SECONDS=0
+					getReal=""
+					getReal=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "real" )
+					
 
-					if [ ${MINUTES} -ne 0 ]; then
+					if [ "$getReal" != "" ]; then
+						MINUTES=$( echo $getReal |awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $1}')
+						SECONDS=$( echo $getReal | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $2}')
+					fi
+					
+					getSys=""
+					getSys=$(cat ${DIRECTORY_PATH}/$i/$j/$k/${FILE}| grep "sys")
+					
+					if [ "$getSys" != "" ]; then 
+						SYS_MINUTES=$( echo $getSys | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $1}')
+						SYS_SECONDS=$( echo $getSys | awk '{print $2}' | awk -F "." '{print $1}' | awk -F "m" '{print $2}')
+					fi
+			
+					if [ ${SECONDS} -ne 0 -o ${MINUTES} -ne 0 ]; then
+						
 						MINUTES_TO_SECONDS=$((MINUTES * 60))
 						SECONDS=$((SECONDS + MINUTES_TO_SECONDS))
 					fi
 
+					DIFFERENCE=0
+					if [ ${SYS_SECONDS} -ne 0 -o ${SYS_MINUTES} -ne 0 ]; then
+						SYS_MINUTES_TO_SECONDS=$((SYS_MINUTES * 60))
+						SYS_SECONDS=$((SYS_SECONDS + SYS_MINUTES_TO_SECONDS))
+					
+						DIFFERENCE=$((SECONDS / SYS_SECONDS))
+					fi
 					echo "Language:$j,Protocol:$k,Time:${SECONDS}" >> ${DIRECTORY_PATH}/graph_data/performance_client.txt
+					echo "Language:$j,Protocol:$k,Time:${SYS_SECONDS},Difference:${DIFFERENCE}" >> ${DIRECTORY_PATH}/graph_data/kernel_client.txt
 					;;
 			esac
+		fi
 		done
 	done
 done

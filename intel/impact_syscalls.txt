@@ -1,0 +1,8 @@
+Server
+======
+rpc -> csharp
+rest -> csharp + php
+
+Client
+======
+grpc -> go + php

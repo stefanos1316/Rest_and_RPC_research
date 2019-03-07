@@ -1,0 +1,8 @@
+Server
+======
+grpc -> csharp
+rest -> csharp + php
+
+Client
+======
+grpc -> php

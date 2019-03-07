@@ -5,7 +5,7 @@ Language:go,Protocol:grpc,Time:19
 Language:go,Protocol:rest,Time:19
 Language:go,Protocol:rpc,Time:15
 Language:java,Protocol:grpc,Time:27
-Language:java,Protocol:jax_ws_rpc,Time:866
+Language:java,Protocol:jax_ws_rpc,Time:867
 Language:java,Protocol:rest,Time:0
 Language:javascript,Protocol:grpc,Time:6
 Language:javascript,Protocol:rest,Time:8

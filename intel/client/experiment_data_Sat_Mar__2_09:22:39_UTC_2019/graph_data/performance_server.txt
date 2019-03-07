@@ -9,7 +9,7 @@ Language:java,Protocol:jax_ws_rpc,Time:867
 Language:java,Protocol:rest,Time:0
 Language:javascript,Protocol:grpc,Time:6
 Language:javascript,Protocol:rest,Time:8
-Language:javascript,Protocol:rpc,Time:9
+Language:javascript,Protocol:rpc,Time:10
 Language:php,Protocol:grpc,Time:479
 Language:php,Protocol:rest,Time:724
 Language:php,Protocol:rpc,Time:0

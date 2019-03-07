@@ -30,9 +30,9 @@ for scenario in ${ipc}; do
 				for energy in ${languages}; do
 					tmp=""
 					if [ "${energy}" == "java" -a "$scenario" == "rpc" ]; then
-						tmp=$(grep -w ${energy} $1/${i}/${j}/energy_server.txt | grep -w jax_ws_rpc | awk -F":" '{print $NF}')
+						tmp=$(grep -w ${energy} $1/${i}/${j}/kernel_server.txt | grep -w jax_ws_rpc | awk -F":" '{print $NF}')
 					else	
-						tmp=$(grep -w ${energy} $1/${i}/${j}/energy_server.txt | grep -w ${scenario} | awk -F":" '{print $NF}')
+						tmp=$(grep -w ${energy} $1/${i}/${j}/kernel_server.txt | grep -w ${scenario} | awk -F":" '{print $NF}')
 					fi
 
 					if [ "${tmp}" == "0" ]; then

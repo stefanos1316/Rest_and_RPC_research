@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "GitHub/Rest_and_RPC_research/tasks/python/rest/client.py", line 5, in <module>
+    response = requests.get(url)
+  File "/usr/lib/python2.7/site-packages/requests/api.py", line 72, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/lib/python2.7/site-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python2.7/site-packages/requests/sessions.py", line 508, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python2.7/site-packages/requests/sessions.py", line 618, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python2.7/site-packages/requests/adapters.py", line 490, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', BadStatusLine("''",))
+
+real	0m0.407s
+user	0m0.151s
+sys	0m0.028s

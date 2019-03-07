@@ -12,7 +12,7 @@ Language:javascript,Protocol:rpc,Time:22
 Language:php,Protocol:grpc,Time:330
 Language:php,Protocol:rest,Time:253
 Language:php,Protocol:rpc,Time:21
-Language:python,Protocol:grpc,Time:18
+Language:python,Protocol:grpc,Time:19
 Language:python,Protocol:rest,Time:75
 Language:python,Protocol:rpc,Time:51
 Language:ruby,Protocol:grpc,Time:12
