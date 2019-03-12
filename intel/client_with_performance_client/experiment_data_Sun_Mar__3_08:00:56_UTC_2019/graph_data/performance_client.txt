@@ -16,6 +16,6 @@ Language:php,Protocol:rpc,Time:80
 Language:python,Protocol:grpc,Time:33
 Language:python,Protocol:rest,Time:70
 Language:python,Protocol:rpc,Time:61
-Language:ruby,Protocol:grpc,Time:35
+Language:ruby,Protocol:grpc,Time:34
 Language:ruby,Protocol:rest,Time:301
 Language:ruby,Protocol:rpc,Time:42

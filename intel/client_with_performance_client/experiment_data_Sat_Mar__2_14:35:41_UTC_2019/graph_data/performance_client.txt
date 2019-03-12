@@ -9,13 +9,13 @@ Language:java,Protocol:jax_ws_rpc,Time:861
 Language:java,Protocol:rest,Time:45
 Language:javascript,Protocol:grpc,Time:2
 Language:javascript,Protocol:rest,Time:5
-Language:javascript,Protocol:rpc,Time:6
+Language:javascript,Protocol:rpc,Time:5
 Language:php,Protocol:grpc,Time:476
 Language:php,Protocol:rest,Time:726
 Language:php,Protocol:rpc,Time:84
 Language:python,Protocol:grpc,Time:33
 Language:python,Protocol:rest,Time:71
 Language:python,Protocol:rpc,Time:61
-Language:ruby,Protocol:grpc,Time:34
+Language:ruby,Protocol:grpc,Time:35
 Language:ruby,Protocol:rest,Time:298
 Language:ruby,Protocol:rpc,Time:42
