@@ -37,7 +37,9 @@ function helpMe {
 	echo "-a | --remoteHostAddressEM [device IP]		The IP address of the host that acts as an energy monitoring."
 	echo "-b | --remoteHostNameClient [devcice name]	The name of the host that will act as a client instance."
 	echo "-d | --remoteHostAddressClient [device IP]	The IP address of the host that acts as a client."
-	echo "-t | --straces [argument]				Option to get traces such as syscalls or network calls"
+	echo "-t | --straces					Option to collect system calls"
+	echo "-r | --resource-usage				Option to print resouce usage informatin such as maximum resident size, context switching, and so on"
+	echo "-e | --energy-consumption				Option to obtain energy and run-time performance measurements"
 	echo "-h | --help					Print the help me message and exit."
 	echo
 
@@ -56,8 +58,16 @@ REMOTE_HOST_NAME_CLIENT=""
 REMOTE_HOST_ADDRESS_CLIENT=""
 TRACES_TYPE=""
 TRACES_FLAG=false
+FLAG=""
+EXPERIMENT_TYPE=""
+RESOURCE_USAGE_REMOTE=""
+RESOURCE_USAGE_LOCAL=""
+ENERGY_CONSUMPION_REMOTE=""
+ENERGY_CONSUMPION_LOCAL=""
+PERFORMANCE_REMOTE=""
+PERFORMANCE_LOCAL=""
 
-OPTIONS=`getopt -o p:n:a:hb:d:t: --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient:,straces: -n 'execute.sh' -- "$@"`
+OPTIONS=`getopt -o p:n:a:hb:d:t:re --long help,directoryPath:,remoteHostNameEM:,remoteHostNameClient:,remoteHostAddressEM:,remoteHostAddressClient:,straces:,resource-usage,energy-consumption -n 'execute.sh' -- "$@"`
 eval set -- "$OPTIONS"
 while true; do
 	case "$1" in 
@@ -93,11 +103,18 @@ while true; do
 				syscalls) TRACES_TYPE=$2 ; shift 2 ;;
 				*) >&2 echo "[Error] Option not available, consider adding network or syscalls" ; shift 2 ;;
 			esac ;;
+		-r|--resource-usage)
+			FLAG="/usr/bin/time -v" ; EXPERIMENT_TYPE="resource_usage" ; shift ;;
+		-e|--energy-consumption)
+			FLAG="time" ; EXPERIMENT_TYPE="energy_consumption"; shift ;;
 		-h|--help) helpMe ; shift ;;
 		--) shift ; break ;;
 		*) >&2 echo "Wrong command line argument, please try again." ; exit 1 ;;
 	esac
 done
+
+echo ${FLAG}
+exit
 
 # Create parameters for the directory names
 EnergyPerformanceLogDataDate=$(date -u | sed -e 's/ /_/g')
@@ -111,23 +128,18 @@ checkRemoteHostSSH ${REMOTE_HOST_NAME_CLIENT} ${REMOTE_HOST_ADDRESS_CLIENT}
 REMOTE_HOST_EM=${REMOTE_HOST_NAME_EM}@${REMOTE_HOST_ADDRESS_EM}
 REMOTE_HOST_CLIENT=${REMOTE_HOST_NAME_CLIENT}@${REMOTE_HOST_ADDRESS_CLIENT}
 
-# If the script is still running it means ssh connection is fine.
-mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_server
+# Create directories to store results
+#if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+#	mkdir -p ../reports/$EnergyPerformanceLogDirName/energy_consumption
+#	mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_server
+#	ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption
+#	ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client
+#fi
 
-ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server
-ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client
-
-if [ $? -eq 0 ];
-then
-	echo "Directories created normally."
-else
-	echo "Failed to create directories."
-	echo "Please check remote host's permissions."
-	exit
-fi
-
-# Create Performance locally since the execution is done here.
-mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_server
+#if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+#	mkdir -p ../reports/$EnergyPerformanceLogDirName/resource_usage_server
+#	ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/resource_usage_client
+#fi
 
 # Now we will run the experiment and collect out data.
 for i in `ls ${DIRECTORY_PATH}`
@@ -136,10 +148,23 @@ do
 	for j in `ls ${DIRECTORY_PATH}/${i}` 
 	do
 		if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" -o "$j" = "jax_ws_rpc" ]; then
-			ssh ${REMOTE_HOST_EM} mkdir -p GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j
-			ssh ${REMOTE_HOST_CLIENT} mkdir -p GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j
+			if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+				ENERGY_CONSUMPTION_REMOTE="GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j"
+				PERFORMANCE_REMOTE="GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_remote/$i/$j"
+				PERFORMANCE_LOCAL="../reports/$EnergyPerformanceLogDirName/performance_local/$i/$j"
+				ssh ${REMOTE_HOST_EM} mkdir -p ${ENERGY_CONSUMPTION_REMOTE}
+				ssh ${REMOTE_HOST_CLIENT} mkdir -p ${PERFORMANCE_REMOTE}
+				mkdir -p ${PERFORMANCE_LOCAL}
+			
+			fi
+
+			if [ "${EXPERIMENT_TYPE}" == "" ]; then
+				RESOURCE_USAGE_REMOTE="GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/resource_usage_remote"
+				RESOURCE_USAGE_LOCAL="../reports/$EnergyPerformanceLogDirName/resource_usage_local"
+				ssh ${REMOTE_HOST_CLIENT} mkdir -p ${RESOURCE_USAGE_REMOTE}
+				mkdir -p ${RESOURCE_USAGE_LOCAL}
+			fi
 		fi
-		mkdir -p ../reports/$EnergyPerformanceLogDirName/performance_server/$i/$j
 
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
 		do
@@ -151,13 +176,13 @@ do
 
 					if [ "$j" == "grpc" -a "$k" == "GreeterServer" ]; then
 						echo "Executing $j from $i"
-                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
+                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt
                                         	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
 						(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 						getServerPID=$!
 						
                                                 # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt' &" &
                                                 sleep 2
 
 						# Run grpc's Client
@@ -180,7 +205,7 @@ do
 
 					elif [ "$j" == "rest" -a "$k" == "wwwroot" ]; then
 						echo "Executing $j from $i"
-                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
+                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt
                                         	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
 						(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
 						getServerPID=$!
@@ -193,7 +218,7 @@ do
 							fi
 						done
 
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt' &" &
                                                 sleep 2
 
 						#Run rest's Client
@@ -215,7 +240,7 @@ do
 
 					elif [ "$j" == "rpc" -a "$k" == "sample" ]; then
 						echo "Executing $j from $i"
-                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt
+                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt
                                         	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
 
 						(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
@@ -230,7 +255,7 @@ do
 						done
 
 						echo 'CHsarps RPC server started...'
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/csharp.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt' &" &
                                                 sleep 2
 
                                                 #Run rest's Client
@@ -270,11 +295,11 @@ do
 							fi
 						done
                                                 		
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
 
                                                 # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt' &" &
 						sleep 2
 
 						# Run grpc's Client
@@ -309,11 +334,11 @@ do
 							fi
 						done
                                                 		
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
 
                                                 # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt' &" &
                                                 sleep 2
 
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
@@ -333,11 +358,11 @@ do
 
 					elif [ "$j" == "rpc" -a "$k" == "instructions_rpc.txt" ]; then
 						echo "Executing $j from $i"
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
 
                                                 # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/php.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt' &" &
                                                 sleep 2
 
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
@@ -357,7 +382,7 @@ do
                                         getServerPID=0
 					if [ "$j" = "grpc" -a "$k" == "server.ru" ]; then
                                                 echo "Executing $j from $i"
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt
+                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
 						
 					        # Start the server
@@ -372,7 +397,7 @@ do
 						done
 						
 					        # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt' &" &
                                                 sleep 2
 					
 						# Start the client instance $j is the type of RPC or Rest
@@ -395,7 +420,7 @@ do
 						
 					if [ "$j" == "rpc" -a "$k" == "server.ru" ]; then	
                                                 echo "Executing $j from $i"
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt
+                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
 					
 						# Start the server
@@ -410,7 +435,7 @@ do
 						done	
                                                 
 						# Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt' &" &
                                                 sleep 2
 					
 						# Start the client instance $j is the type of RPC or Rest
@@ -437,7 +462,7 @@ do
 
                                                 echo "Executing $j from $i"
 						SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt
+                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt
                                                 touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
 
 						# Start the server
@@ -457,7 +482,7 @@ do
 				
 						echo 'Ruby Rest server started'
                                                 # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/ruby.txt' &" &
+                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt' &" &
                                                 sleep 2
 						# Start the client instance $j is the type of RPC or Rest
                                                 ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
@@ -484,7 +509,7 @@ do
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "server.go" ]; then	
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/go.txt
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/go.txt
 							touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt
 
 							getServerPID=0
@@ -500,7 +525,7 @@ do
 							done
 						
 							# Run the wattsup in the background
-							ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/go.txt' &" &
+							ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/go.txt' &" &
 							sleep 2
 
 							# Start the client instance $j is the type of RPC or Rest
@@ -529,7 +554,7 @@ do
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/javascript.txt
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/javascript.txt
                                                 	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt
 
 							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/javascript.txt &		
@@ -544,7 +569,7 @@ do
 							done
                                                 	
 							# Run the wattsup in the background
-                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/javascript.txt' &" &
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/javascript.txt' &" &
 							sleep 3
 
 							# Start the client instance $j is the type of RPC or Rest
@@ -572,7 +597,7 @@ do
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/python.txt
+							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/python.txt
                                                 	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt
 
 							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
@@ -587,7 +612,7 @@ do
 							done
 
                                                 	# Run the wattsup in the background
-                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/python.txt' &" &
+                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/python.txt' &" &
                                                 	sleep 2
 
 							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
@@ -613,7 +638,7 @@ do
 					# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
 					if [ "$j" == "grpc" -a "$k" == "android" ]; then
 						echo "Executing $j from $i"
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt
+						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/java.txt
 						touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt
 
 						(time mvn -f ${DIRECTORY_PATH}/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/java.txt &
@@ -627,7 +652,7 @@ do
 						done
 								
 						# Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/java.txt' &" &
 						sleep 2					
 						# Now start the remote client by entering the path where it is located
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time mvn -f GitHub/Rest_and_RPC_research/tasks/$i/$j/ exec:java -Dexec.mainClass=io.grpc.examples.helloworld.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
@@ -655,7 +680,7 @@ do
 						done
 						
 					        # Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/java.txt' &" &
 						sleep 2					
 
 						# Starting remote client,
@@ -687,7 +712,7 @@ do
 						sleep 2
 							
 					        # Run the wattsup in the background
-						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server/$i/$j/java.txt' &" &
+						ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/java.txt' &" &
 						sleep 2					
 
 						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time java -cp ./GitHub/Rest_and_RPC_research/tasks/java/jax_ws_rpc/src com.thejavageek.HelloWorldClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/java.txt'" &
@@ -713,9 +738,9 @@ done
 
 # Now transer all the collected data to the server in the related directories
 # From client
-scp -r ${REMOTE_HOST_CLIENT}:/home/pi/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client ../reports/${EnergyPerformanceLogDirName}/
+scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client ../reports/${EnergyPerformanceLogDirName}/
 # From RPi
-scp -r ${REMOTE_HOST_EM}:/home/pi/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_server ../reports/${EnergyPerformanceLogDirName}/
+scp -r ${REMOTE_HOST_EM}:/home/sgeorgiou/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption ../reports/${EnergyPerformanceLogDirName}/
 
 echo "Transfer done"
 
