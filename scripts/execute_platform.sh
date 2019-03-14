@@ -62,7 +62,7 @@ FLAG=""
 EXPERIMENT_TYPE=""
 RESOURCE_USAGE_REMOTE=""
 RESOURCE_USAGE_LOCAL=""
-ENERGY_CONSUMPION_REMOTE=""
+ENERGY_CONSUMPTION_REMOTE=""
 ENERGY_CONSUMPION_LOCAL=""
 PERFORMANCE_REMOTE=""
 PERFORMANCE_LOCAL=""
@@ -113,9 +113,6 @@ while true; do
 	esac
 done
 
-echo ${FLAG}
-exit
-
 # Create parameters for the directory names
 EnergyPerformanceLogDataDate=$(date -u | sed -e 's/ /_/g')
 EnergyPerformanceLogDirName="experiment_data_"$EnergyPerformanceLogDataDate
@@ -155,16 +152,16 @@ do
 				ssh ${REMOTE_HOST_EM} mkdir -p ${ENERGY_CONSUMPTION_REMOTE}
 				ssh ${REMOTE_HOST_CLIENT} mkdir -p ${PERFORMANCE_REMOTE}
 				mkdir -p ${PERFORMANCE_LOCAL}
-			
 			fi
 
-			if [ "${EXPERIMENT_TYPE}" == "" ]; then
-				RESOURCE_USAGE_REMOTE="GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/resource_usage_remote"
-				RESOURCE_USAGE_LOCAL="../reports/$EnergyPerformanceLogDirName/resource_usage_local"
+			if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+				RESOURCE_USAGE_REMOTE="GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/resource_usage_remote/$i/$j"
+				RESOURCE_USAGE_LOCAL="../reports/$EnergyPerformanceLogDirName/resource_usage_local/$i/$j"
 				ssh ${REMOTE_HOST_CLIENT} mkdir -p ${RESOURCE_USAGE_REMOTE}
 				mkdir -p ${RESOURCE_USAGE_LOCAL}
 			fi
 		fi
+
 
 		for k in `ls ${DIRECTORY_PATH}/${i}/${j}`
 		do
@@ -176,19 +173,51 @@ do
 
 					if [ "$j" == "grpc" -a "$k" == "GreeterServer" ]; then
 						echo "Executing $j from $i"
-                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt
-                                        	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
-						(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
-						getServerPID=$!
-						
-                                                # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt' &" &
-                                                sleep 2
 
-						# Run grpc's Client
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
-						getClientName=$(echo "GreeterClient.dll")
-						sleep 2
+						# To obtain energy measurements
+						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+                            ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt
+                            touch  ${PERFORMANCE_LOCAL}/csharp.txt
+							(time dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ${PERFORMANCE_LOCAL}/csharp.txt &
+							getServerPID=$!
+
+							while true; do
+								STATUS=""
+								STATUS=$(curl http://195.251.251.27:50051 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+						
+                            # Run the wattsup in the background
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt' &" &
+                            sleep 2
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> ${PERFORMANCE_REMOTE}/csharp.txt'" &
+							getClientName=$(echo "GreeterClient.dll")
+							sleep 2
+						fi
+
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+							touch ${RESOURCE_USAGE_LOCAL}/csharp.txt
+							(${FLAG} dotnet run -f netcoreapp2.1 -p ${DIRECTORY_PATH}/$i/$j/GreeterServer) 2>> ${RESOURCE_USAGE_LOCAL}/csharp.txt &
+							getServerPID=$!
+							
+							while true; do
+								STATUS=""
+								STATUS=$(curl http://195.251.251.27:50051 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} dotnet run -f netcoreapp2.1 -p GitHub/Rest_and_RPC_research/tasks/$i/$j/GreeterClient) 2>> ${RESOURCE_USAGE_REMOTE}/csharp.txt'" &
+							getClientName=$(echo "GreeterClient.dll")
+							sleep 2
+						fi
+
 				        
 						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
@@ -197,33 +226,54 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy Monitoring] Stopped"
+						echo "[Experiment terminated]"
 
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
-
 					elif [ "$j" == "rest" -a "$k" == "wwwroot" ]; then
 						echo "Executing $j from $i"
-                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt
-                                        	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
-						(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
-						getServerPID=$!
+                        	
+						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then	
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt
+                        	touch  ${PERFORMANCE_LOCAL}/csharp.txt
+							(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ${PERFORMANCE_REMOTE}/csharp.txt &
+							getServerPID=$!
 								
-						while true; do
-							STATUS=""
-							STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
-							if [ "$STATUS" == "" ]; then
-								break
-							fi
-						done
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
 
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt' &" &
-                                                sleep 2
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt' &" &
+                            sleep 2
 
-						#Run rest's Client
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time mono GitHub/Rest_and_RPC_research/tasks/$i/$j/Client.exe) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
-						getClientName=$(echo "Client.exe")
+							#Run rest's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time mono GitHub/Rest_and_RPC_research/tasks/$i/$j/Client.exe) 2>> ${PERFORMANCE_REMOTE}/csharp.txt'" &
+							getClientName=$(echo "Client.exe")
+						fi
+
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        	touch  ${RESOURCE_USAGE_LOCAL}/csharp.txt
+							(${FLAG} dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ${RESOURCE_USAGE_LOCAL}/csharp.txt &
+							getServerPID=$!
+								
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+							echo "I am here"
+							#Run rest's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} mono GitHub/Rest_and_RPC_research/tasks/$i/$j/Client.exe) 2>> ${RESOURCE_USAGE_REMOTE}/csharp.txt'" &
+							getClientName=$(echo "Client.exe")
+						fi
+
 						
 						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
@@ -232,36 +282,54 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy Monitoring] Stopped"
+						echo "[Experiment termindated]"
 
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
-
 					elif [ "$j" == "rpc" -a "$k" == "sample" ]; then
 						echo "Executing $j from $i"
-                                        	ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt
-                                        	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt
-
-						(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/csharp.txt &
-                                               	getServerPID=$!
-                                                              
-						while true; do
-							STATUS=""
-							STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
-							if [ "$STATUS" == "" ]; then
-								break
-							fi
-						done
-
-						echo 'CHsarps RPC server started...'
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/csharp.txt' &" &
-                                                sleep 2
-
-                                                #Run rest's Client
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/csharp.txt'" &
-                                                getClientName=$(echo "SimpleRpc.dll")	
 						
+						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then	
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt
+                        	touch  ${PERFORMANCE_LOCAL}/csharp.txt
+							(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ${PERFORMANCE_LOCAL}/csharp.txt &
+                            getServerPID=$!
+                                                              
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt' &" &
+                            sleep 2
+
+                            #Run rest's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> ${PERFORMANCE_REMOTE}/csharp.txt'" &
+                            getClientName=$(echo "SimpleRpc.dll")	
+						fi
+
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        	touch  ${RESOURCE_USAGE_LOCAL}/csharp.txt
+							(${FLAG} dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll --urls=http://195.251.251.27:5001 -p ${DIRECTORY_PATH}/$i/$j/sample/SimpleRpc.Sample.Server/) 2>> ${RESOURCE_USAGE_LOCAL}/csharp.txt &
+                            getServerPID=$!
+                                                              
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:5001 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+
+                            #Run rest's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} dotnet run bin/Release/netcoreapp2.0/SimpleRpc.dll -p GitHub/Rest_and_RPC_research/tasks/$i/$j/sample/SimpleRpc.Sample.Client/) 2>> ${RESOURCE_USAGE_REMOTE}/csharp.txt'" &
+                            getClientName=$(echo "SimpleRpc.dll")	
+						fi
+
 						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
 							sleep 1
@@ -269,11 +337,12 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy Monitoring] Stopped"
+						echo "[Experiment terminated]"
 
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
+						exit
 					fi
 					;;
 				php)
