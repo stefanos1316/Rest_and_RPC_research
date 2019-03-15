@@ -345,8 +345,7 @@ do
 						exit
 					fi
 					;;
-				php)
-					exit
+				php1)
 					getServerPID=0
 					getClientName=""
                                              
@@ -409,28 +408,49 @@ do
 						sleep 5
 					elif [ "$j" = "rest" -a "$k" == "app" ]; then
 						echo "Executing $j from $i"
-						SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
-						(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt & 
-						getServerPID=$!
+						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+                        	touch  ${PERFORMANCE_LOCAL}/php.txt
+							SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
+							(time php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ${PERFORMANCE_LOCAL}/php.txt & 
+							getServerPID=$!
 								
-						while true; do
-							STATUS=""
-							STATUS=$(curl -v --silent http://195.251.251.27:8001 2>&1 | grep Failed)
-							if [ "$STATUS" == "" ]; then
-								break
-							fi
-						done
-                                                		
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8001 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
 
-                                                # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt' &" &
-                                                sleep 2
-
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
-						getClientName=$(echo "client.php")
+                            # Run the wattsup in the background
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/php.txt
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/php.txt' &" &
+							sleep 2
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> ${PERFORMANCE_REMOTE}/php.txt'" &
+							getClientName=$(echo "client.php")
+				        fi
 				        	
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        	touch  ${RESOURCE_USAGE_LOCAL}/php.txt
+							SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
+							(${FLAG} php ${DIRECTORY_PATH}/$i/$j/artisan serve --host=${SERVER_IP_ADDRESS} --port=8001) 2>> ${RESOURCE_USAGE_LOCAL}/php.txt & 
+							getServerPID=$!
+								
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8001 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} php GitHub/Rest_and_RPC_research/tasks/$i/$j/client/client.php) 2>> ${RESOURCE_USAGE_REMOTE}/php.txt'" &
+							getClientName=$(echo "client.php")
+				        fi
+
 						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
 							sleep 1
@@ -438,34 +458,45 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy monitoring] Stopped"
+						echo "[Experiment terminated]"
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep php | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
-
 					elif [ "$j" == "rpc" -a "$k" == "instructions_rpc.txt" ]; then
 						echo "Executing $j from $i"
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
+						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+                        	touch  ${PERFORMANCE_LOCAL}/php.txt
 
-                                                # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt' &" &
-                                                sleep 2
+                            # Run the wattsup in the background
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/php.txt
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/php.txt' &" &
+							sleep 2
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> ${PERFORMANCE_REMOTE}/php.txt'" &
+							getClientName=$(echo "client.php")	
+				        fi
 
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time php GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
-						getClientName=$(echo "client.php")				
-	
-				        	#Check if remote client is still running
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        	touch  ${RESOURCE_USAGE_LOCAL}/php.txt
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} php GitHub/Rest_and_RPC_research/tasks/$i/$j/client.php) 2>> ${RESOURCE_USAGE_REMOTE}/php.txt'" &
+							getClientName=$(echo "client.php")	
+				        fi
+									
+				        #Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
 							sleep 1
 						done
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy monitoring] Stopped"
+						echo "[Experiment terminated]"
 					fi
 				;;
 				ruby)
+				exit
                                         getServerPID=0
 					if [ "$j" = "grpc" -a "$k" == "server.ru" ]; then
                                                 echo "Executing $j from $i"
@@ -715,29 +746,47 @@ do
 					fi
 				;;
 
-				python) 
+				python1) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/python.txt
-                                                	touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt
+							
+							if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+								ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/python.txt
+                        		touch  ${PERFORMANCE_LOCAL}/python.txt
+								(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ${PERFORMANCE_LOCAL}/python.txt &
+								getServerPID=$!									
 
-							(time python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/python.txt &
-							getServerPID=$!									
+								while true; do	
+									STATUS=""
+									STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+									if [ "${STATUS}" == "" ]; then
+										break
+									fi
+								done
 
-							while true; do	
-								STATUS=""
-								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
-								if [ "${STATUS}" == "" ]; then
-									break
-								fi
-							done
+                            # Run the wattsup in the background
+							ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/python.txt' &" &
+                            sleep 2
 
-                                                	# Run the wattsup in the background
-                                                	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/python.txt' &" &
-                                                	sleep 2
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> ${PERFORMANCE_REMOTE}/python.txt'" &
+							fi
 
-							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/python.txt'" &
+							if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        		touch  ${RESOURCE_USAGE_LOCAL}/python.txt
+								(${FLAG} python ${DIRECTORY_PATH}/$i/$j/server.py) 2>> ${RESOURCE_USAGE_LOCAL}/python.txt &
+								getServerPID=$!									
+
+								while true; do	
+									STATUS=""
+									STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+									if [ "${STATUS}" == "" ]; then
+										break
+									fi
+								done
+
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} python GitHub/Rest_and_RPC_research/tasks/$i/$j/client.py) 2>> ${RESOURCE_USAGE_REMOTE}/python.txt'" &
+							fi
 
 							# Check if remote client is still running
 							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.py > /dev/null ;
