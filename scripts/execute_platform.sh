@@ -167,7 +167,7 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
-				csharp1)
+				csharp)
 					getServerPID=0
 					getClientName=""
 
@@ -345,7 +345,7 @@ do
 						exit
 					fi
 					;;
-				php1)
+				php)
 					getServerPID=0
 					getClientName=""
                                              
@@ -496,32 +496,51 @@ do
 					fi
 				;;
 				ruby)
-				exit
-                                        getServerPID=0
+                    getServerPID=0
 					if [ "$j" = "grpc" -a "$k" == "server.ru" ]; then
-                                                echo "Executing $j from $i"
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
+                        echo "Executing $j from $i"
+                        if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/ruby.txt
+                            touch  ${PERFORMANCE_LOCAL}/ruby.txt
 						
 					        # Start the server
-						(time ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
-						getServerPID=$!
-						while true; do
-							STATUS=""
-							STATUS=$(curl -v --silent http://195.251.251.27:50051/ 2>&1 | grep Failed)
-							if [ "${STATUS}" == "" ]; then	
-								break
-							fi		
-						done
+							(time ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ${PERFORMANCE_LOCAL}/ruby.txt &
+							getServerPID=$!
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:50051/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then	
+									break
+								fi		
+							done
 						
-					        # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt' &" &
-                                                sleep 2
+					 	    # Run the wattsup in the background
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/ruby.txt' &" &
+                            sleep 2
 					
-						# Start the client instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> ${PERFORMANCE_REMOTE}/ruby.txt'" &
+						fi
+
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                            touch  ${RESOURCE_USAGE_LOCAL}/ruby.txt
 						
-				        	#Check if remote client is still running
+					        # Start the server
+							(${FLAG} ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ${RESOURCE_USAGE_LOCAL}/ruby.txt &
+							getServerPID=$!
+							while true; do
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:50051/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then	
+									break
+								fi		
+							done
+					
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> ${RESOURCE_USAGE_REMOTE}/ruby.txt'" &
+						fi
+				        	
+						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.ru > /dev/null ;
 						do
 							sleep 1
@@ -529,7 +548,7 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy Monitoring] Stopped"
+						echo "[Experiment terminated]"
 
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep ruby | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
@@ -537,29 +556,49 @@ do
 					fi      
 						
 					if [ "$j" == "rpc" -a "$k" == "server.ru" ]; then	
-                                                echo "Executing $j from $i"
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
+                        echo "Executing $j from $i"
+                        if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then    
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/ruby.txt
+                            touch  ${PERFORMANCE_LOCAL}/ruby.txt
 					
-						# Start the server
-						(time ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
-						getServerPID=$!
-						while true; do
-							STATUS=""
-							STATUS=$(curl http://195.251.251.27:8888)
-							if [ "${STATUS}" == "" ]; then	
-								break
-							fi	
-						done	
+							# Start the server
+							(time ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ${PERFORMANCE_LOCAL}/ruby.txt &
+							getServerPID=$!
+							while true; do
+								STATUS=""
+								STATUS=$(curl http://195.251.251.27:8888 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then	
+									break
+								fi	
+							done	
                                                 
-						# Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt' &" &
-                                                sleep 2
+							# Run the wattsup in the background
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/ruby.txt' &" &
+                            sleep 2
 					
-						# Start the client instance $j is the type of RPC or Rest
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
-						
-				        	#Check if remote client is still running
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> ${PERFORMANCE_REMOTE}/ruby.txt'" &
+						fi
+
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                            touch  ${RESOURCE_USAGE_LOCAL}/ruby.txt
+					
+							# Start the server
+							(${FLAG} ruby ${DIRECTORY_PATH}/$i/$j/server.ru) 2>> ${RESOURCE_USAGE_LOCAL}/ruby.txt &
+							getServerPID=$!
+							while true; do
+								STATUS=""
+								STATUS=$(curl http://195.251.251.27:8888 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then	
+									break
+								fi	
+							done
+					
+							# Start the client instance $j is the type of RPC or Rest
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> ${RESOURCE_USAGE_REMOTE}/ruby.txt'" &
+						fi
+				        
+						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.ru > /dev/null ;
 						do
 							sleep 1
@@ -567,45 +606,71 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy Monitoring] Stopped"
+						echo "[Experiment terminated]"
 					
 						# Get create PID from go server and remove them
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						kill -9 ${getServerPID}
 						sleep 5
+						exit
 					fi
 
 					if [ "$j" = "rest" -a "$k" = "bin" ]; then
-
-                                                echo "Executing $j from $i"
+                        echo "Executing $j from $i"
 						SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
-                                                ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt
+                        if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/ruby.txt
+                        	touch  ${PERFORMANCE_LOCAL}/ruby.txt
 
-						# Start the server
-						cd ${DIRECTORY_PATH}/$i/$j
-						(time rails s -b 195.251.251.27 -p 8080) 2>> ~/GitHub/Rest_and_RPC_research/reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/ruby.txt &
-						getServerPID=$!
-						cd ../../../scripts/
+							# Start the server
+							cd ${DIRECTORY_PATH}/$i/$j
+							(time rails s -b 195.251.251.27 -p 8080) 2>> ../../${PERFORMANCE_LOCAL}/ruby.txt &
+							getServerPID=$!
+							cd ../../../scripts/
 
-						# Necessary warm up time
-						while true; do	
-							STATUS=""
-							STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
-							if [ "${STATUS}" == "" ]; then
-								break
-							fi
-						done
+							# Necessary warm up time
+							while true; do	
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then
+									break
+								fi
+							done
 				
-						echo 'Ruby Rest server started'
-                                                # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/ruby.txt' &" &
-                                                sleep 2
-						# Start the client instance $j is the type of RPC or Rest
-                                                ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/ruby.txt'" &
+							# Run the wattsup in the background
+                        	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${PERFORMANCE_LOCAL}/ruby.txt' &" &
+                            sleep 2
 
-				        	#Check if remote client is still running
+							# Start the client instance $j is the type of RPC or Rest
+                            ssh ${REMOTE_HOST_CLIENT} "bash -c '(time ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> ${PERFORMANCE_REMOTE}/ruby.txt'" &
+						fi
+
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+							mkdir -p ${RESOURCE_USAGE_LOCAL}
+							ssh ${REMOTE_HOST_CLIENT} mkdir -p ${RESOURCE_USAGE_REMOTE}
+							touch  ${RESOURCE_USAGE_LOCAL}/ruby.txt
+
+							# Start the server
+							cd ${DIRECTORY_PATH}/$i/$j
+							(${FLAG} rails s -b 195.251.251.27 -p 8080) 2>> ../../${RESOURCE_USAGE_LOCAL}/ruby.txt &
+							getServerPID=$!
+							cd ../../../scripts/
+				
+							# Necessary warm up time
+							while true; do	
+								STATUS=""
+								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
+								if [ "${STATUS}" == "" ]; then
+									break
+								fi
+							done
+				
+							# Start the client instance $j is the type of RPC or Rest
+                            ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} ruby GitHub/Rest_and_RPC_research/tasks/$i/$j/client.ru) 2>> ${RESOURCE_USAGE_REMOTE}/ruby.txt'" &
+						fi
+
+				        #Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.ru > /dev/null ;
 						do
 							sleep 1
@@ -613,7 +678,7 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy Monitoring] Stopped"
+						echo "[Experiment terminated]"
 
 						# Get create PID from go server and remove them
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
@@ -621,7 +686,7 @@ do
 						sleep 5
 					fi
 					;;
-				go1)
+				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "server.go" ]; then	
 							echo "Executing $j from $i"
@@ -684,7 +749,7 @@ do
 						fi
 					fi
 				 ;;
-				javascript1) 
+				javascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
 							echo "Executing $j from $i"
@@ -746,7 +811,7 @@ do
 					fi
 				;;
 
-				python1) 
+				python) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.py"  ]; then
 							echo "Executing $j from $i"
@@ -805,7 +870,7 @@ do
 						fi	
 					fi
 				;;
-				java1)
+				java)
 					# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
 					if [ "$j" == "grpc" -a "$k" == "android" ]; then
 						echo "Executing $j from $i"
@@ -881,11 +946,12 @@ do
                             sleep 2
 
 							#Run rest's Client
-							ssh ${REMOTE_HOST_CLIENT} "bash -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client/$i/$j/java.txt && cd ~/'" &
+							ssh ${REMOTE_HOST_CLIENT} "bash -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (time bash execwquteJavaClient.sh) 2>> ~/${PERFORMANCE_REMOTE}/java.txt'" &
 							getClientName=$(echo "Client.exe")
 						fi
 
-						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+							mkdir -p ${RESOURCE_USAGE_LOCAL}
                         	touch  ${RESOURCE_USAGE_LOCAL}/java.txt
 							(${FLAG} bash ../apache-tomcat-9.0.8/bin/catalina.sh start) 2>> ${RESOURCE_USAGE_LOCAL}/java.txt &
 							getServerPID=$!
@@ -897,9 +963,9 @@ do
 									break
 								fi
 							done
-
+							
 							#Run rest's Client
-							ssh ${REMOTE_HOST_CLIENT} "bash -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (${FLAG} bash execwquteJavaClient.sh) 2>> ${RESOURCE_USAGE_REMOTE}/java.txt && cd ~/'" &
+							ssh ${REMOTE_HOST_CLIENT} "bash -c 'cd GitHub/Rest_and_RPC_research/tasks/java/rest/ && (${FLAG} bash execwquteJavaClient.sh) 2>> ~/${RESOURCE_USAGE_REMOTE}/java.txt'" &
 							sleep 1
 						fi
 
