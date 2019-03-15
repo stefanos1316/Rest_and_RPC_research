@@ -167,7 +167,7 @@ do
 		do
 			# At this point we already reached the source code of a specific implemetation
 			case "$i" in
-				csharp)
+				csharp1)
 					getServerPID=0
 					getClientName=""
 
@@ -237,7 +237,7 @@ do
 						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then	
 							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/csharp.txt
                         	touch  ${PERFORMANCE_LOCAL}/csharp.txt
-							(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ${PERFORMANCE_REMOTE}/csharp.txt &
+							(time dotnet ${DIRECTORY_PATH}/$i/$j/bin/Release/netcoreapp2.1/myWebAppp.dll  --urls=http://195.251.251.27:5001) 2>> ${PERFORMANCE_LOCAL}/csharp.txt &
 							getServerPID=$!
 								
 							while true; do
@@ -352,29 +352,47 @@ do
 					# Start the server for grpc
 					if [ "$j" = "grpc" -a "$k" == "server.js" ]; then
 						echo "Executing $j from $i"
-						# Run grpc's server 
-						(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt &
-						getServerPID=$!
+						if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then
+                        	touch  ${PERFORMANCE_LOCAL}/php.txt
+							(time node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ${PERFORMANCE_LOCAL}/php.txt &
+							getServerPID=$!
 								
-						while true; do
-							STATUS=""
-							STATUS=$(curl http://195.251.251.27:50051 2>&1 | grep Failed)
-							if [ "$STATUS" == "" ]; then
-								break
-							fi
-						done
-                                                		
-						ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt
-                                                touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/php.txt
+							while true; do
+								STATUS=""
+								STATUS=$(curl http://195.251.251.27:50051 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
 
-                                                # Run the wattsup in the background
-                                                ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/php.txt' &" &
-						sleep 2
+                            # Run the wattsup in the background
+							ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/php.txt
+                            ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/php.txt' &" &
+							sleep 2
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> ${PERFORMANCE_REMOTE}/php.txt'" &
+							getClientName=$(echo "run_greeter_client.sh")
+				        fi
 
-						# Run grpc's Client
-						ssh ${REMOTE_HOST_CLIENT} "bash -c '(time bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/php.txt'" &
-						getClientName=$(echo "run_greeter_client.sh")
-				        	
+						if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        	touch  ${RESOURCE_USAGE_LOCAL}/php.txt
+							(${FLAG} node ${DIRECTORY_PATH}/$i/$j/server.js) 2>> ${RESOURCE_USAGE_LOCAL}/php.txt &
+							getServerPID=$!
+								
+							while true; do
+								STATUS=""
+								STATUS=$(curl http://195.251.251.27:50051 2>&1 | grep Failed)
+								if [ "$STATUS" == "" ]; then
+									break
+								fi
+							done
+							
+							# Run grpc's Client
+							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} bash GitHub/Rest_and_RPC_research/tasks/$i/$j/run_greeter_client.sh) 2>> ${RESOURCE_USAGE_REMOTE}/php.txt'" &
+							getClientName=$(echo "run_greeter_client.sh")
+				        fi	
+						
 						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
 							sleep 1
@@ -382,13 +400,12 @@ do
 					
 						# Once the client stopped running kill Server and WattsUp?Pro instances.
 						ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-						echo "[Energy monitoring] Stopped"
+						echo "[Experiment terminated]"
 						
 						# Get create PID from go server and remove them
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep node | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
-
 					elif [ "$j" = "rest" -a "$k" == "app" ]; then
 						echo "Executing $j from $i"
 						SERVER_IP_ADDRESS=$(curl http://ifconfig.me/ip)
@@ -568,38 +585,55 @@ do
 
 						# Get create PID from go server and remove them
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep puma | awk -F "/" '{print $1}')
-                                                kill -9 ${REMAINING}
+                        kill -9 ${REMAINING}
 						sleep 5
-
 					fi
-
 					;;
 				go)
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then
 						if [ "$k" = "server.go" ]; then	
 							echo "Executing $j from $i"
-							ssh ${REMOTE_HOST_EM} touch GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/go.txt
-							touch  ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt
+							if [ "${EXPERIMENT_TYPE}" == "energy_consumption" ]; then	
+								ssh ${REMOTE_HOST_EM} touch ${ENERGY_CONSUMPTION_REMOTE}/go.txt
+                        		touch  ${PERFORMANCE_LOCAL}/go.txt
+								(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ${PERFORMANCE_LOCAL}/go.txt &
+								getServerPID=$!
+								
+								while true; do
+									STATUS=""
+									STATUS=$(curl -v --silent http://195.251.251.27:8080 2>&1 | grep Failed)
+									if [ "$STATUS" == "" ]; then
+										break
+									fi
+								done
 
-							getServerPID=0
-							(time go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ../reports/${EnergyPerformanceLogDirName}/performance_server/$i/$j/go.txt &
-							getServerPID=$!
-							
-							while true; do	
-								STATUS=""
-								STATUS=$(curl -v --silent http://195.251.251.27:8080/ 2>&1 | grep Failed)
-								if [ "${STATUS}" == "" ]; then
-									break
-								fi
-							done
-						
-							# Run the wattsup in the background
-							ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts  >> GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption/$i/$j/go.txt' &" &
-							sleep 2
+                            	ssh ${REMOTE_HOST_EM} "sh -c 'sudo ./GitHub/Rest_RPC_EM/watts-up/wattsup ttyUSB0 -s watts >> ${ENERGY_CONSUMPTION_REMOTE}/go.txt' &" &
+                            	sleep 2
 
-							# Start the client instance $j is the type of RPC or Rest
-							ssh ${REMOTE_HOST_CLIENT} "bash -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> GitHub/Rest_RPC_Client/reports/$EnergyPerformanceLogDirName/performance_client/$i/$j/go.txt'" &
-							sleep 1
+								#Run rest's Client
+								ssh ${REMOTE_HOST_CLIENT} "bash -c '(time go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> ${PERFORMANCE_REMOTE}/go.txt'" &
+								getClientName=$(echo "Client.exe")
+								sleep 1
+							fi
+
+							if [ "${EXPERIMENT_TYPE}" == "resource_usage" ]; then
+                        		touch  ${RESOURCE_USAGE_LOCAL}/go.txt
+								(${FLAG} go run ${DIRECTORY_PATH}/$i/$j/server.go) 2>> ${RESOURCE_USAGE_LOCAL}/go.txt &
+								getServerPID=$!
+								
+								while true; do
+									STATUS=""
+									STATUS=$(curl -v --silent http://195.251.251.27:8080 2>&1 | grep Failed)
+									if [ "$STATUS" == "" ]; then
+										break
+									fi
+								done
+
+								#Run rest's Client
+								ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} go run GitHub/Rest_and_RPC_research/tasks/$i/$j/client.go) 2>> ${RESOURCE_USAGE_REMOTE}/go.txt'" &
+								getClientName=$(echo "Client.exe")
+								sleep 1
+							fi
 
 							# Check if remote client is still running
 							while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i client.go > /dev/null ;
@@ -609,7 +643,7 @@ do
 					
 							# Once the client stopped running kill Server and WattsUp?Pro instances.
 							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-							echo "[Energy monitoring] Stopped"
+							echo "[Experiment terminated]"
 						
 							# Get create PID from go server and remove them
 							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep server | awk -F "/" '{print $1}')
@@ -618,7 +652,6 @@ do
 						fi
 					fi
 				 ;;
-
 				javascript) 
 					if [ "$j" = "grpc" -o "$j" = "rest" -o "$j" = "rpc" ]; then 
 						if [ "$k" = "server.js"  ]; then
@@ -704,6 +737,7 @@ do
 					fi
 				;;
 				java)
+					exit
 					# For each java protocol there is a different way to execute it, thus, we use case for such a porpose
 					if [ "$j" == "grpc" -a "$k" == "android" ]; then
 						echo "Executing $j from $i"
