@@ -97,12 +97,7 @@ while true; do
 				*) >&2 echo "[Error] IP address is required!" ; shift 2 ;;
 			esac ;;
 		-t|--straces)
-			TRACES_FLAG=true
-			case $2 in 
-				network) TRACES_TYPE=$2 ; shift 2 ;;
-				syscalls) TRACES_TYPE=$2 ; shift 2 ;;
-				*) >&2 echo "[Error] Option not available, consider adding network or syscalls" ; shift 2 ;;
-			esac ;;
+			FLAG="strace -fce 'trace=!futex,wait4,waitid,pselect6,poll,epoll_wait,epoll_pwait,epoll_ctl'" ; EXPERIMENT_TYPE="resource_usage" ; shift ;;
 		-r|--resource-usage)
 			FLAG="/usr/bin/time -v" ; EXPERIMENT_TYPE="resource_usage" ; shift ;;
 		-e|--energy-consumption)
@@ -268,13 +263,12 @@ do
 									break
 								fi
 							done
-							echo "I am here"
+							
 							#Run rest's Client
 							ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} mono GitHub/Rest_and_RPC_research/tasks/$i/$j/Client.exe) 2>> ${RESOURCE_USAGE_REMOTE}/csharp.txt'" &
 							getClientName=$(echo "Client.exe")
 						fi
 
-						
 						#Check if remote client is still running
 						while ssh ${REMOTE_HOST_CLIENT} ps aux | grep -i ${getClientName} > /dev/null; do
 							sleep 1
@@ -342,7 +336,6 @@ do
 						REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep dotnet | awk -F "/" '{print $1}')
 						kill -9 ${REMAINING}
 						sleep 5
-						exit
 					fi
 					;;
 				php)
@@ -861,7 +854,7 @@ do
 					
 							# Once the client stopped running kill Server and WattsUp?Pro instances.
 							ssh ${REMOTE_HOST_EM} sudo pkill wattsup
-							echo "[Energy monitoring] Stopped"
+							echo "[Experiment terminated]"
 						
 							# Stop server instance
 							REMAINING=$(netstat -lntp 2>/dev/null | awk '{print $7}' | grep python | awk -F "/" '{print $1}')
@@ -977,7 +970,6 @@ do
 
 						bash ../apache-tomcat-9.0.8/bin/catalina.sh stop
 						sleep 5
-						exit
 					fi
 								
 					if [ "$j" == "jax_ws_rpc" -a "$k" == "src" ]; then
@@ -1042,9 +1034,9 @@ done
 
 # Now transer all the collected data to the server in the related directories
 # From client
-scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/performance_client ../reports/${EnergyPerformanceLogDirName}/
+scp -r ${REMOTE_HOST_CLIENT}:/home/sgeorgiou/GitHub/Rest_RPC_Client/reports/${EnergyPerformanceLogDirName}/* ../reports/${EnergyPerformanceLogDirName}/
 # From RPi
-scp -r ${REMOTE_HOST_EM}:/home/sgeorgiou/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/energy_consumption ../reports/${EnergyPerformanceLogDirName}/
+scp -r ${REMOTE_HOST_EM}:/home/sgeorgiou/GitHub/Rest_RPC_EM/reports/$EnergyPerformanceLogDirName/* ../reports/${EnergyPerformanceLogDirName}/
 
 echo "Transfer done"
 
