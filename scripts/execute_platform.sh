@@ -782,7 +782,7 @@ do
 								done
 
 								#Run rest's Client
-								ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> ${RESOURCE_USAGE_REMOTE}/go.txt'" &
+								ssh ${REMOTE_HOST_CLIENT} "bash -c '(${FLAG} node GitHub/Rest_and_RPC_research/tasks/$i/$j/client.js) 2>> ${RESOURCE_USAGE_REMOTE}/javascript.txt'" &
 								sleep 1
 							fi
 							

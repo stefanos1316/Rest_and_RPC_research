@@ -36,7 +36,7 @@ for (i = 0; i < 20000; i++) {
   user = 'world' + i;
   request.setName(user);
   client.sayHello(request, function(err, response) {
-    console.log('Greeting:', response.getMessage());
+	//   console.log('Greeting:', response.getMessage());
   });
 }
 }

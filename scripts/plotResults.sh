@@ -46,11 +46,11 @@ fi
 
 # At this part we are going to interate through the directories that offers data for energy and performance for the server and client instance.
 for i in `ls ${DIRECTORY_PATH}`; do 
-	#echo "Directory name is $i"
+	echo "Directory name is $i"
 	for j in `ls ${DIRECTORY_PATH}/$i`; do
-		#echo "Programming language sequence is $j"
+		echo "Programming language sequence is $j"
 		for k in `ls ${DIRECTORY_PATH}/$i/$j`; do
-			#echo "Protocol is $k"
+			echo "Protocol is $k"
 		
 			if [ "$k" == "grpc" -o "$k" == "rest" -o "$k" == "rpc" -o "$k" == "jax_ws_rpc" ]; then
 
@@ -157,7 +157,6 @@ for i in `ls ${DIRECTORY_PATH}`; do
 	done
 done
 
-#done
 
 echo Done, exiting...
 exit 1

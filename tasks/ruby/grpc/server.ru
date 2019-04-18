@@ -37,7 +37,7 @@ end
 # server port.
 def main
   s = GRPC::RpcServer.new
-  s.add_http2_port('192.168.1.12:50051', :this_port_is_insecure)
+  s.add_http2_port('195.251.251.27:50051', :this_port_is_insecure)
   s.handle(GreeterServer)
   s.run_till_terminated
 end
