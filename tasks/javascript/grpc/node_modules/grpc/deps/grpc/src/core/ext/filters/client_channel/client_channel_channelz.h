@@ -26,40 +26,15 @@
 #include "src/core/lib/channel/channel_trace.h"
 #include "src/core/lib/channel/channelz.h"
 
-typedef struct grpc_subchannel grpc_subchannel;
-
 namespace grpc_core {
+
+class Subchannel;
+
 namespace channelz {
 
-// Subtype of ChannelNode that overrides and provides client_channel specific
-// functionality like querying for connectivity_state and subchannel data.
-class ClientChannelNode : public ChannelNode {
- public:
-  static RefCountedPtr<ChannelNode> MakeClientChannelNode(
-      grpc_channel* channel, size_t channel_tracer_max_nodes,
-      bool is_top_level_channel);
-
-  ClientChannelNode(grpc_channel* channel, size_t channel_tracer_max_nodes,
-                    bool is_top_level_channel);
-  virtual ~ClientChannelNode() {}
-
-  // Overriding template methods from ChannelNode to render information that
-  // only ClientChannelNode knows about.
-  void PopulateConnectivityState(grpc_json* json) override;
-  void PopulateChildRefs(grpc_json* json) override;
-
-  // Helper to create a channel arg to ensure this type of ChannelNode is
-  // created.
-  static grpc_arg CreateChannelArg();
-
- private:
-  grpc_channel_element* client_channel_;
-};
-
-// Handles channelz bookkeeping for sockets
 class SubchannelNode : public BaseNode {
  public:
-  SubchannelNode(grpc_subchannel* subchannel, size_t channel_tracer_max_nodes);
+  SubchannelNode(Subchannel* subchannel, size_t channel_tracer_max_nodes);
   ~SubchannelNode() override;
 
   void MarkSubchannelDestroyed() {
@@ -70,11 +45,11 @@ class SubchannelNode : public BaseNode {
   grpc_json* RenderJson() override;
 
   // proxy methods to composed classes.
-  void AddTraceEvent(ChannelTrace::Severity severity, grpc_slice data) {
+  void AddTraceEvent(ChannelTrace::Severity severity, const grpc_slice& data) {
     trace_.AddTraceEvent(severity, data);
   }
   void AddTraceEventWithReference(ChannelTrace::Severity severity,
-                                  grpc_slice data,
+                                  const grpc_slice& data,
                                   RefCountedPtr<BaseNode> referenced_channel) {
     trace_.AddTraceEventWithReference(severity, data,
                                       std::move(referenced_channel));
@@ -84,12 +59,12 @@ class SubchannelNode : public BaseNode {
   void RecordCallSucceeded() { call_counter_.RecordCallSucceeded(); }
 
  private:
-  grpc_subchannel* subchannel_;
+  void PopulateConnectivityState(grpc_json* json);
+
+  Subchannel* subchannel_;
   UniquePtr<char> target_;
   CallCountingHelper call_counter_;
   ChannelTrace trace_;
-
-  void PopulateConnectivityState(grpc_json* json);
 };
 
 }  // namespace channelz
