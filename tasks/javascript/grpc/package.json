@@ -32,7 +32,7 @@
     "make-dir": "^1.1.0",
     "merge2": "^1.1.0",
     "mocha": "^3.5.3",
-    "mocha-jenkins-reporter": "^0.3.9",
+    "mocha-jenkins-reporter": "^0.4.2",
     "ncp": "^2.0.0",
     "nyc": "^11.7.2",
     "pify": "^3.0.0",
@@ -66,7 +66,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "google-protobuf": "^3.9.1",
-    "grpc": "^1.22.2"
+    "google-protobuf": "^3.10.0",
+    "grpc": "^1.24.2"
   }
 }
