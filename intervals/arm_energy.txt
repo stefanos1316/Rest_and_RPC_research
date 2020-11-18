@@ -1,4 +1,4 @@
-"Client gRPC"   "Client RPC"	"Client Rest"	"Server gRPC"	"Server RPC"	"Server Rest"
+Client-gRPC	Client-RPC	Client-Rest	Server-gRPC	Server-RPC	Server-Rest
 0.0 	219.300000 	12.000000 	0.0 	290.700000 	96.500000
 10.800000 	5.200000 	4.100000 	6.9000000 	6.6000000 	3.200000
 83.500000 	73.300000 	33.900000 	75.600000 	40.600000 	43.500000
